@@ -1,0 +1,97 @@
+<header class="fixed w-full z-50 transition-all duration-300 bg-carnival-purple/90 backdrop-blur-md border-b border-white/10 shadow-lg" id="navbar">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-3 group">
+      <div class="relative w-14 h-14 transition-transform duration-300 group-hover:scale-110">
+        <!-- Glow effect behind logo -->
+        <div class="absolute inset-0 bg-carnival-gold/20 blur-xl rounded-full"></div>
+        <img src="/logo.png" alt="Edu Carnival Logo" class="relative w-full h-full object-contain drop-shadow-md">
+      </div>
+      <div class="hidden sm:block">
+        <span class="block text-2xl font-display font-bold text-white leading-none group-hover:text-carnival-gold transition-colors">EDU <span class="text-carnival-pink">CARNIVAL</span></span>
+        <span class="block text-xs text-white/60 tracking-widest font-sans uppercase">The Learning Festival</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-8">
+      
+      <!-- Home -->
+      <a routerLink="/" routerLinkActive="text-carnival-gold" [routerLinkActiveOptions]="{exact: true}" class="nav-link text-white hover:text-carnival-gold font-medium transition-colors relative py-2">Home</a>
+
+      <!-- Upcoming Events (Dropdown) -->
+      <div class="group relative py-2">
+        <button class="flex items-center gap-1 text-white hover:text-carnival-gold font-medium transition-colors">
+          Events
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+          <div class="bg-carnival-purple border border-white/10 rounded-xl shadow-xl overflow-hidden glass-panel">
+            <a routerLink="/events/upcoming" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold border-b border-white/5 transition-colors">
+              <span class="font-bold block">Upcoming Events</span>
+              <span class="text-xs text-white/50">Schedule & Locations</span>
+            </a>
+            <a routerLink="/events/expo-highlights" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold transition-colors">
+              <span class="font-bold block">Expo Highlights</span>
+              <span class="text-xs text-white/50">Past Event Gallery</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registration (Dropdown) -->
+      <div class="group relative py-2">
+        <button class="flex items-center gap-1 text-white hover:text-carnival-gold font-medium transition-colors">
+          Registration
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="absolute top-full left-0 w-64 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+           <div class="bg-carnival-purple border border-white/10 rounded-xl shadow-xl overflow-hidden glass-panel">
+            <a routerLink="/registration/exhibitor" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold border-b border-white/5 transition-colors">
+              <span class="font-bold block">Exhibitor Registration</span>
+              <span class="text-xs text-white/50">For Universities & Institutions</span>
+            </a>
+            <a routerLink="/registration/participant" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold transition-colors">
+              <span class="font-bold block">Participant Registration</span>
+              <span class="text-xs text-white/50">For Students & Parents</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+       <!-- Media & More (Dropdown) -->
+       <div class="group relative py-2">
+        <button class="flex items-center gap-1 text-white hover:text-carnival-gold font-medium transition-colors">
+          Explore
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="absolute top-full left-0 w-48 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+           <div class="bg-carnival-purple border border-white/10 rounded-xl shadow-xl overflow-hidden glass-panel">
+            <a routerLink="/stalls" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold border-b border-white/5">Virtual Stalls</a>
+            <a routerLink="/media/photos" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold border-b border-white/5">Photo Gallery</a>
+            <a routerLink="/media/videos" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold border-b border-white/5">Video Gallery</a>
+            <a routerLink="/brochure" class="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-carnival-gold">Download Brochure</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contact Button -->
+      <a routerLink="/contact" class="px-6 py-2 bg-gradient-to-r from-carnival-pink to-purple-600 text-white font-semibold rounded-full hover:shadow-[0_0_20px_rgba(236,72,153,0.5)] transition-all duration-300 transform hover:-translate-y-0.5 border border-white/10">
+        Contact Us
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden text-white hover:text-carnival-pink focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+  </div>
+</header>

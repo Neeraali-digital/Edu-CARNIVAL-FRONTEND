@@ -1,0 +1,48 @@
+<div class="flex flex-col items-center justify-center p-8 bg-carnival-purple/50 rounded-2xl glass-panel relative overflow-hidden">
+    
+  <!-- Wheel Container -->
+  <div class="relative w-80 h-80 transition-transform duration-[4000ms] cubic-bezier(0.1, 0, 0.1, 1)" 
+       [style.transform]="'rotate(' + rotationDegree + 'deg)'">
+    
+    <!-- Segments -->
+    <div class="absolute inset-0 rounded-full border-4 border-carnival-gold shadow-2xl overflow-hidden bg-white">
+      <!-- Create segments using CSS conical gradients for simplicity, or SVGs -->
+      <!-- Simple SVG Wheel -->
+      <svg viewBox="0 0 100 100" class="w-full h-full">
+        <path d="M50 50 L50 0 A50 50 0 0 1 85.3 14.6 Z" fill="#ec4899" /> <!-- Pink -->
+        <path d="M50 50 L85.3 14.6 A50 50 0 0 1 100 50 Z" fill="#2e1065" /> <!-- Purple -->
+        <path d="M50 50 L100 50 A50 50 0 0 1 85.3 85.3 Z" fill="#fbbf24" /> <!-- Gold -->
+        <path d="M50 50 L85.3 85.3 A50 50 0 0 1 50 100 Z" fill="#ec4899" />
+        <path d="M50 50 L50 100 A50 50 0 0 1 14.6 85.3 Z" fill="#2e1065" />
+        <path d="M50 50 L14.6 85.3 A50 50 0 0 1 0 50 Z" fill="#fbbf24" />
+        <path d="M50 50 L0 50 A50 50 0 0 1 14.6 14.6 Z" fill="#ec4899" />
+        <path d="M50 50 L14.6 14.6 A50 50 0 0 1 50 0 Z" fill="#2e1065" />
+      </svg>
+    </div>
+
+    <!-- Center Hub -->
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full border-4 border-carnival-gold z-10 flex items-center justify-center shadow-lg">
+      <div class="w-8 h-8 rounded-full bg-carnival-pink animate-pulse"></div>
+    </div>
+  </div>
+
+  <!-- Pointer -->
+  <div class="absolute top-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+    <div class="w-4 h-8 bg-white border-2 border-carnival-purple shadow-md" style="clip-path: polygon(100% 0, 0 0, 50% 100%);"></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="mt-8 text-center space-y-4">
+    <h3 class="text-white font-display font-bold text-xl">Spin & Win Prizes!</h3>
+    <p class="text-white/60 text-sm max-w-xs mx-auto mb-4" *ngIf="!prize">Try your luck to win exclusive Edu Carnival merchandise or discount coupons!</p>
+    
+    <div *ngIf="prize" class="py-2 px-4 bg-carnival-gold text-carnival-purple font-bold rounded-lg animate-bounce">
+      🎉 You Won: {{ prize }}! 🎉
+    </div>
+
+    <button (click)="spinWheel()" [disabled]="isSpinning" 
+      class="px-8 py-3 bg-gradient-to-r from-carnival-pink to-purple-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+      {{ isSpinning ? 'Spinning...' : 'SPIN NOW' }}
+    </button>
+  </div>
+</div>
