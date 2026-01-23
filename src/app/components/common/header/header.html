@@ -88,10 +88,64 @@
     </nav>
 
     <!-- Mobile Menu Button -->
-    <button class="md:hidden text-white hover:text-carnival-pink focus:outline-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button (click)="toggleMobileMenu()" class="md:hidden text-white hover:text-carnival-pink focus:outline-none z-50">
+      <svg *ngIf="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
       </svg>
+      <svg *ngIf="isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
     </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div *ngIf="isMobileMenuOpen" 
+       class="fixed inset-0 bg-carnival-purple z-[100] md:hidden flex flex-col pt-24 px-6 overflow-y-auto min-h-screen">
+    
+    <!-- Top Nav Action for Mobile -->
+    <div class="absolute top-4 right-4 z-[110]">
+        <button (click)="closeMobileMenu()" class="p-2 text-white hover:text-carnival-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <nav class="flex flex-col gap-8 pb-20 max-w-sm mx-auto w-full">
+      <a routerLink="/" (click)="closeMobileMenu()" 
+         class="text-3xl font-display font-bold text-white hover:text-carnival-gold transition-colors border-b border-white/10 pb-4">
+        Home
+      </a>
+      
+      <div class="space-y-6">
+        <h4 class="text-carnival-gold font-bold uppercase tracking-widest text-xs opacity-70">Events</h4>
+        <div class="flex flex-col gap-4 pl-4 border-l-2 border-carnival-pink/30">
+            <a routerLink="/events/upcoming" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">Upcoming Events</a>
+            <a routerLink="/events/expo-highlights" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">Expo Highlights</a>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="text-carnival-gold font-bold uppercase tracking-widest text-xs opacity-70">Registration</h4>
+        <div class="flex flex-col gap-4 pl-4 border-l-2 border-carnival-pink/30">
+            <a routerLink="/registration/exhibitor" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">Exhibitor</a>
+            <a routerLink="/registration/participant" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">Participant</a>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h4 class="text-carnival-gold font-bold uppercase tracking-widest text-xs opacity-70">Explore</h4>
+        <div class="flex flex-col gap-4 pl-4 border-l-2 border-carnival-pink/30">
+            <a routerLink="/stalls" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">Stalls</a>
+            <a routerLink="/media/photos" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">Galleries</a>
+            <a routerLink="/brochure" (click)="closeMobileMenu()" class="text-xl text-white/90 font-medium">E-Brochure</a>
+        </div>
+      </div>
+
+      <a routerLink="/contact" (click)="closeMobileMenu()" 
+         class="mt-6 px-8 py-5 bg-gradient-to-r from-carnival-pink via-purple-600 to-carnival-pink bg-[length:200%_auto] animate-gradient text-white text-center font-bold rounded-2xl shadow-xl transform active:scale-95 transition-all">
+        Contact Us
+      </a>
+    </nav>
   </div>
 </header>
