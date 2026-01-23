@@ -16,7 +16,7 @@ export class CityDetailComponent implements OnInit {
         {
             id: 'jammu',
             name: 'Jammu',
-            image: 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&q=80&w=1000',
+            image: '/Jammu.jpg',
             date: 'March 15-16, 2026',
             location: 'Convention Centre, Jammu',
             description: 'Experience the Grand Edu Expo in Jammu, the city of temples. Connect with top international universities, attend career workshops, and explore scholarship opportunities tailored for students from the region.',
@@ -30,7 +30,7 @@ export class CityDetailComponent implements OnInit {
         {
             id: 'gangtok',
             name: 'Gangtok',
-            image: 'https://images.unsplash.com/photo-1589136142558-94675c602490?auto=format&fit=crop&q=80&w=1000',
+            image: '/Gangtok.jpg',
             date: 'March 20-21, 2026',
             location: 'Manan Kendra, Gangtok',
             description: 'The Edu Expo heads to the serene hills of Gangtok. A perfect opportunity for students in Sikkim and North Bengal to meet global education experts amidst the majestic Kanchenjunga backdrop.',
@@ -44,7 +44,7 @@ export class CityDetailComponent implements OnInit {
         {
             id: 'imphal',
             name: 'Imphal',
-            image: 'https://images.unsplash.com/photo-1571401664426-382045997230?auto=format&fit=crop&q=80&w=1000',
+            image: '/Imphal.jpg',
             date: 'March 25-26, 2026',
             location: 'City Convention Centre, Imphal',
             description: 'Imphal welcomes the Edu Expo with open arms. Discover a world of possibilities in the heart of Manipur. We bring the best of international education directly to you.',
@@ -58,7 +58,7 @@ export class CityDetailComponent implements OnInit {
         {
             id: 'dimapur',
             name: 'Dimapur',
-            image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000',
+            image: '/Dimapur.jpg',
             date: 'March 30-31, 2026',
             location: 'Agri Expo Center, Dimapur',
             description: 'Nagaland\'s commercial hub, Dimapur, hosts the biggest educational event of the year. Don\'t miss this chance to transform your academic journey with global exposure.',
@@ -72,7 +72,7 @@ export class CityDetailComponent implements OnInit {
         {
             id: 'dibrugarh',
             name: 'Dibrugarh',
-            image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1000',
+            image: '/Dibrugarh.jpg',
             date: 'April 05-06, 2026',
             location: 'Chowkidingee Field, Dibrugarh',
             description: 'The Tea City of India, Dibrugarh, joins the Edu Expo trail. We bring premium educational resources and global university contacts to the students of Upper Assam.',
@@ -83,20 +83,6 @@ export class CityDetailComponent implements OnInit {
                 { title: 'Quiz Competition', time: '03:30 PM', description: 'Test your knowledge and win prizes.' }
             ]
         },
-        {
-            id: 'guwahati',
-            name: 'Guwahati',
-            image: 'https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?auto=format&fit=crop&q=80&w=1000',
-            date: 'April 10-12, 2026',
-            location: 'Maniram Dewan Trade Centre, Guwahati',
-            description: 'The grand finale of the Edu Expo takes place in Guwahati. A 3-day mega event featuring the widest range of universities, celebrity speakers, and massive scholarship grants.',
-            programDetails: [
-                { title: 'Grand Finale Opening', time: '10:00 AM', description: 'Inauguration by Honorable Education Minister.' },
-                { title: 'The Mega Expo', time: '10:00 AM - 7:00 PM', description: 'Our largest gathering with 100+ institutions.' },
-                { title: 'Financing Study Abroad', time: '02:00 PM', description: 'Special session by top banking partners.' },
-                { title: 'Celebrity Keynote', time: '04:00 PM', description: 'Inspirational talk by a youth icon.' }
-            ]
-        }
     ];
 
     constructor(private route: ActivatedRoute) { }

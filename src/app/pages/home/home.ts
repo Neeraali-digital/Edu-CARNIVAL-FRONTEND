@@ -12,11 +12,10 @@ import { WheelSpinnerComponent } from '../../components/carnival/wheel-spinner/w
 })
 export class HomeComponent {
   cities = [
-    { id: 'jammu', name: 'Jammu', image: 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&q=80&w=1000' },
-    { id: 'gangtok', name: 'Gangtok', image: 'https://images.unsplash.com/photo-1589136142558-94675c602490?auto=format&fit=crop&q=80&w=1000' },
-    { id: 'imphal', name: 'Imphal', image: 'https://images.unsplash.com/photo-1602419409000-dc9775f0a359?auto=format&fit=crop&q=80&w=1000' },
-    { id: 'dimapur', name: 'Dimapur', image: 'https://images.unsplash.com/photo-1620023640707-160350901e8a?auto=format&fit=crop&q=80&w=1000' },
-    { id: 'dibrugarh', name: 'Dibrugarh', image: 'https://images.unsplash.com/photo-1598558509355-6df35496420c?auto=format&fit=crop&q=80&w=1000' },
-    { id: 'guwahati', name: 'Guwahati', image: 'https://images.unsplash.com/photo-1605370215714-232679fb890c?auto=format&fit=crop&q=80&w=1000' }
+    { id: 'jammu', name: 'Jammu', image: '/Jammu.jpg' },
+    { id: 'gangtok', name: 'Gangtok', image: '/Gangtok.jpg' },
+    { id: 'imphal', name: 'Imphal', image: '/Imphal.jpg' },
+    { id: 'dimapur', name: 'Dimapur', image: '/Dimapur.jpg' },
+    { id: 'dibrugarh', name: 'Dibrugarh', image: '/Dibrugarh.jpg' }
   ];
 }
