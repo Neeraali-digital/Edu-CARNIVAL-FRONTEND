@@ -46,22 +46,30 @@
   <section class="py-20 bg-[#1a0b2e] relative">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Touring <span class="text-carnival-gold">Across Cities</span></h2>
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Upcoming <span class="text-carnival-gold">Expo</span></h2>
         <div class="w-24 h-1 bg-gradient-to-r from-carnival-pink to-purple-600 mx-auto rounded-full"></div>
       </div>
       
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- City Card Loop -->
         <div *ngFor="let city of cities" 
-             class="group relative h-40 rounded-2xl overflow-hidden cursor-pointer">
-          <div class="absolute inset-0 bg-carnival-purple/50 group-hover:bg-carnival-pink/60 transition-colors duration-300 z-10"></div>
+             [routerLink]="['/city', city.id]"
+             class="group relative h-64 rounded-3xl overflow-hidden cursor-pointer shadow-2xl hover:shadow-carnival-pink/20 transition-all duration-500 hover:-translate-y-2">
           <!-- Real City IMG -->
-          <img [src]="city.image" [alt]="city.name" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 transform group-hover:scale-110">
-          <div class="absolute inset-0 flex items-center justify-center z-20">
-            <h3 class="text-white font-display font-bold text-xl tracking-wider drop-shadow-lg">{{city.name}}</h3>
+          <img [src]="city.image" [alt]="city.name" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 transform group-hover:scale-110">
+          
+          <!-- Subtle Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-carnival-purple via-carnival-purple/20 to-transparent group-hover:from-carnival-pink/80 transition-colors duration-500 z-10"></div>
+          
+          <!-- Content -->
+          <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 z-20">
+            <h3 class="text-white font-display font-bold text-2xl tracking-wider drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{{city.name}}</h3>
+            <div class="h-1 w-0 group-hover:w-16 bg-carnival-gold transition-all duration-300 rounded-full mt-2"></div>
+            <span class="text-white/0 group-hover:text-white/100 transition-all duration-300 mt-2 text-xs font-semibold uppercase tracking-tighter">View Details</span>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 

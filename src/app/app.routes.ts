@@ -10,9 +10,13 @@ import { ParticipantRegistrationComponent } from './pages/registration/participa
 import { PhotoGalleryComponent } from './pages/media/photo-gallery/photo-gallery';
 import { VideoGalleryComponent } from './pages/media/video-gallery/video-gallery';
 
+import { CityDetailComponent } from './pages/cities/city-detail/city-detail.component';
+
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'Edu Carnival - Home' },
     { path: 'home', redirectTo: '', pathMatch: 'full' },
+    { path: 'city/:id', component: CityDetailComponent, title: 'City Details - Edu Carnival' },
+
 
     // Events
     { path: 'events/upcoming', component: UpcomingEventsComponent, title: 'Upcoming Events - Edu Carnival' },

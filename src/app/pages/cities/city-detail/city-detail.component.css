@@ -1,5 +1,6 @@
-.wheel-animation {
-    transition: transform 3s cubic-bezier(0.1, 0, 0.1, 1);
+/* City Detail Component Styles */
+.animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
 }
 
 @keyframes fade-in-up {
@@ -12,8 +13,4 @@
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.animate-fade-in-up {
-    animation: fade-in-up 0.5s ease-out forwards;
 }

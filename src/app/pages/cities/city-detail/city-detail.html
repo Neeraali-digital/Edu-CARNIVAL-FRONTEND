@@ -1,0 +1,98 @@
+<div class="min-h-screen bg-[#1a0b2e] text-white">
+  <!-- Hero Section -->
+  <section class="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img [src]="city?.image" [alt]="city?.name" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a0b2e]/60 to-[#1a0b2e]"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <div class="inline-block mb-4 px-4 py-1 rounded-full bg-carnival-pink/20 border border-carnival-pink/30 backdrop-blur-md">
+        <span class="text-carnival-pink font-semibold uppercase tracking-widest text-sm">Upcoming Expo - 2026</span>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up">
+        {{city?.name}} <span class="text-carnival-gold">Expo</span>
+      </h1>
+      <div class="flex flex-wrap items-center justify-center gap-6 text-lg">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-carnival-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span class="font-semibold text-white/90">{{city?.date}}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-carnival-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="font-semibold text-white/90">{{city?.location}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details Content -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        <!-- Left Column: About & Schedule -->
+        <div class="lg:col-span-2 space-y-12">
+          <div>
+            <h2 class="text-3xl font-display font-bold mb-6 text-carnival-gold border-l-4 border-carnival-pink pl-6">About the Event</h2>
+            <p class="text-xl text-white/70 leading-relaxed italic">
+              "{{city?.description}}"
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-3xl font-display font-bold mb-8 text-carnival-gold border-l-4 border-carnival-pink pl-6">Program Schedule</h2>
+            <div class="space-y-6">
+              <div *ngFor="let item of city?.programDetails" class="group flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-gold/50 transition-all duration-300">
+                <div class="w-24 text-carnival-pink font-bold flex-shrink-0">{{item.time}}</div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2 group-hover:text-carnival-gold transition-colors">{{item.title}}</h3>
+                  <p class="text-white/60">{{item.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Quick Info & CTA -->
+        <div class="space-y-8">
+          <div class="p-8 rounded-3xl bg-gradient-to-br from-purple-900 to-[#1a0b2e] border border-white/10 shadow-2xl">
+            <h3 class="text-2xl font-bold mb-6 text-white text-center">Quick Links</h3>
+            <div class="space-y-4">
+              <a routerLink="/registration/participant" class="block w-full py-4 text-center bg-carnival-pink hover:bg-carnival-pink/80 text-white font-bold rounded-xl transition-all">Register to Attend</a>
+              <a routerLink="/registration/exhibitor" class="block w-full py-4 text-center border-2 border-white/20 hover:border-carnival-gold hover:text-carnival-gold text-white font-bold rounded-xl transition-all">Book a Stall</a>
+              <a routerLink="/contact" class="block w-full py-4 text-center text-white/60 hover:text-white transition-all underline">Contact Venue Head</a>
+            </div>
+          </div>
+
+          <div class="p-8 rounded-3xl bg-white/5 border border-white/10">
+            <h3 class="text-xl font-bold mb-4 text-carnival-gold">Need Help?</h3>
+            <p class="text-white/60 mb-6">Have questions about the event in {{city?.name}}? Our team is here to help you.</p>
+            <div class="space-y-2 text-sm">
+              <p class="flex items-center gap-2"><span class="text-carnival-pink">Email:</span> support@educarnival.com</p>
+              <p class="flex items-center gap-2"><span class="text-carnival-pink">Phone:</span> +91 99999 88888</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Back Button -->
+      <div class="mt-20 text-center">
+        <a routerLink="/" class="inline-flex items-center gap-2 text-white/50 hover:text-carnival-gold transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Upcoming Expo
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
