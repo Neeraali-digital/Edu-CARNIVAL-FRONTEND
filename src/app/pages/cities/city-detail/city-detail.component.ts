@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
@@ -13,13 +13,21 @@ import { ApiService } from '../../../services/api.service';
 export class CityDetailComponent implements OnInit {
     city: any;
 
-    constructor(private route: ActivatedRoute, private api: ApiService) { }
+    constructor(private route: ActivatedRoute, private api: ApiService, private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.route.params.subscribe(params => {
             const cityId = params['id'];
-            this.api.getOne('cities', cityId).subscribe(data => {
-                this.city = data;
+            console.log('City ID from route:', cityId);
+            this.api.getOne('cities', cityId).subscribe({
+                next: (data) => {
+                    console.log('City Data received:', data);
+                    this.city = data;
+                    this.cdr.detectChanges();
+                },
+                error: (err) => {
+                    console.error('Error fetching city details:', err);
+                }
             });
         });
     }

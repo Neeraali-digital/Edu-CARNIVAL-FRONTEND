@@ -1,0 +1,10 @@
+<div *ngIf="toast" class="toast-container" [class.show]="isVisible" [ngClass]="toast.type">
+  <div class="toast-icon">
+    <span *ngIf="toast.type === 'success'">✓</span>
+    <span *ngIf="toast.type === 'error'">✕</span>
+    <span *ngIf="toast.type === 'info'">ℹ</span>
+    <span *ngIf="toast.type === 'warning'">⚠</span>
+  </div>
+  <div class="toast-message">{{ toast.message }}</div>
+  <button class="toast-close" (click)="close()">×</button>
+</div>

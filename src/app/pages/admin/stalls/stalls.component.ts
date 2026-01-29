@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
@@ -12,19 +12,37 @@ import { ApiService } from '../../../services/api.service';
 })
 export class AdminStallsComponent implements OnInit {
   stalls: any[] = [];
+  bookings: any[] = [];
+  activeTab = 'stalls';
   showModal = false;
   editingStall = false;
   currentStall: any = {};
   selectedFile: File | null = null;
+  isSubmitting = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  refresh() {
     this.loadStalls();
+    this.loadBookings();
   }
 
   loadStalls() {
-    this.api.getAll('stalls').subscribe(data => this.stalls = data);
+    this.api.getAll('stalls').subscribe(data => {
+      this.stalls = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  loadBookings() {
+    this.api.getAll('stall-bookings').subscribe(data => {
+      this.bookings = data.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      this.cdr.detectChanges();
+    });
   }
 
   openModal() {
@@ -43,6 +61,8 @@ export class AdminStallsComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+    this.isSubmitting = false;
+    this.cdr.detectChanges();
   }
 
   onFileSelected(event: any) {
@@ -50,6 +70,7 @@ export class AdminStallsComponent implements OnInit {
   }
 
   saveStall() {
+    this.isSubmitting = true;
     const formData = new FormData();
     formData.append('title', this.currentStall.title);
     formData.append('price', this.currentStall.price); // Beware, if undefined
@@ -58,22 +79,25 @@ export class AdminStallsComponent implements OnInit {
       formData.append('image', this.selectedFile);
     }
 
-    if (this.editingStall) {
-      this.api.update('stalls', this.currentStall.id, formData).subscribe(() => {
-        this.loadStalls();
+    const request$ = this.editingStall
+      ? this.api.update('stalls', this.currentStall.id, formData)
+      : this.api.create('stalls', formData);
+
+    request$.subscribe({
+      next: () => {
+        this.refresh();
         this.closeModal();
-      });
-    } else {
-      this.api.create('stalls', formData).subscribe(() => {
-        this.loadStalls();
-        this.closeModal();
-      });
-    }
+      },
+      error: (err) => {
+        console.error('Error saving stall:', err);
+        this.isSubmitting = false;
+      }
+    });
   }
 
   deleteStall(id: number) {
     if (confirm('Are you sure you want to delete this stall?')) {
-      this.api.delete('stalls', id).subscribe(() => this.loadStalls());
+      this.api.delete('stalls', id).subscribe(() => this.refresh());
     }
   }
 }

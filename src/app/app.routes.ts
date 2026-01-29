@@ -20,6 +20,7 @@ import { AdminRegistrationsComponent } from './pages/admin/registrations/registr
 import { AdminInquiriesComponent } from './pages/admin/inquiries/inquiries.component';
 import { AdminGalleryComponent } from './pages/admin/gallery/gallery.component';
 import { AdminStallsComponent } from './pages/admin/stalls/stalls.component';
+import { AdminProgramScheduleComponent } from './pages/admin/program-schedule/program-schedule.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -57,6 +58,7 @@ export const routes: Routes = [
             { path: 'inquiries', component: AdminInquiriesComponent },
             { path: 'gallery', component: AdminGalleryComponent },
             { path: 'stalls', component: AdminStallsComponent },
+            { path: 'program-schedule', component: AdminProgramScheduleComponent },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },

@@ -17,84 +17,53 @@
       <!-- Event Items -->
       <div class="space-y-12">
         
-        <!-- Event 1: Jammu -->
-        <div class="relative flex flex-col md:flex-row gap-8 items-center group">
-          <div class="w-full md:w-1/2 md:text-right md:pr-12 pl-12 order-2 md:order-1">
-            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-pink transition-colors">Jammu</h3>
-            <p class="text-carnival-gold font-medium mb-2">March 15-16, 2026</p>
-            <p class="text-white/60 text-sm">Convention Centre, Jammu. The journey begins in the city of temples.</p>
-            <a [routerLink]="['/city', 'jammu']" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-pink pb-0.5 hover:text-carnival-pink transition-colors">View Details</a>
+        <div *ngFor="let city of cities; let i = index; let isEven = even" class="relative flex flex-col md:flex-row gap-8 items-center group">
+          
+          <!-- Case 1: Even Index (0, 2, 4...) -> Text Left, Image Right -->
+          <!-- Text Side -->
+          <div *ngIf="isEven" class="w-full md:w-1/2 md:text-right md:pr-12 pl-12 order-2 md:order-1">
+            <div *ngIf="city.is_current_expo" class="inline-block mb-2 px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full animate-pulse">LIVE NOW</div>
+            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-pink transition-colors">{{ city.name }}</h3>
+            <p class="text-carnival-gold font-medium mb-2">{{ city.date }}</p>
+            <p class="text-white/60 text-sm">{{ city.location }}</p>
+            <a [routerLink]="['/city', city.slug]" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-pink pb-0.5 hover:text-carnival-pink transition-colors cursor-pointer">View Details</a>
           </div>
-          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-carnival-pink border-4 border-[#1a0b2e] z-10 group-hover:scale-150 transition-transform duration-300"></div>
-          <div class="w-full md:w-1/2 pl-12 order-3 md:order-2">
-            <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-pink/50 transition-colors">
-              <img src="/Jammu.jpg" alt="Jammu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+          <!-- Image Side (Empty in structure, filled if Odd) -->
+           <div *ngIf="!isEven" class="w-full md:w-1/2 md:pl-12 pl-12 order-3 md:order-1">
+             <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-gold/50 transition-colors relative">
+               <img [src]="city.image || 'https://placehold.co/600x400/2e1065/white?text=' + city.name" [alt]="city.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+               <div *ngIf="city.is_current_expo" class="absolute inset-0 border-4 border-red-500/50 rounded-xl pointer-events-none animate-pulse"></div>
+             </div>
+           </div>
+
+
+          <!-- Center Dot -->
+          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-[#1a0b2e] z-10 group-hover:scale-150 transition-transform duration-300"
+               [ngClass]="{'bg-carnival-pink': isEven, 'bg-carnival-gold': !isEven, 'bg-red-500 scale-125': city.is_current_expo}"></div>
+
+
+          <!-- Image Side (Filled if Even) -->
+          <div *ngIf="isEven" class="w-full md:w-1/2 pl-12 order-3 md:order-2">
+            <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-pink/50 transition-colors relative">
+              <img [src]="city.image || 'https://placehold.co/600x400/2e1065/white?text=' + city.name" [alt]="city.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div *ngIf="city.is_current_expo" class="absolute inset-0 border-4 border-red-500/50 rounded-xl pointer-events-none animate-pulse"></div>
             </div>
           </div>
+
+          <!-- Text Side (Filled if Odd) -->
+          <div *ngIf="!isEven" class="w-full md:w-1/2 md:text-left md:pl-12 pl-12 order-2 md:order-2">
+            <div *ngIf="city.is_current_expo" class="inline-block mb-2 px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full animate-pulse">LIVE NOW</div>
+            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-gold transition-colors">{{ city.name }}</h3>
+            <p class="text-carnival-gold font-medium mb-2">{{ city.date }}</p>
+            <p class="text-white/60 text-sm">{{ city.location }}</p>
+             <a [routerLink]="['/city', city.slug]" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-gold pb-0.5 hover:text-carnival-gold transition-colors cursor-pointer">View Details</a>
+          </div>
+
         </div>
 
-        <!-- Event 2: Gangtok -->
-        <div class="relative flex flex-col md:flex-row gap-8 items-center group">
-          <div class="w-full md:w-1/2 pl-12 order-3 md:order-1">
-             <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-gold/50 transition-colors">
-              <img src="/Gangtok.jpg" alt="Gangtok" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-          </div>
-          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-carnival-gold border-4 border-[#1a0b2e] z-10 group-hover:scale-150 transition-transform duration-300"></div>
-          <div class="w-full md:w-1/2 md:text-left md:pl-12 pl-12 order-2 md:order-2">
-            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-gold transition-colors">Gangtok</h3>
-            <p class="text-carnival-gold font-medium mb-2">March 20-21, 2026</p>
-            <p class="text-white/60 text-sm">Manan Kendra, Gangtok. Education excellence amidst the serene hills.</p>
-            <a [routerLink]="['/city', 'gangtok']" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-gold pb-0.5 hover:text-carnival-gold transition-colors">View Details</a>
-          </div>
-        </div>
-
-        <!-- Event 3: Imphal -->
-        <div class="relative flex flex-col md:flex-row gap-8 items-center group">
-          <div class="w-full md:w-1/2 md:text-right md:pr-12 pl-12 order-2 md:order-1">
-            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-pink transition-colors">Imphal</h3>
-            <p class="text-carnival-gold font-medium mb-2">March 25-26, 2026</p>
-            <p class="text-white/60 text-sm">City Convention Centre, Imphal. Opening doors to global learning in Manipur.</p>
-            <a [routerLink]="['/city', 'imphal']" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-pink pb-0.5 hover:text-carnival-pink transition-colors">View Details</a>
-          </div>
-          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-carnival-pink border-4 border-[#1a0b2e] z-10 group-hover:scale-150 transition-transform duration-300"></div>
-          <div class="w-full md:w-1/2 pl-12 order-3 md:order-2">
-             <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-pink/50 transition-colors">
-              <img src="/Imphal.jpg" alt="Imphal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-          </div>
-        </div>
-        
-        <!-- Event 4: Dimapur -->
-        <div class="relative flex flex-col md:flex-row gap-8 items-center group">
-          <div class="w-full md:w-1/2 pl-12 order-3 md:order-1">
-             <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-gold/50 transition-colors">
-              <img src="/Dimapur.jpg" alt="Dimapur" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-          </div>
-          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-carnival-gold border-4 border-[#1a0b2e] z-10 group-hover:scale-150 transition-transform duration-300"></div>
-          <div class="w-full md:w-1/2 md:text-left md:pl-12 pl-12 order-2 md:order-2">
-            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-gold transition-colors">Dimapur</h3>
-            <p class="text-carnival-gold font-medium mb-2">March 30-31, 2026</p>
-            <p class="text-white/60 text-sm">Agri Expo Center, Dimapur. Transforming futures in Nagaland.</p>
-            <a [routerLink]="['/city', 'dimapur']" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-gold pb-0.5 hover:text-carnival-gold transition-colors">View Details</a>
-          </div>
-        </div>
-
-        <!-- Event 5: Dibrugarh -->
-        <div class="relative flex flex-col md:flex-row gap-8 items-center group">
-          <div class="w-full md:w-1/2 md:text-right md:pr-12 pl-12 order-2 md:order-1">
-            <h3 class="text-2xl font-display font-bold text-white group-hover:text-carnival-pink transition-colors">Dibrugarh</h3>
-            <p class="text-carnival-gold font-medium mb-2">April 05-06, 2026</p>
-            <p class="text-white/60 text-sm">Chowkidingee Field. Empowering the youth of Upper Assam.</p>
-            <a [routerLink]="['/city', 'dibrugarh']" class="mt-4 inline-block text-xs font-bold text-white uppercase tracking-wider border-b border-carnival-pink pb-0.5 hover:text-carnival-pink transition-colors">View Details</a>
-          </div>
-          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-carnival-pink border-4 border-[#1a0b2e] z-10 group-hover:scale-150 transition-transform duration-300"></div>
-          <div class="w-full md:w-1/2 pl-12 order-3 md:order-2">
-             <div class="rounded-xl overflow-hidden h-40 shadow-lg border border-white/10 group-hover:border-carnival-pink/50 transition-colors">
-              <img src="/Dibrugarh.jpg" alt="Dibrugarh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-          </div>
+        <div *ngIf="cities.length === 0" class="text-center text-white/50 py-12">
+            No upcoming events scheduled yet.
         </div>
 
       </div>

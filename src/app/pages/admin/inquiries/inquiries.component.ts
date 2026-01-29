@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../../services/api.service';
 
@@ -12,7 +12,7 @@ import { ApiService } from '../../../services/api.service';
 export class AdminInquiriesComponent implements OnInit {
   inquiries: any[] = [];
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.api.getAll('inquiries').subscribe(data => {
@@ -20,6 +20,7 @@ export class AdminInquiriesComponent implements OnInit {
       this.inquiries = data.sort((a: any, b: any) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
+      this.cdr.detectChanges();
     });
   }
 

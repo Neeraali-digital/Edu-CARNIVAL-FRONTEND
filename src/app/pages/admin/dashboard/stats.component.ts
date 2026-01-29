@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core'; // Core imports
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../../services/api.service';
 import { BaseChartDirective } from 'ng2-charts';
@@ -79,35 +79,41 @@ export class DashboardStatsComponent implements OnInit {
     datasets: [{ data: [0, 0, 0], backgroundColor: ['#ff007f', '#764ba2', '#f1c40f'] }]
   };
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.api.getAll('cities').subscribe(data => {
-      this.cityCount = data.length;
-      this.updateCharts();
-    });
-    this.api.getAll('registrations/exhibitor').subscribe(data => {
-      this.exhibitorCount = data.length;
-      this.updateCharts();
-    });
-    this.api.getAll('registrations/participant').subscribe(data => {
-      this.participantCount = data.length;
-      this.updateCharts();
-    });
-    this.api.getAll('inquiries').subscribe(data => {
-      this.inquiryCount = data.length;
-      this.updateCharts();
-    });
+    this.api.getAll('dashboard-stats').subscribe(data => {
+      // Since getAll appends '/', and our url is 'dashboard-stats/', it might be 'dashboard-stats//' or work if backend handles it
+      // Ideally use getOne or custom http.get but getAll works if endpoint is correct
+      // The API returns an object, getAll expects array usually in my code but here it's any.
+      // Let's assume api.getAll does http.get(url/)
 
-    // Fetch for Pie Chart
-    this.api.getAll('stalls').subscribe(stalls => {
-      this.api.getAll('photos').subscribe(photos => {
-        this.pieChartData.datasets[0].data = [this.cityCount, stalls.length, photos.length];
-      });
+      // Actually, the api service might be expecting an array if typed.
+      // Let's just cast data as any.
+      const stats = data as any;
+
+      this.cityCount = stats.total_cities || 0;
+      this.exhibitorCount = stats.exhibitor_regs || 0;
+      this.participantCount = stats.participant_regs || 0;
+      this.inquiryCount = stats.inquiries || 0;
+
+      this.barChartData.datasets[0].data = [
+        this.exhibitorCount,
+        this.participantCount,
+        this.inquiryCount
+      ];
+
+      this.pieChartData.datasets[0].data = [
+        this.cityCount,
+        stats.total_stalls || 0,
+        stats.total_gallery || 0
+      ];
+
+      // Trigger chart update
+      this.chart?.update();
+      this.cdr.detectChanges();
     });
   }
 
-  updateCharts() {
-    this.barChartData.datasets[0].data = [this.exhibitorCount, this.participantCount, this.inquiryCount];
-  }
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 }

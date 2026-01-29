@@ -315,3 +315,42 @@
         transform: translateY(0);
     }
 }
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    padding: 1rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.tabs button:hover {
+    color: #1a0b2e;
+}
+
+.tabs button.active {
+    color: #764ba2;
+}
+
+.tabs button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #764ba2;
+    border-radius: 3px 3px 0 0;
+}

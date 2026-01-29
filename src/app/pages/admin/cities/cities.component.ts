@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
@@ -16,33 +16,42 @@ export class AdminCitiesComponent implements OnInit {
   editingCity = false;
   currentCity: any = {};
   selectedFile: File | null = null;
+  isSubmitting = false;
+  originalSlug = '';
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.loadCities();
   }
 
   loadCities() {
-    this.api.getAll('cities').subscribe(data => this.cities = data);
+    this.api.getAll('cities').subscribe(data => {
+      this.cities = data;
+      this.cdr.detectChanges();
+    });
   }
 
   openModal() {
     this.editingCity = false;
     this.currentCity = {};
     this.selectedFile = null;
+    this.originalSlug = '';
     this.showModal = true;
   }
 
   editCity(city: any) {
     this.editingCity = true;
     this.currentCity = { ...city };
+    this.originalSlug = city.slug; // Store original slug for API lookup
     this.selectedFile = null;
     this.showModal = true;
   }
 
   closeModal() {
     this.showModal = false;
+    this.isSubmitting = false;
+    this.cdr.detectChanges();
   }
 
   onFileSelected(event: any) {
@@ -50,28 +59,39 @@ export class AdminCitiesComponent implements OnInit {
   }
 
   saveCity() {
+    this.isSubmitting = true;
+    console.log('Submitting city...', this.currentCity);
     const formData = new FormData();
     formData.append('name', this.currentCity.name);
     formData.append('slug', this.currentCity.slug);
-    formData.append('date', this.currentCity.date);
-    formData.append('location', this.currentCity.location);
-    formData.append('description', this.currentCity.description);
+    if (this.currentCity.description) formData.append('description', this.currentCity.description);
+    if (this.currentCity.date) formData.append('date', this.currentCity.date);
+    if (this.currentCity.start_date) formData.append('start_date', this.currentCity.start_date);
+    if (this.currentCity.end_date) formData.append('end_date', this.currentCity.end_date);
+    formData.append('is_current_expo', this.currentCity.is_current_expo ? 'true' : 'false');
+    if (this.currentCity.location) formData.append('location', this.currentCity.location);
 
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }
 
-    if (this.editingCity) {
-      this.api.update('cities', this.currentCity.slug, formData).subscribe(() => {
+    const request$ = this.editingCity
+      ? this.api.update('cities', this.originalSlug, formData)
+      : this.api.create('cities', formData);
+
+    request$.subscribe({
+      next: (res) => {
+        console.log('City saved successfully', res);
         this.loadCities();
         this.closeModal();
-      });
-    } else {
-      this.api.create('cities', formData).subscribe(() => {
-        this.loadCities();
-        this.closeModal();
-      });
-    }
+      },
+      error: (err) => {
+        console.error('Error saving city:', err);
+        alert('Failed to save city. Please check console for details.');
+        this.isSubmitting = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   deleteCity(slug: string) {

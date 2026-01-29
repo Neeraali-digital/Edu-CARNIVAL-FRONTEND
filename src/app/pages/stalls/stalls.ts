@@ -1,22 +1,85 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-stalls',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './stalls.html',
   styleUrl: './stalls.css',
 })
 export class StallsComponent implements OnInit {
   stalls: any[] = [];
+  cities: any[] = [];
+  showModal = false;
+  selectedStall: any = null;
 
-  constructor(private api: ApiService) { }
+  @ViewChild('bookingForm') bookingForm!: NgForm;
+
+  bookingData = {
+    name: '',
+    email: '',
+    phone: '',
+    city: ''
+  };
+  isSubmitting = false;
+
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef, private toast: ToastService) { }
 
   ngOnInit() {
+    this.loadStalls();
+    this.loadCities();
+  }
+
+  loadStalls() {
     this.api.getAll('stalls').subscribe(data => {
       this.stalls = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  loadCities() {
+    this.api.getAll('cities').subscribe(data => {
+      this.cities = data;
+    });
+  }
+
+  openBookingModal(stall: any) {
+    this.selectedStall = stall;
+    this.showModal = true;
+  }
+
+  closeBookingModal() {
+    this.showModal = false;
+    this.selectedStall = null;
+    this.bookingData = { name: '', email: '', phone: '', city: '' };
+    this.isSubmitting = false;
+  }
+
+  submitBooking() {
+    if (!this.selectedStall) return;
+
+    this.isSubmitting = true;
+    const payload = {
+      ...this.bookingData,
+      stall: this.selectedStall.id
+    };
+
+    this.api.create('stall-bookings', payload).subscribe({
+      next: () => {
+        console.log('Booking success callback');
+        this.toast.success('Stall booked successfully! We will contact you soon.', 5000);
+        this.closeBookingModal();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Booking failed', err);
+        this.toast.error('Booking failed. Please try again.', 5000);
+        this.isSubmitting = false;
+      }
     });
   }
 }

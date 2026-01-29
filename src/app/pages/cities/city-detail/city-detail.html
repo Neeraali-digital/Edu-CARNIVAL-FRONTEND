@@ -9,8 +9,12 @@
 
     <!-- Content -->
     <div class="container mx-auto px-4 relative z-10 text-center">
-      <div class="inline-block mb-4 px-4 py-1 rounded-full bg-carnival-pink/20 border border-carnival-pink/30 backdrop-blur-md">
-        <span class="text-carnival-pink font-semibold uppercase tracking-widest text-sm">Upcoming Expo - 2026</span>
+      <div class="inline-block mb-4 px-4 py-1 rounded-full backdrop-blur-md border transition-all"
+           [ngClass]="{'bg-red-600 border-red-500 animate-pulse': city?.is_current_expo, 'bg-carnival-pink/20 border-carnival-pink/30': !city?.is_current_expo}">
+        <span class="font-semibold uppercase tracking-widest text-sm"
+              [ngClass]="{'text-white': city?.is_current_expo, 'text-carnival-pink': !city?.is_current_expo}">
+          {{ city?.is_current_expo ? 'LIVE NOW' : 'Upcoming Expo - 2026' }}
+        </span>
       </div>
       <h1 class="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up">
         {{city?.name}} <span class="text-carnival-gold">Expo</span>

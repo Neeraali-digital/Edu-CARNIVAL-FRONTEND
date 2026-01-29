@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-participant-registration',
@@ -12,6 +13,7 @@ import { ApiService } from '../../../services/api.service';
   styleUrl: './participant-registration.css'
 })
 export class ParticipantRegistrationComponent {
+  @ViewChild('participantForm') participantForm!: NgForm;
   formData = {
     full_name: '',
     school_college: '',
@@ -20,18 +22,23 @@ export class ParticipantRegistrationComponent {
     interests: ''
   };
   submitted = false;
+  isSubmitting = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private toast: ToastService) { }
 
   onSubmit() {
+    this.isSubmitting = true;
     this.api.create('registrations/participant', this.formData).subscribe({
       next: (res) => {
         this.submitted = true;
-        alert('Registration successful!');
+        this.toast.success('Registration successful!', 5000);
+        this.participantForm.resetForm();
+        this.isSubmitting = false;
       },
       error: (err) => {
         console.error(err);
-        alert('Registration failed.');
+        this.toast.error('Registration failed.', 5000);
+        this.isSubmitting = false;
       }
     });
   }

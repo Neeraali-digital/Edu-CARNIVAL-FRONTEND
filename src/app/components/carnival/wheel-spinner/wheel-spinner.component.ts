@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import confetti from 'canvas-confetti';
 
@@ -14,6 +14,8 @@ export class WheelSpinnerComponent {
     isSpinning = false;
     prize: string | null = null;
     selectedPrizeIndex = -1;
+
+    constructor(private cdr: ChangeDetectorRef) { }
 
     mathCos(deg: number) {
         return Math.cos((deg * Math.PI) / 180);
@@ -39,6 +41,7 @@ export class WheelSpinnerComponent {
 
         this.isSpinning = true;
         this.prize = null;
+        this.cdr.detectChanges(); // Update UI to remove previous prize if any
 
         // Pick a random prize index
         const prizeIndex = Math.floor(Math.random() * this.prizes.length);
@@ -58,12 +61,14 @@ export class WheelSpinnerComponent {
         const totalRotation = this.rotationDegree + (extraSpins * 360) + (targetDegree - (this.rotationDegree % 360));
 
         this.rotationDegree = totalRotation;
+        this.cdr.detectChanges(); // Ensure rotation starts
 
         // Wait for 3 seconds (animation duration)
         setTimeout(() => {
             this.isSpinning = false;
             this.prize = this.prizes[prizeIndex].name;
             this.triggerBlast();
+            this.cdr.detectChanges(); // Force update to show prize
         }, 3000);
     }
 

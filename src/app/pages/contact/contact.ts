@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,24 +12,29 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './contact.css'
 })
 export class ContactComponent {
+  @ViewChild('contactForm') contactForm!: NgForm;
   formData = {
     name: '',
     email: '',
-    subject: '',
+    subject: 'General Inquiry',
     message: ''
   };
+  isSubmitting = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private toast: ToastService) { }
 
   onSubmit() {
+    this.isSubmitting = true;
     this.api.create('inquiries', this.formData).subscribe({
       next: (res) => {
-        alert('Thank you for contacting us!');
-        this.formData = { name: '', email: '', subject: '', message: '' };
+        this.toast.success('Thank you for contacting us!');
+        this.contactForm.resetForm({ subject: 'General Inquiry' }); // Keep default subject
+        this.isSubmitting = false;
       },
       error: (err) => {
         console.error(err);
-        alert('Could not send message.');
+        this.toast.error('Could not send message. Please try again.');
+        this.isSubmitting = false;
       }
     });
   }

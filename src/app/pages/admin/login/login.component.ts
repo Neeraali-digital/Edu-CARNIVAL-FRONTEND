@@ -13,16 +13,24 @@ import { ApiService } from '../../../services/api.service';
       <div class="login-card">
         <h2>Admin Login</h2>
         <p class="subtitle">Welcome to Edu Carnival Dashboard</p>
-        <form (ngSubmit)="login()">
+        <form #loginForm="ngForm" (ngSubmit)="login()">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" [(ngModel)]="username" name="username" required>
+            <input type="text" id="username" [(ngModel)]="username" name="username" required #user="ngModel">
+             <div *ngIf="user.invalid && (user.dirty || user.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d;">
+                Username is required.
+             </div>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" [(ngModel)]="password" name="password" required>
+            <input type="password" id="password" [(ngModel)]="password" name="password" required #pass="ngModel">
+             <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d;">
+                Password is required.
+             </div>
           </div>
-          <button type="submit" class="login-btn">Login</button>
+          <button type="submit" class="login-btn" [disabled]="!loginForm.form.valid || isSubmitting" [style.opacity]="(!loginForm.form.valid || isSubmitting) ? '0.6' : '1'">
+            {{ isSubmitting ? 'Logging in...' : 'Login' }}
+          </button>
           <p *ngIf="error" class="error">{{ error }}</p>
         </form>
       </div>
@@ -128,9 +136,12 @@ export class AdminLoginComponent {
   password = '';
   error = '';
 
+  isSubmitting = false;
+
   constructor(private router: Router, private api: ApiService) { }
 
   login() {
+    this.isSubmitting = true;
     this.api.login(this.username, this.password).subscribe({
       next: (res: any) => {
         if (res.is_superuser) {
@@ -139,11 +150,13 @@ export class AdminLoginComponent {
           this.router.navigate(['/admin/dashboard']);
         } else {
           this.error = 'Access denied. Administrator privileges required.';
+          this.isSubmitting = false;
         }
       },
       error: (err) => {
         console.error(err);
         this.error = 'Invalid credentials. Please try again.';
+        this.isSubmitting = false;
       }
     });
   }

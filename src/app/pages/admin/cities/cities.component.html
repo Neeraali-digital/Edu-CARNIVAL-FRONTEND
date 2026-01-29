@@ -65,38 +65,72 @@
       <h3>{{ editingCity ? 'Edit City' : 'Add New City' }}</h3>
       <button class="close-btn" (click)="closeModal()">&times;</button>
     </div>
-    <form (ngSubmit)="saveCity()">
+    <form #cityForm="ngForm" (ngSubmit)="saveCity()">
       <div class="modal-body">
         <div class="form-group">
           <label>City Name</label>
-          <input type="text" [(ngModel)]="currentCity.name" name="name" required placeholder="e.g. Dubai">
+          <input type="text" [(ngModel)]="currentCity.name" name="name" required placeholder="e.g. Dubai" #name="ngModel">
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d; font-size: 0.8rem;">
+             City Name is required.
+           </div>
         </div>
         <div class="form-group">
           <label>Slug (Unique Identifier)</label>
-          <input type="text" [(ngModel)]="currentCity.slug" name="slug" required placeholder="e.g. dubai-expo">
+          <input type="text" [(ngModel)]="currentCity.slug" name="slug" required placeholder="e.g. dubai-expo" #slug="ngModel">
+           <div *ngIf="slug.invalid && (slug.dirty || slug.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d; font-size: 0.8rem;">
+             Slug is required.
+           </div>
         </div>
         <div class="form-group grid-2">
             <div>
-                <label>Date</label>
-                <input type="text" [(ngModel)]="currentCity.date" name="date" required placeholder="e.g. March 15-16, 2026">
+                <label>Display Date (Text)</label>
+                <input type="text" [(ngModel)]="currentCity.date" name="date" required placeholder="e.g. March 15-16, 2026" #date="ngModel">
+                <div *ngIf="date.invalid && (date.dirty || date.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d; font-size: 0.8rem;">
+                   Display Date is required.
+                </div>
             </div>
             <div>
                  <label>City Image</label>
                  <input type="file" (change)="onFileSelected($event)" accept="image/*">
             </div>
         </div>
+
+        <div class="form-group grid-3">
+          <div>
+            <label>Start Date (Sorting)</label>
+            <input type="date" [(ngModel)]="currentCity.start_date" name="start_date">
+          </div>
+          <div>
+            <label>End Date</label>
+            <input type="date" [(ngModel)]="currentCity.end_date" name="end_date">
+          </div>
+          <div class="flex items-center pt-8">
+             <label class="flex items-center gap-2 cursor-pointer">
+               <input type="checkbox" [(ngModel)]="currentCity.is_current_expo" name="is_current_expo" class="w-5 h-5 text-purple-600 rounded focus:ring-purple-500">
+               <span class="font-semibold text-gray-700">Currently Happening?</span>
+             </label>
+          </div>
+        </div>
         <div class="form-group">
           <label>Location/Venue</label>
-          <input type="text" [(ngModel)]="currentCity.location" name="location" required placeholder="e.g. World Trade Centre">
+          <input type="text" [(ngModel)]="currentCity.location" name="location" required placeholder="e.g. World Trade Centre" #location="ngModel">
+          <div *ngIf="location.invalid && (location.dirty || location.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d; font-size: 0.8rem;">
+             Location is required.
+           </div>
         </div>
         <div class="form-group">
           <label>Description</label>
-          <textarea [(ngModel)]="currentCity.description" name="description" rows="4" required placeholder="Details about this city's expo..."></textarea>
+          <textarea [(ngModel)]="currentCity.description" name="description" rows="4" required placeholder="Details about this city's expo..." #desc="ngModel"></textarea>
+          <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="text-red-400 text-xs mt-1" style="color: #ff4d4d; font-size: 0.8rem;">
+             Description is required.
+           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
-        <button type="submit" class="btn-save">{{ editingCity ? 'Update City' : 'Create City' }}</button>
+        <button type="submit" class="btn-save" [disabled]="!cityForm.form.valid || isSubmitting" [style.opacity]="(!cityForm.form.valid || isSubmitting) ? '0.6' : '1'">
+          {{ isSubmitting ? 'Saving...' : (editingCity ? 'Update City' : 'Create City') }}
+        </button>
       </div>
     </form>
   </div>
