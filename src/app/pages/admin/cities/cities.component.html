@@ -1,0 +1,103 @@
+<div class="page-header">
+  <div class="header-left">
+    <h2>Manage Cities</h2>
+    <span class="badge">{{ cities.length }} Locations</span>
+  </div>
+  <div class="header-right">
+    <button class="primary-btn" (click)="openModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add New City
+    </button>
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th width="30%">City Name</th>
+        <th width="20%">Date</th>
+        <th width="30%">Location</th>
+        <th width="20%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let city of cities" class="table-row">
+        <td>
+          <span class="title-text">{{ city.name }}</span>
+        </td>
+        <td>{{ city.date }}</td>
+        <td>
+          <div class="loc-cell">
+            <span class="icon">📍</span> {{ city.location }}
+          </div>
+        </td>
+        <td>
+          <div class="actions">
+            <button class="action-btn edit" (click)="editCity(city)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button>
+            <button class="action-btn delete" (click)="deleteCity(city.slug)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="cities.length === 0">
+        <td colspan="4" class="empty-state">
+          <p>No cities added yet.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>{{ editingCity ? 'Edit City' : 'Add New City' }}</h3>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+    <form (ngSubmit)="saveCity()">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>City Name</label>
+          <input type="text" [(ngModel)]="currentCity.name" name="name" required placeholder="e.g. Dubai">
+        </div>
+        <div class="form-group">
+          <label>Slug (Unique Identifier)</label>
+          <input type="text" [(ngModel)]="currentCity.slug" name="slug" required placeholder="e.g. dubai-expo">
+        </div>
+        <div class="form-group grid-2">
+            <div>
+                <label>Date</label>
+                <input type="text" [(ngModel)]="currentCity.date" name="date" required placeholder="e.g. March 15-16, 2026">
+            </div>
+            <div>
+                 <label>City Image</label>
+                 <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            </div>
+        </div>
+        <div class="form-group">
+          <label>Location/Venue</label>
+          <input type="text" [(ngModel)]="currentCity.location" name="location" required placeholder="e.g. World Trade Centre">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="currentCity.description" name="description" rows="4" required placeholder="Details about this city's expo..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn-save">{{ editingCity ? 'Update City' : 'Create City' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

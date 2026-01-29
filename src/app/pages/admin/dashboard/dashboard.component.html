@@ -1,0 +1,65 @@
+<div class="admin-wrapper">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-container">
+        <img src="/logo.png" alt="Edu Carnival Admin" class="logo-img">
+        <div class="logo-text">
+          <h3>Edu Carnival</h3>
+          <span class="admin-badge">Admin Panel</span>
+        </div>
+      </div>
+    </div>
+    
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+
+          <span class="text">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/cities" routerLinkActive="active">
+
+          <span class="text">Cities</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/registrations" routerLinkActive="active">
+
+          <span class="text">Registrations</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/inquiries" routerLinkActive="active">
+
+          <span class="text">Inquiries</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/gallery" routerLinkActive="active">
+
+          <span class="text">Gallery</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/stalls" routerLinkActive="active">
+
+          <span class="text">Stalls</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <button (click)="logout()" class="logout-btn">
+
+        <span class="text">Logout</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

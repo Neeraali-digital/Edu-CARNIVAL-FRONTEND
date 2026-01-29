@@ -1,0 +1,64 @@
+<div class="page-header">
+  <div class="header-left">
+    <h2>Contact Inquiries</h2>
+    <span class="badge">{{ inquiries.length }} Total</span>
+  </div>
+  <div class="header-right">
+    <button class="icon-btn" (click)="ngOnInit()" title="Refresh">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th width="20%">User Details</th>
+        <th width="20%">Subject</th>
+        <th width="40%">Message</th>
+        <th width="15%">Date Received</th>
+        <th width="5%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inq of inquiries" class="table-row">
+        <td>
+          <div class="user-cell">
+            <div class="avatar-placeholder">{{ inq.name.charAt(0) }}</div>
+            <div class="user-info">
+              <span class="username">{{ inq.name }}</span>
+              <span class="user-email">{{ inq.email }}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="subject-pill">{{ inq.subject }}</span>
+        </td>
+        <td>
+          <div class="message-cell" [title]="inq.message">
+            {{ inq.message }}
+          </div>
+        </td>
+        <td class="date-cell">
+          {{ inq.created_at | date:'mediumDate' }}
+          <span class="time">{{ inq.created_at | date:'shortTime' }}</span>
+        </td>
+        <td>
+          <button class="delete-btn" (click)="deleteInquiry(inq.id)" title="Delete Inquiry">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="inquiries.length === 0">
+        <td colspan="5" class="empty-state">
+          <p>No inquiries found.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

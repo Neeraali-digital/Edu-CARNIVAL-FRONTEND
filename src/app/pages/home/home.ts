@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WheelSpinnerComponent } from '../../components/carnival/wheel-spinner/wheel-spinner.component';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,14 @@ import { WheelSpinnerComponent } from '../../components/carnival/wheel-spinner/w
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class HomeComponent {
-  cities = [
-    { id: 'jammu', name: 'Jammu', image: '/Jammu.jpg' },
-    { id: 'gangtok', name: 'Gangtok', image: '/Gangtok.jpg' },
-    { id: 'imphal', name: 'Imphal', image: '/Imphal.jpg' },
-    { id: 'dimapur', name: 'Dimapur', image: '/Dimapur.jpg' },
-    { id: 'dibrugarh', name: 'Dibrugarh', image: '/Dibrugarh.jpg' }
-  ];
+export class HomeComponent implements OnInit {
+  cities: any[] = [];
+
+  constructor(private api: ApiService) { }
+
+  ngOnInit() {
+    this.api.getAll('cities').subscribe(data => {
+      this.cities = data;
+    });
+  }
 }

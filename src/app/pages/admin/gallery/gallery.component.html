@@ -1,0 +1,143 @@
+<div class="page-header">
+  <div class="header-left">
+    <h2>Gallery Management</h2>
+    <div class="tabs">
+      <button [class.active]="activeTab === 'photos'" (click)="activeTab = 'photos'" class="tab-btn">
+        <span class="icon">📷</span> Photos
+      </button>
+      <button [class.active]="activeTab === 'videos'" (click)="activeTab = 'videos'" class="tab-btn">
+        <span class="icon">🎥</span> Videos
+      </button>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="primary-btn" (click)="activeTab === 'photos' ? openPhotoModal() : openVideoModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add {{ activeTab === 'photos' ? 'Photo' : 'Video' }}
+    </button>
+  </div>
+</div>
+
+<!-- Photos Grid -->
+<div *ngIf="activeTab === 'photos'" class="gallery-grid">
+  <div *ngFor="let photo of photos" class="gallery-card">
+    <div class="img-wrapper">
+      <img [src]="photo.image" [alt]="photo.title" onerror="this.src='/assets/placeholder.jpg'">
+    </div>
+    <div class="card-footer">
+      <h4 [title]="photo.title">{{ photo.title }}</h4>
+      <button class="action-btn delete" (click)="deletePhoto(photo.id)" title="Delete Photo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Empty State -->
+  <div *ngIf="photos.length === 0" class="empty-state">
+    <div class="empty-icon">🖼️</div>
+    <p>No photos added yet.</p>
+  </div>
+</div>
+
+<!-- Videos Table -->
+<div *ngIf="activeTab === 'videos'" class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th width="30%">Video Title</th>
+        <th width="50%">Video Link (YouTube)</th>
+        <th width="20%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let video of videos" class="table-row">
+        <td>
+            <span class="title-text">{{ video.title }}</span>
+        </td>
+        <td>
+            <a [href]="video.video_url" target="_blank" class="link-pill">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {{ video.video_url }}
+            </a>
+        </td>
+        <td>
+           <button class="action-btn delete" (click)="deleteVideo(video.id)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+           </button>
+        </td>
+      </tr>
+      <tr *ngIf="videos.length === 0">
+        <td colspan="3" class="empty-state-row">
+          <p>No videos added yet.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add Photo Modal -->
+<div *ngIf="showPhotoModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Add New Photo</h3>
+      <button class="close-btn" (click)="closeModals()">&times;</button>
+    </div>
+    <form (ngSubmit)="savePhoto()">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Photo Title *</label>
+          <input type="text" [(ngModel)]="newItem.title" name="title" required placeholder="e.g. Inauguration Ceremony">
+        </div>
+        <div class="form-group">
+            <label>Upload Image *</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
+            <p class="hint">Supported formats: JPG, PNG, WEBP</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="closeModals()">Cancel</button>
+        <button type="submit" class="btn-save" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Saving...' : 'Save Photo' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Video Modal -->
+<div *ngIf="showVideoModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add New Video</h3>
+        <button class="close-btn" (click)="closeModals()">&times;</button>
+      </div>
+      <form (ngSubmit)="saveVideo()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Video Title *</label>
+            <input type="text" [(ngModel)]="newItem.title" name="title" required placeholder="e.g. Event Highlights 2025">
+          </div>
+          <div class="form-group">
+              <label>YouTube URL *</label>
+              <input type="text" [(ngModel)]="newItem.video_url" name="video_url" required placeholder="https://youtube.com/watch?v=...">
+              <p class="hint">Enter the full YouTube video link.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="closeModals()">Cancel</button>
+          <button type="submit" class="btn-save" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Saving...' : 'Save Video' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

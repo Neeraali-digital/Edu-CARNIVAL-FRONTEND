@@ -120,7 +120,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- City Card Loop -->
         <div *ngFor="let city of cities" 
-             [routerLink]="['/city', city.id]"
+             [routerLink]="['/city', city.slug]"
              class="group relative h-64 rounded-3xl overflow-hidden cursor-pointer shadow-2xl hover:shadow-carnival-pink/20 transition-all duration-500 hover:-translate-y-2">
           <!-- Real City IMG -->
           <img [src]="city.image" [alt]="city.name" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 transform group-hover:scale-110">

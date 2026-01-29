@@ -1,0 +1,151 @@
+/* Modern Admin Layout */
+.admin-wrapper { 
+  display: flex; 
+  height: 100vh; 
+  font-family: 'Inter', sans-serif; 
+  background: #f4f6f8; 
+}
+
+/* Sidebar */
+.sidebar { 
+  width: 280px; 
+  background: #1a0b2e; /* Dark Purple */
+  color: white; 
+  display: flex; 
+  flex-direction: column; 
+  box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.sidebar-header { 
+  padding: 1.5rem; 
+  border-bottom: 1px solid rgba(255,255,255,0.05); 
+  background: rgba(0,0,0,0.2);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.4));
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.admin-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ff007f; /* Carnival Pink */
+  font-weight: 600;
+}
+
+/* Nav Links */
+.nav-links { 
+  list-style: none; 
+  padding: 1.5rem 1rem; 
+  flex-grow: 1; 
+  overflow-y: auto;
+}
+
+.nav-links li { margin-bottom: 0.5rem; }
+
+.nav-links li a { 
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem; 
+  color: rgba(255,255,255,0.7); 
+  text-decoration: none; 
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.nav-links li a .icon {
+  font-size: 1.2rem;
+  filter: grayscale(1);
+  transition: all 0.3s;
+}
+
+.nav-links li a:hover { 
+  background: rgba(255,255,255,0.08); 
+  color: white;
+  transform: translateX(5px);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.nav-links li a.active { 
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.2) 0%, rgba(191, 0, 255, 0.2) 100%);
+  color: white; 
+  border: 1px solid rgba(255, 0, 127, 0.5);
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.2);
+  font-weight: 600;
+}
+
+.nav-links li a.active .icon {
+  filter: grayscale(0);
+}
+
+/* Sidebar Footer */
+.sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+.logout-btn { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%; 
+  padding: 1rem; 
+  background: rgba(239, 68, 68, 0.1); /* Red tint */
+  color: #ef4444; 
+  border: 1px solid rgba(239, 68, 68, 0.3); 
+  border-radius: 12px; 
+  cursor: pointer; 
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Content Area */
+.content { 
+  flex-grow: 1; 
+  padding: 2.5rem; 
+  overflow-y: auto; 
+  background-color: #f8fafc;
+}
+
+/* Shared Styles for Admin Cards/Tables (Use directly in child components) */
+/* .card{ background: white; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; } */
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }

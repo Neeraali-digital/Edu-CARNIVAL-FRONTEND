@@ -1,5 +1,5 @@
-<app-header></app-header>
-<main class="min-h-screen pt-20">
+<app-header *ngIf="!isAdminRoute"></app-header>
+<main [class.pt-20]="!isAdminRoute" class="min-h-screen">
   <router-outlet></router-outlet>
 </main>
-<app-footer></app-footer>
+<app-footer *ngIf="!isAdminRoute"></app-footer>

@@ -50,7 +50,7 @@
           <div>
             <h2 class="text-3xl font-display font-bold mb-8 text-carnival-gold border-l-4 border-carnival-pink pl-6">Program Schedule</h2>
             <div class="space-y-6">
-              <div *ngFor="let item of city?.programDetails" class="group flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-gold/50 transition-all duration-300">
+              <div *ngFor="let item of city?.program_details" class="group flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-gold/50 transition-all duration-300">
                 <div class="w-24 text-carnival-pink font-bold flex-shrink-0">{{item.time}}</div>
                 <div>
                   <h3 class="text-xl font-bold mb-2 group-hover:text-carnival-gold transition-colors">{{item.title}}</h3>

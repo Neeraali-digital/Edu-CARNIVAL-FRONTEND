@@ -9,14 +9,23 @@ import { ExhibitorRegistrationComponent } from './pages/registration/exhibitor-r
 import { ParticipantRegistrationComponent } from './pages/registration/participant-registration/participant-registration';
 import { PhotoGalleryComponent } from './pages/media/photo-gallery/photo-gallery';
 import { VideoGalleryComponent } from './pages/media/video-gallery/video-gallery';
-
 import { CityDetailComponent } from './pages/cities/city-detail/city-detail.component';
+
+// Admin Components
+import { AdminLoginComponent } from './pages/admin/login/login.component';
+import { AdminDashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { DashboardStatsComponent } from './pages/admin/dashboard/stats.component';
+import { AdminCitiesComponent } from './pages/admin/cities/cities.component';
+import { AdminRegistrationsComponent } from './pages/admin/registrations/registrations.component';
+import { AdminInquiriesComponent } from './pages/admin/inquiries/inquiries.component';
+import { AdminGalleryComponent } from './pages/admin/gallery/gallery.component';
+import { AdminStallsComponent } from './pages/admin/stalls/stalls.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'Edu Carnival - Home' },
     { path: 'home', redirectTo: '', pathMatch: 'full' },
     { path: 'city/:id', component: CityDetailComponent, title: 'City Details - Edu Carnival' },
-
 
     // Events
     { path: 'events/upcoming', component: UpcomingEventsComponent, title: 'Upcoming Events - Edu Carnival' },
@@ -34,6 +43,23 @@ export const routes: Routes = [
     { path: 'stalls', component: StallsComponent, title: 'Stalls - Edu Carnival' },
     { path: 'brochure', component: BrochureComponent, title: 'Brochure - Edu Carnival' },
     { path: 'contact', component: ContactComponent, title: 'Contact Us - Edu Carnival' },
+
+    // Admin Panel
+    { path: 'admin/login', component: AdminLoginComponent, title: 'Admin Login - Edu Carnival' },
+    {
+        path: 'admin',
+        component: AdminDashboardComponent,
+        canActivate: [authGuard],
+        children: [
+            { path: 'dashboard', component: DashboardStatsComponent },
+            { path: 'cities', component: AdminCitiesComponent },
+            { path: 'registrations', component: AdminRegistrationsComponent },
+            { path: 'inquiries', component: AdminInquiriesComponent },
+            { path: 'gallery', component: AdminGalleryComponent },
+            { path: 'stalls', component: AdminStallsComponent },
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+        ]
+    },
 
     // Wildcard
     { path: '**', redirectTo: '' }

@@ -1,0 +1,97 @@
+<div class="page-header">
+  <div class="header-left">
+    <h2>Stall Management</h2>
+    <span class="badge">{{ stalls.length }} Active</span>
+  </div>
+  <div class="header-right">
+    <button class="primary-btn" (click)="openModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add New Stall
+    </button>
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th width="30%">Stall Title</th>
+        <th width="15%">Price</th>
+        <th width="40%">Description</th>
+        <th width="15%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stall of stalls" class="table-row">
+        <td>
+          <span class="title-text">{{ stall.title }}</span>
+        </td>
+        <td>
+          <span class="price-pill">{{ stall.price | currency:'INR' }}</span>
+        </td>
+        <td>
+          <div class="desc-cell" [title]="stall.description">
+            {{ stall.description }}
+          </div>
+        </td>
+        <td>
+          <div class="actions">
+            <button class="action-btn edit" (click)="editStall(stall)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button>
+            <button class="action-btn delete" (click)="deleteStall(stall.id)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="stalls.length === 0">
+        <td colspan="4" class="empty-state">
+          <p>No stalls available. Add one to get started.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Overlay -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>{{ editingStall ? 'Edit Stall' : 'Create New Stall' }}</h3>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+    
+    <form (ngSubmit)="saveStall()">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Stall Title</label>
+          <input type="text" [(ngModel)]="currentStall.title" name="title" required placeholder="e.g. Standard Booth 3x3">
+        </div>
+        <div class="form-group">
+          <label>Price (INR)</label>
+          <input type="number" [(ngModel)]="currentStall.price" name="price" required placeholder="e.g. 15000">
+        </div>
+        <div class="form-group">
+            <label>Stall Image</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="currentStall.description" name="description" rows="4" placeholder="Enter stall details..."></textarea>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn-save">{{ editingStall ? 'Update Stall' : 'Create Stall' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
