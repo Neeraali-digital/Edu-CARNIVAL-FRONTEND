@@ -142,76 +142,261 @@
   </section>
 
   <!-- Features/Grid Section -->
-  <section class="py-20 relative px-10 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#1a0b2e] to-carnival-purple z-0"></div>
+  <!-- Why Students Visit Section -->
+  <!-- Why Students Visit Section -->
+  <section class="py-24 relative overflow-hidden">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#1a0b2e] via-[#240d3a] to-[#1a0b2e] z-0"></div>
     
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Left Content -->
-        <div class="order-2 lg:order-1">
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Why Join the <br/><span class="text-carnival-pink">Carnival?</span></h2>
-          <div class="space-y-6">
-            <div class="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-gold/50 transition-colors duration-300 glass-panel">
-              <div class="w-12 h-12 rounded-xl bg-carnival-gold/20 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-carnival-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-white mb-2">Top Universities</h3>
-                <p class="text-white/60">Connect directly with representatives from prestigious institutions across the globe.</p>
-              </div>
-            </div>
-            
-            <div class="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-pink/50 transition-colors duration-300 glass-panel">
-              <div class="w-12 h-12 rounded-xl bg-carnival-pink/20 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-carnival-pink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-white mb-2">Expert Counseling</h3>
-                <p class="text-white/60">Get personalized guidance on admission processes, scholarships, and career paths.</p>
-              </div>
-            </div>
+    <!-- Decorative Blobs -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-carnival-pink/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-carnival-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-            <div class="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors duration-300 glass-panel">
-              <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-white mb-2">Interactive Workshops</h3>
-                <p class="text-white/60">Participate in hands-on workshops and seminars led by industry experts.</p>
-              </div>
-            </div>
+    <div class="container mx-auto px-4 relative z-10">
+      
+      <!-- HEADER: Why Students Visit -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+          Why Should <span class="text-carnival-pink">Students Visit</span> the Edu Carnival Expo?
+        </h2>
+      </div>
+
+      <!-- GRID: Why Students Points -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
+        <!-- Item 1 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-gold/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-carnival-gold to-orange-500 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
           </div>
+          <p class="text-white font-medium text-lg leading-snug">Presence of top universities and leading institutions</p>
         </div>
 
-        <!-- Right Visual with Real Images -->
-        <div class="order-1 lg:order-2 relative">
-          <div class="absolute inset-0 bg-gradient-to-tr from-carnival-pink to-carnival-gold blur-[80px] opacity-20 animate-pulse-slow"></div>
-          <div class="relative z-10 grid grid-cols-2 gap-4">
-             <div class="space-y-4 translate-y-8">
-               <div class="h-48 rounded-2xl bg-white/10 glass-panel border border-white/10 animate-float overflow-hidden" style="animation-delay: 0s;">
-                 <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Student Life">
-               </div>
-               <div class="h-64 rounded-2xl bg-white/10 glass-panel border border-white/10 animate-float overflow-hidden" style="animation-delay: 2s;">
-                  <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop" class="w-full h-full object-cover" alt="Counseling">
-               </div>
-             </div>
-             <div class="space-y-4">
-               <div class="h-64 rounded-2xl bg-white/10 glass-panel border border-white/10 animate-float overflow-hidden" style="animation-delay: 1s;">
-                  <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Exhibition">
-               </div>
-               <div class="h-48 rounded-2xl bg-white/10 glass-panel border border-white/10 animate-float overflow-hidden" style="animation-delay: 3s;">
-                  <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Library">
-               </div>
-             </div>
+        <!-- Item 2 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-carnival-pink/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-carnival-pink to-purple-600 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
           </div>
+          <p class="text-white font-medium text-lg leading-snug">Free entry, along with complimentary career counselling and guidance</p>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+          </div>
+          <p class="text-white font-medium text-lg leading-snug">Free seminars and expert guidance from industry professionals</p>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          </div>
+          <p class="text-white font-medium text-lg leading-snug">Direct interaction with representatives from universities and institutions</p>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-green-500/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <p class="text-white font-medium text-lg leading-snug">Spot admissions and scholarship opportunities</p>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-600 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <p class="text-white font-medium text-lg leading-snug">Explore education opportunities in India and abroad</p>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-red-500/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-400 to-rose-600 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+          </div>
+          <p class="text-white font-medium text-lg leading-snug">Understand market-trending and in-demand courses offered by universities and institutions</p>
+        </div>
+
+        <!-- Item 8 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/50 hover:bg-white/10 transition-all duration-300 group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center mb-4 shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
+          </div>
+          <p class="text-white font-medium text-lg leading-snug">Explore multiple study options under one roof and get instant clarity on doubts</p>
         </div>
       </div>
+
+
+      <!-- HEADER: Who Should Attend -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Who Should <span class="text-carnival-pink">Attend the Edu Carnival Expo?</span></h2>
+      </div>
+
+      <!-- Cloud/Flow Layout for Who Should Attend -->
+      <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+        
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-carnival-pink hover:border-carnival-pink transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">🎓 Students who have completed 12th and are looking for graduation programs</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-purple-600 hover:border-purple-600 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">📚 Graduation students seeking postgraduate courses</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">🤔 Any student exploring the next step in their education</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-carnival-gold hover:border-carnival-gold transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">👨‍👩‍👧 Parents and guardians seeking information about admissions or higher studies for their children or relatives</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-green-600 hover:border-green-600 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">💼 Working professionals planning to pursue higher studies</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-teal-600 hover:border-teal-600 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">🌏 Students interested in studying across India and abroad</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-red-500 hover:border-red-500 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">🤝 Individuals or consultants looking to explore partnerships or collaborations</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-indigo-500 hover:border-indigo-500 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">📖 Lifelong learners exploring professional courses</span>
+        </div>
+
+        <div class="px-6 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-pink-500 hover:border-pink-500 transition-all duration-300 cursor-default group">
+          <span class="text-white font-medium text-lg">🧭 Career counselors and education advisors seeking the latest trends in higher education</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Exhibitors Benefits Section -->
+  <section class="py-24 relative bg-[#0f041a]">
+    <div class="container mx-auto px-4 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Text Content -->
+        <div class="order-2 lg:order-1">
+          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-8">
+            Benefits for <span class="text-carnival-gold">Exhibitors</span> at the <span class="text-carnival-pink">Edu Carnival Expo</span>
+          </h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+            
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Crowd-pulling activities that ensure continuous footfall</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Maximum stall visibility, with customized stall options as an added advantage</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">High-potential premium exhibition venues located in student-targeted areas</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Direct access to decision-makers (students and parents or guardians)</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Opportunity to showcase courses, programs, and campus facilities</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Generate quality leads and increase student enrollments</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Promote brand visibility among a focused audience</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Offer spot admissions and scholarship opportunities</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Media exposure to build and strengthen institutional branding</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Cost-effective marketing with area-based student targeting</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-white/80">Immediate lead generation and faster admission confirmation</p>
+            </div>
+
+          </div>
+
+          <div class="mt-10">
+            <a routerLink="/registration/exhibitor" class="inline-flex items-center gap-3 px-8 py-4 bg-carnival-gold text-[#1a0b2e] font-bold rounded-full overflow-hidden shadow-[0_0_40px_rgba(251,191,36,0.2)] hover:shadow-[0_0_60px_rgba(251,191,36,0.4)] hover:bg-white transition-all duration-300 transform hover:-translate-y-1">
+              <span>Book Your Stall</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Visual / Image Side -->
+        <div class="order-1 lg:order-2 relative">
+          <div class="relative z-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
+             <img src="https://images.unsplash.com/photo-1559223607-b4d0555ae227?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Crowd at Expo" 
+                  class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105">
+             <div class="absolute inset-0 bg-gradient-to-t from-[#0f041a] via-transparent to-transparent"></div>
+          </div>
+          
+          <!-- Decorative Shapes -->
+          <div class="absolute -top-10 -right-10 w-64 h-64 bg-carnival-pink/20 rounded-full blur-3xl animate-pulse"></div>
+          <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-carnival-gold/20 rounded-full blur-3xl animate-float"></div>
+        </div>
+        
+      </div>
+
     </div>
   </section>
 
