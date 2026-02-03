@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastService, ToastMessage } from '../../../services/toast.service';
 import { Subscription } from 'rxjs';
@@ -15,18 +15,18 @@ export class ToastComponent implements OnInit, OnDestroy {
     private subscription: Subscription | null = null;
     isVisible = false;
 
-    constructor(private toastService: ToastService) { }
+    constructor(private toastService: ToastService, private cdr: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.subscription = this.toastService.toast$.subscribe(toast => {
+            console.log('Toast received:', toast); // Debug log
             if (toast) {
                 this.toast = toast;
                 this.isVisible = true;
             } else {
                 this.isVisible = false;
-                // Wait for animation to finish before removing data? 
-                // For simplicity, we just hide it.
             }
+            this.cdr.detectChanges(); // Force update
         });
     }
 

@@ -13,6 +13,7 @@ import { ApiService } from '../../../services/api.service';
 export class AdminStallsComponent implements OnInit {
   stalls: any[] = [];
   bookings: any[] = [];
+  cities: any[] = [];
   activeTab = 'stalls';
   showModal = false;
   editingStall = false;
@@ -24,11 +25,20 @@ export class AdminStallsComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+    this.loadCities();
   }
 
   refresh() {
     this.loadStalls();
     this.loadBookings();
+  }
+
+  loadCities() {
+    this.api.getAll('cities').subscribe(data => {
+      this.cities = data;
+      console.log('Loaded cities:', this.cities.length);
+      this.cdr.detectChanges();
+    });
   }
 
   loadStalls() {
@@ -75,6 +85,7 @@ export class AdminStallsComponent implements OnInit {
     formData.append('title', this.currentStall.title);
     formData.append('price', this.currentStall.price); // Beware, if undefined
     if (this.currentStall.description) formData.append('description', this.currentStall.description);
+    if (this.currentStall.city) formData.append('city', this.currentStall.city);
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }

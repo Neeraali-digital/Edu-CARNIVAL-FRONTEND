@@ -20,7 +20,7 @@ import { ApiService } from '../../../services/api.service';
       
       <div class="tabs">
         <button [class.active]="activeTab === 'exhibitors'" (click)="activeTab = 'exhibitors'">Exhibitors</button>
-        <button [class.active]="activeTab === 'participants'" (click)="activeTab = 'participants'">Participants</button>
+        <button [class.active]="activeTab === 'participants'" (click)="activeTab = 'participants'">Visitors</button>
       </div>
 
       <div *ngIf="activeTab === 'exhibitors'">
@@ -61,7 +61,7 @@ import { ApiService } from '../../../services/api.service';
       </div>
 
       <div *ngIf="activeTab === 'participants'">
-        <h3>Participant Registrations</h3>
+        <h3>Visitor Registrations</h3>
         <table class="data-table">
           <thead>
             <tr>
@@ -91,7 +91,7 @@ import { ApiService } from '../../../services/api.service';
               </td>
             </tr>
             <tr *ngIf="participants.length === 0">
-               <td colspan="7" class="text-center">No participant registrations yet.</td>
+               <td colspan="7" class="text-center">No visitor registrations yet.</td>
             </tr>
           </tbody>
         </table>

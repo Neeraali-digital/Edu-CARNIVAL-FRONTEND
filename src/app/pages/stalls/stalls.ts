@@ -23,7 +23,7 @@ export class StallsComponent implements OnInit {
     name: '',
     email: '',
     phone: '',
-    city: ''
+    slot_id: ''
   };
   isSubmitting = false;
 
@@ -31,7 +31,7 @@ export class StallsComponent implements OnInit {
 
   ngOnInit() {
     this.loadStalls();
-    this.loadCities();
+    // Cities loaded internally via stalls relation
   }
 
   loadStalls() {
@@ -41,11 +41,7 @@ export class StallsComponent implements OnInit {
     });
   }
 
-  loadCities() {
-    this.api.getAll('cities').subscribe(data => {
-      this.cities = data;
-    });
-  }
+  // loadCities removed as not needed directly
 
   openBookingModal(stall: any) {
     this.selectedStall = stall;
@@ -55,7 +51,7 @@ export class StallsComponent implements OnInit {
   closeBookingModal() {
     this.showModal = false;
     this.selectedStall = null;
-    this.bookingData = { name: '', email: '', phone: '', city: '' };
+    this.bookingData = { name: '', email: '', phone: '', slot_id: '' };
     this.isSubmitting = false;
   }
 
@@ -65,12 +61,14 @@ export class StallsComponent implements OnInit {
     this.isSubmitting = true;
     const payload = {
       ...this.bookingData,
-      stall: this.selectedStall.id
+      stall: this.selectedStall.id,
+      city: this.selectedStall.city_details?.id
     };
 
     this.api.create('stall-bookings', payload).subscribe({
       next: () => {
         console.log('Booking success callback');
+        console.log('Triggering toast...');
         this.toast.success('Stall booked successfully! We will contact you soon.', 5000);
         this.closeBookingModal();
         this.cdr.detectChanges();

@@ -30,7 +30,7 @@ export const routes: Routes = [
 
     // Events
     { path: 'events/upcoming', component: UpcomingEventsComponent, title: 'Upcoming Events - Edu Carnival' },
-    { path: 'events/expo-highlights', component: ExpoHighlightsComponent, title: 'Expo Highlights - Edu Carnival' },
+    { path: 'events/expo-highlights', component: ExpoHighlightsComponent, title: 'Tariff & Sponsorship - Edu Carnival' },
 
     // Registration
     { path: 'registration/exhibitor', component: ExhibitorRegistrationComponent, title: 'Exhibitor Registration - Edu Carnival' },
