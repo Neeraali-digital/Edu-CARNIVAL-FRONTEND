@@ -19,7 +19,6 @@
       <tr>
         <th width="30%">City Name</th>
         <th width="20%">Date</th>
-        <th width="30%">Location</th>
         <th width="20%">Actions</th>
       </tr>
     </thead>
@@ -29,11 +28,6 @@
           <span class="title-text">{{ city.name }}</span>
         </td>
         <td>{{ city.date }}</td>
-        <td>
-          <div class="loc-cell">
-            <span class="icon">📍</span> {{ city.location }}
-          </div>
-        </td>
         <td>
           <div class="actions">
             <button class="action-btn edit" (click)="editCity(city)" title="Edit">
@@ -50,7 +44,7 @@
         </td>
       </tr>
       <tr *ngIf="cities.length === 0">
-        <td colspan="4" class="empty-state">
+        <td colspan="3" class="empty-state">
           <p>No cities added yet.</p>
         </td>
       </tr>
