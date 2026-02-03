@@ -98,6 +98,10 @@
           <input type="text" [(ngModel)]="newItem.title" name="title" required placeholder="e.g. Inauguration Ceremony">
         </div>
         <div class="form-group">
+          <label>Year *</label>
+          <input type="number" [(ngModel)]="newItem.year" name="year" required placeholder="e.g. 2025">
+        </div>
+        <div class="form-group">
             <label>Upload Image *</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
             <p class="hint">Supported formats: JPG, PNG, WEBP</p>

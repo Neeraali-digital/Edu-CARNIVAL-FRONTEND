@@ -50,7 +50,7 @@ export class AdminGalleryComponent implements OnInit {
 
   // Modal Actions
   openPhotoModal() {
-    this.newItem = {};
+    this.newItem = { year: new Date().getFullYear() };
     this.selectedFile = null;
     this.showPhotoModal = true;
   }
@@ -72,14 +72,15 @@ export class AdminGalleryComponent implements OnInit {
 
   // CRUD Operations
   savePhoto() {
-    if (!this.newItem.title || !this.selectedFile) {
-      alert('Please provide both title and image.');
+    if (!this.newItem.title || !this.selectedFile || !this.newItem.year) {
+      alert('Please provide title, year, and image.');
       return;
     }
 
     this.isSubmitting = true;
     const formData = new FormData();
     formData.append('title', this.newItem.title);
+    formData.append('year', this.newItem.year);
     formData.append('image', this.selectedFile);
 
     this.api.create('photos', formData).subscribe({

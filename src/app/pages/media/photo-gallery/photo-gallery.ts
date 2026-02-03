@@ -11,14 +11,31 @@ import { ApiService } from '../../../services/api.service';
   styleUrl: './photo-gallery.css'
 })
 export class PhotoGalleryComponent implements OnInit {
-  photos: any[] = [];
+  groupedPhotos: { year: number, photos: any[] }[] = [];
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.api.getAll('photos').subscribe(data => {
-      this.photos = data;
+      this.groupPhotosByYear(data);
       this.cdr.detectChanges();
     });
+  }
+
+  groupPhotosByYear(photos: any[]) {
+    const groups: { [key: number]: any[] } = {};
+
+    photos.forEach(photo => {
+      const year = photo.year || new Date().getFullYear(); // Default to current year if missing
+      if (!groups[year]) {
+        groups[year] = [];
+      }
+      groups[year].push(photo);
+    });
+
+    // Convert to array and sort by year descending
+    this.groupedPhotos = Object.keys(groups)
+      .map(year => ({ year: parseInt(year), photos: groups[parseInt(year)] }))
+      .sort((a, b) => b.year - a.year);
   }
 }
