@@ -124,6 +124,10 @@
            </div>
         </div>
         <div class="form-group">
+            <label>Description</label>
+            <textarea [(ngModel)]="currentStall.description" name="description" placeholder="Enter stall description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
           <label>City</label>
           <select [(ngModel)]="currentStall.city" name="city" required #city="ngModel">
             <option value="" disabled selected>Select a City</option>

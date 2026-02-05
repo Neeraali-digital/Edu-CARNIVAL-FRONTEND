@@ -70,6 +70,7 @@ export class AdminCitiesComponent implements OnInit {
     if (this.currentCity.end_date) formData.append('end_date', this.currentCity.end_date);
     formData.append('is_current_expo', this.currentCity.is_current_expo ? 'true' : 'false');
     if (this.currentCity.location) formData.append('location', this.currentCity.location);
+    if (this.currentCity.place) formData.append('place', this.currentCity.place);
 
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);

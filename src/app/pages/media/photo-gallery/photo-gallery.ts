@@ -13,11 +13,15 @@ import { ApiService } from '../../../services/api.service';
 export class PhotoGalleryComponent implements OnInit {
   groupedPhotos: { year: number, photos: any[] }[] = [];
 
+  isLoading = true;
+
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.api.getAll('photos').subscribe(data => {
       this.groupPhotosByYear(data);
+      this.isLoading = false;
       this.cdr.detectChanges();
     });
   }
