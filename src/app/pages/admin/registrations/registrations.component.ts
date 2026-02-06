@@ -32,7 +32,7 @@ import { ApiService } from '../../../services/api.service';
               <th>Company</th>
               <th>Email</th>
               <th>Phone</th>
-              <th>Category</th>
+              <th>Location</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -43,14 +43,22 @@ import { ApiService } from '../../../services/api.service';
               <td>{{ reg.company_name }}</td>
               <td>{{ reg.email }}</td>
               <td>{{ reg.phone_number }}</td>
-              <td>{{ reg.category }}</td>
+              <td>{{ reg.location }}</td>
               <td>{{ reg.created_at | date:'short' }}</td>
               <td>
-                <button class="delete-btn" (click)="deleteRegistration(reg.id, 'exhibitor')" title="Delete">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
+                <div class="action-group">
+                    <button class="view-btn" (click)="viewRegistration(reg)" title="View Details">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+                    <button class="delete-btn" (click)="deleteRegistration(reg.id, 'exhibitor')" title="Delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
               </td>
             </tr>
             <tr *ngIf="exhibitors.length === 0">
@@ -83,11 +91,19 @@ import { ApiService } from '../../../services/api.service';
               <td>{{ reg.interests }}</td>
               <td>{{ reg.created_at | date:'short' }}</td>
               <td>
-                <button class="delete-btn" (click)="deleteRegistration(reg.id, 'participant')" title="Delete">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
+                <div class="action-group">
+                    <button class="view-btn" (click)="viewRegistration(reg)" title="View Details">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+                    <button class="delete-btn" (click)="deleteRegistration(reg.id, 'participant')" title="Delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
               </td>
             </tr>
             <tr *ngIf="participants.length === 0">
@@ -95,6 +111,67 @@ import { ApiService } from '../../../services/api.service';
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Detail Modal -->
+      <div *ngIf="selectedRegistration" class="modal-overlay" (click)="closeModal()">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>{{ activeTab === 'exhibitors' ? 'Exhibitor Details' : 'Visitor Details' }}</h3>
+                <button class="close-btn" (click)="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Full Name</label>
+                        <p>{{ selectedRegistration.full_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Email</label>
+                        <p>{{ selectedRegistration.email }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Phone</label>
+                        <p>{{ selectedRegistration.phone_number }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Date Registered</label>
+                        <p>{{ selectedRegistration.created_at | date:'medium' }}</p>
+                    </div>
+                    
+                    <!-- Exhibitor Specifics -->
+                    <ng-container *ngIf="activeTab === 'exhibitors'">
+                        <div class="detail-item">
+                            <label>Institution/Company</label>
+                            <p>{{ selectedRegistration.company_name }}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Location</label>
+                            <p>{{ selectedRegistration.location }}</p>
+                        </div>
+                        <div class="detail-item full-width">
+                            <label>Message</label>
+                            <p class="message-box">{{ selectedRegistration.message || 'No message provided.' }}</p>
+                        </div>
+                    </ng-container>
+
+                    <!-- Visitor Specifics -->
+                    <ng-container *ngIf="activeTab === 'participants'">
+                        <div class="detail-item">
+                            <label>School/College</label>
+                            <p>{{ selectedRegistration.school_college }}</p>
+                        </div>
+                        <div class="detail-item full-width">
+                            <label>Interests</label>
+                            <p>{{ selectedRegistration.interests }}</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="primary-btn" (click)="closeModal()">Close</button>
+            </div>
+        </div>
       </div>
     </div>
   `,
@@ -136,6 +213,24 @@ import { ApiService } from '../../../services/api.service';
     .primary-btn:hover { background: #2980b9; }
     .primary-btn svg { width: 1.25rem; height: 1.25rem; }
 
+    .action-group { display: flex; gap: 0.5rem; }
+
+    .view-btn {
+      background: #e0f2fe;
+      color: #0284c7;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .view-btn:hover { background: #bae6fd; color: #0369a1; }
+    .view-btn svg { width: 18px; height: 18px; }
+
     .delete-btn {
       background: #fee2e2;
       color: #ef4444;
@@ -152,12 +247,41 @@ import { ApiService } from '../../../services/api.service';
     .delete-btn:hover { background: #fee2e2; color: #dc2626; transform: scale(1.1); }
     .delete-btn svg { width: 18px; height: 18px; }
     .text-center { text-align: center; color: #64748b; font-style: italic; }
+
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+        display: flex; justify-content: center; align-items: center; z-index: 100;
+    }
+    .modal-card {
+        background: white; width: 100%; max-width: 600px; border-radius: 16px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); overflow: hidden;
+        animation: slideUp 0.3s ease-out;
+    }
+    .modal-header {
+        padding: 1.5rem; border-bottom: 1px solid #e2e8f0;
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .modal-header h3 { margin: 0; font-size: 1.25rem; }
+    .close-btn { background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; }
+    .modal-body { padding: 2rem; max-height: 70vh; overflow-y: auto; }
+    
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .detail-item label { display: block; font-size: 0.85rem; color: #64748b; margin-bottom: 0.25rem; font-weight: 600; text-transform: uppercase; }
+    .detail-item p { margin: 0; font-size: 1.1rem; color: #1e293b; font-weight: 500; }
+    .detail-item.full-width { grid-column: span 2; }
+    .message-box { background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0; color: #475569; }
+
+    .modal-footer { padding: 1.5rem; background: #f8fafc; display: flex; justify-content: flex-end; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   `]
 })
 export class AdminRegistrationsComponent implements OnInit {
   exhibitors: any[] = [];
   participants: any[] = [];
   activeTab = 'exhibitors';
+  selectedRegistration: any = null;
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
@@ -182,6 +306,16 @@ export class AdminRegistrationsComponent implements OnInit {
       this.participants = data.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       this.cdr.detectChanges();
     });
+  }
+
+  viewRegistration(reg: any) {
+    this.selectedRegistration = reg;
+    this.cdr.detectChanges();
+  }
+
+  closeModal() {
+    this.selectedRegistration = null;
+    this.cdr.detectChanges();
   }
 
   deleteRegistration(id: number, type: 'exhibitor' | 'participant') {

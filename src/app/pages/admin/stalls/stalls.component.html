@@ -23,10 +23,9 @@
     <table class="data-table">
         <thead>
         <tr>
-            <th width="30%">Stall Title</th>
-            <th width="15%">Price</th>
-            <th width="40%">Description</th>
-            <th width="15%">Actions</th>
+            <th width="40%">Stall Title</th>
+            <th width="20%">Price</th>
+            <th width="20%">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -36,11 +35,6 @@
             </td>
             <td>
             <span class="price-pill">{{ stall.price | currency:'INR' }}</span>
-            </td>
-            <td>
-            <div class="desc-cell" [title]="stall.description">
-                {{ stall.description }}
-            </div>
             </td>
             <td>
             <div class="actions">
@@ -58,7 +52,7 @@
             </td>
         </tr>
         <tr *ngIf="stalls.length === 0">
-            <td colspan="4" class="empty-state">
+            <td colspan="3" class="empty-state">
             <p>No stalls available. Add one to get started.</p>
             </td>
         </tr>
@@ -71,7 +65,6 @@
       <thead>
         <tr>
           <th>Stall</th>
-          <th>Slot ID</th>
           <th>City</th>
           <th>Customer Name</th>
           <th>Email</th>
@@ -82,7 +75,6 @@
       <tbody>
         <tr *ngFor="let booking of bookings" class="table-row">
           <td><span class="title-text">{{ booking.stall_details?.title || 'Unknown Stall' }}</span></td>
-          <td><span class="badge" style="background: #e0e7ff; color: #3730a3;">{{ booking.slot_id || '-' }}</span></td>
           <td>{{ booking.city_details?.name || 'N/A' }}</td>
           <td>{{ booking.name }}</td>
           <td>{{ booking.email }}</td>

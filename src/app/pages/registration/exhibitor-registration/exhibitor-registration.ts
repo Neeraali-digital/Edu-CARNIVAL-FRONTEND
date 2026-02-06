@@ -19,7 +19,7 @@ export class ExhibitorRegistrationComponent {
     company_name: '',
     email: '',
     phone_number: '',
-    category: '',
+    location: '',
     message: ''
   };
   submitted = false;

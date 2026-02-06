@@ -27,10 +27,10 @@
                </div>
              </div>
              <div>
-               <label class="block text-white/70 text-sm mb-2">Category</label>
-               <input type="text" [(ngModel)]="formData.category" name="category" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-carnival-gold transition-colors" required #category="ngModel">
-                <div *ngIf="category.invalid && (category.dirty || category.touched)" class="text-red-400 text-xs mt-1">
-                 Category is required.
+               <label class="block text-white/70 text-sm mb-2">Location</label>
+               <input type="text" [(ngModel)]="formData.location" name="location" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-carnival-gold transition-colors" required #location="ngModel">
+                <div *ngIf="location.invalid && (location.dirty || location.touched)" class="text-red-400 text-xs mt-1">
+                 Location is required.
                </div>
              </div>
            </div>

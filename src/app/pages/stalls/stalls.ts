@@ -22,8 +22,7 @@ export class StallsComponent implements OnInit {
   bookingData = {
     name: '',
     email: '',
-    phone: '',
-    slot_id: ''
+    phone: ''
   };
   isSubmitting = false;
 
@@ -51,7 +50,7 @@ export class StallsComponent implements OnInit {
   closeBookingModal() {
     this.showModal = false;
     this.selectedStall = null;
-    this.bookingData = { name: '', email: '', phone: '', slot_id: '' };
+    this.bookingData = { name: '', email: '', phone: '' };
     this.isSubmitting = false;
   }
 
