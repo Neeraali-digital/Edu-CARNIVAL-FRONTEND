@@ -1,25 +1,245 @@
-<div class="pt-24 min-h-screen bg-[#1a0b2e] pb-20">
+<div class="pt-24 min-h-screen bg-[#1a0b2e] pb-20 lg:px-16">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
       <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-4"><span class="text-carnival-pink">Stalls</span></h1>
       <p class="text-white/60">Explore our exhibition hall. Click on a stall to interact.</p>
     </div>
 
-    <!-- Filter/Search Bar -->
-    <div class="mb-12 flex justify-center">
-      <input type="text" placeholder="Search for universities..." class="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white focus:outline-none focus:border-carnival-pink w-full md:w-96 backdrop-blur-sm">
+    <!-- Schedule Table -->
+    <div class="mb-16 rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-2 md:p-6">
+      <div class="overflow-x-auto rounded-xl">
+        <table class="w-full text-center text-white">
+          <thead>
+            <tr class="bg-white/5 text-carnival-gold border-b border-white/10">
+              <th class="p-5 font-display text-lg tracking-wide">City</th>
+              <th class="p-5 font-display text-lg tracking-wide">Day</th>
+              <th class="p-5 font-display text-lg tracking-wide">Date</th>
+              <th class="p-5 font-display text-lg tracking-wide">Venue</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5">
+            <tr class="hover:bg-white/5 transition-colors duration-200">
+              <td class="p-5 font-medium">Jammu</td>
+              <td class="p-5 text-white/70">Saturday</td>
+              <td class="p-5 text-white/70">26th April</td>
+              <td class="p-5 text-white/70">Taj Westend</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors duration-200">
+              <td class="p-5 font-medium">Gangtok</td>
+              <td class="p-5 text-white/70">Monday</td>
+              <td class="p-5 text-white/70">28th April</td>
+              <td class="p-5 text-white/70">Mayfair Spa Resort</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors duration-200">
+              <td class="p-5 font-medium">Imphal</td>
+              <td class="p-5 text-white/70">Thursday</td>
+              <td class="p-5 text-white/70">1st May</td>
+              <td class="p-5 text-white/70">Classic Grande</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors duration-200">
+              <td class="p-5 font-medium">Dimapur</td>
+              <td class="p-5 text-white/70">Saturday</td>
+              <td class="p-5 text-white/70">3rd May</td>
+              <td class="p-5 text-white/70">Noune Resort</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors duration-200">
+              <td class="p-5 font-medium">Dibrugarh</td>
+              <td class="p-5 text-white/70">Tuesday</td>
+              <td class="p-5 text-white/70">6th May</td>
+              <td class="p-5 text-white/70">Hotel Tea County</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Stalls Layout View -->
-    <div class="space-y-16">
+    <!-- Event Details & Stall Sizes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      <!-- Event Info -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm flex flex-col justify-center">
+        <h2 class="text-2xl font-display font-bold text-white mb-4">Edu Carnival 2026 – <span class="text-carnival-pink">April & May Events</span></h2>
+        <p class="text-white/70 leading-relaxed mb-6">
+          Edu Carnival 2026 offers exceptional exhibition opportunities for educational institutions during our April and May events. We provide stall spaces in various sizes, tailored to suit different venue layouts and institutional requirements.
+        </p>
+        <div class="p-4 rounded-xl bg-carnival-purple/30 border border-white/5">
+          <p class="text-white/80 text-sm leading-relaxed flex gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-carnival-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            All stall areas are fully air-conditioned, well-maintained, and professionally managed to ensure a comfortable and productive experience for exhibitors.
+          </p>
+        </div>
+      </div>
+
+      <!-- Stall Sizes -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+        <h3 class="text-xl font-display font-bold text-carnival-gold mb-6">Available Stall Sizes</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- 2x2 -->
+          <div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-carnival-pink/30 transition-colors group">
+            <div class="text-2xl font-bold text-white mb-1">2m x 2m</div>
+            <div class="text-carnival-pink font-medium text-sm">4 sq. m</div>
+          </div>
+          <!-- 3x2 -->
+          <div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-carnival-pink/30 transition-colors group">
+            <div class="text-2xl font-bold text-white mb-1">3m x 2m</div>
+            <div class="text-carnival-pink font-medium text-sm">6 sq. m</div>
+          </div>
+          <!-- 4x2 -->
+          <div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-carnival-pink/30 transition-colors group">
+            <div class="text-2xl font-bold text-white mb-1">4m x 2m</div>
+            <div class="text-carnival-pink font-medium text-sm">8 sq. m</div>
+          </div>
+          <!-- Custom -->
+          <div class="p-4 rounded-xl bg-gradient-to-br from-carnival-pink/10 to-transparent border border-carnival-pink/20 transition-colors group">
+            <div class="text-lg font-bold text-white mb-1">Customized</div>
+            <div class="text-white/60 text-xs">Designed as per institutional requirements</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Facilities & Services -->
+    <div class="mb-16">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 backdrop-blur-sm">
+        
+        <h2 class="text-3xl font-display font-bold text-white mb-8 text-center">Event Facilities & <span class="text-carnival-pink">Support Services</span></h2>
+        <p class="text-white/70 text-center max-w-3xl mx-auto mb-12">
+          To ensure seamless and successful participation, the following facilities and services will be provided:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Item 1 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Venue hire and security arrangements</span>
+          </div>
+          <!-- Item 2 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Complete venue branding and stall setup</span>
+          </div>
+          <!-- Item 3 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Registration desk setup for welcoming visitors</span>
+          </div>
+          <!-- Item 4 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Promotional and advertising support</span>
+          </div>
+          <!-- Item 5 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Tables and visitor chairs as per stall size</span>
+          </div>
+          <!-- Item 6 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Logistics support for incoming printed materials</span>
+          </div>
+          <!-- Item 7 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Power supply setup at the venue</span>
+          </div>
+          <!-- Item 8 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Tea and coffee arrangements for exhibitors</span>
+          </div>
+          <!-- Item 9 -->
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <svg class="w-6 h-6 text-carnival-gold shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-white/90 pt-1">Breakfast and buffet lunch for exhibitors</span>
+          </div>
+        </div>
+
+        <!-- Additional Paid Services -->
+        <div class="border-t border-white/10 pt-8">
+          <h3 class="text-xl font-display font-bold text-carnival-pink mb-6">Additional Paid Services (On Request)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex items-center gap-3 text-white/80">
+              <span class="w-2 h-2 rounded-full bg-carnival-gold"></span>
+              Hotel bookings
+            </div>
+            <div class="flex items-center gap-3 text-white/80">
+              <span class="w-2 h-2 rounded-full bg-carnival-gold"></span>
+              Travel arrangements
+            </div>
+            <div class="flex items-center gap-3 text-white/80">
+              <span class="w-2 h-2 rounded-full bg-carnival-gold"></span>
+              Extended logistics support as per specific requirements
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+      
+    <!-- Policy & Payment -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      
+      <!-- Cancellation Policy -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm flex flex-col justify-center">
+        <h3 class="text-xl font-display font-bold text-carnival-pink mb-6">Cancellation Policy</h3>
+        <p class="text-white/70 mb-4 text-sm">The following refund terms apply in the event of cancellation:</p>
+        <div class="space-y-3">
+           <div class="flex justify-between items-center text-white/90 text-sm border-b border-white/5 pb-2">
+             <span>100 days prior to the event</span>
+             <span class="font-bold text-green-400">100% refund</span>
+           </div>
+           <div class="flex justify-between items-center text-white/90 text-sm border-b border-white/5 pb-2">
+             <span>99 to 60 days prior to the event</span>
+             <span class="font-bold text-yellow-400">50% refund</span>
+           </div>
+           <div class="flex justify-between items-center text-white/90 text-sm border-b border-white/5 pb-2">
+             <span>59 to 30 days prior to the event</span>
+             <span class="font-bold text-orange-400">10% refund</span>
+           </div>
+           <div class="flex justify-between items-center text-white/90 text-sm pb-2">
+             <span>Less than 30 days prior to the event</span>
+             <span class="font-bold text-red-400">No refund</span>
+           </div>
+        </div>
+      </div>
+
+      <!-- Payment Details -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm flex flex-col justify-center">
+        <h3 class="text-xl font-display font-bold text-carnival-gold mb-6">Payment Details</h3>
+        <p class="text-white/70 mb-4 text-sm">Payments may be transferred to the following account:</p>
+        <div class="space-y-4 bg-white/5 p-6 rounded-xl border border-white/5">
+           <div class="flex flex-col sm:flex-row sm:justify-between text-sm">
+             <span class="text-white/50 mb-1 sm:mb-0">Account Name</span>
+             <span class="text-white font-medium select-all">Edu Carnival</span>
+           </div>
+           <div class="flex flex-col sm:flex-row sm:justify-between text-sm">
+             <span class="text-white/50 mb-1 sm:mb-0">Account Number</span>
+             <span class="text-white font-medium select-all">ABC</span>
+           </div>
+           <div class="flex flex-col sm:flex-row sm:justify-between text-sm">
+             <span class="text-white/50 mb-1 sm:mb-0">Bank Name</span>
+             <span class="text-white font-medium select-all">ABC</span>
+           </div>
+           <div class="flex flex-col sm:flex-row sm:justify-between text-sm">
+             <span class="text-white/50 mb-1 sm:mb-0">IFSC Code</span>
+             <span class="text-white font-medium select-all">ABC</span>
+           </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       
       <!-- List Loop -->
-      <div *ngFor="let stall of stalls" class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm p-4 md:p-6">
+      <div *ngFor="let stall of stalls" class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm p-4 md:p-6 flex flex-col">
         
         <!-- Header Info -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <div>
-            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-2">{{ stall.title }}</h2>
+            <h2 class="text-2xl font-display font-bold text-white mb-2">{{ stall.title }}</h2>
             <div class="flex items-center gap-3">
               <span *ngIf="stall.city_details" class="bg-white/10 text-white px-3 py-1 rounded-full text-sm flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -30,15 +250,15 @@
               <span class="text-carnival-gold font-bold text-lg">{{ stall.price | currency:'INR' }}</span>
             </div>
           </div>
-          <button (click)="openBookingModal(stall)" class="w-full md:w-auto px-8 py-3 bg-carnival-pink hover:bg-pink-600 text-white font-bold rounded-xl transition shadow-lg shadow-pink-500/20">
+          <button (click)="openBookingModal(stall)" class="w-full md:w-auto px-6 py-2 bg-carnival-pink hover:bg-pink-600 text-white font-bold rounded-xl transition shadow-lg shadow-pink-500/20 text-sm whitespace-nowrap">
             Book This Stall
           </button>
         </div>
 
         <!-- Large Layout Image -->
-        <div class="w-full rounded-2xl overflow-hidden border border-white/10 bg-black/20 relative group flex justify-center bg-black">
+        <div class="w-full rounded-2xl overflow-hidden border border-white/10 bg-black/20 relative group flex justify-center bg-black mb-6">
           <img [src]="stall.image || 'https://placehold.co/1200x600/2e1065/white?text=Layout+Preview'" 
-               class="w-auto h-[50vh] object-contain" 
+               class="w-auto h-64 md:h-80 object-contain" 
                alt="Stall Layout">
           
           <!-- Hover Overlay (Optional hint) -->
