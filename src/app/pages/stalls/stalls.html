@@ -2,51 +2,74 @@
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
       <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-4"><span class="text-carnival-pink">Stalls</span></h1>
-      <p class="text-white/60">Explore our exhibition hall. Click on a stall to interact.</p>
+      <p class="text-white/60">Explore our exhibition hall</p>
     </div>
 
     <!-- Schedule Table -->
-    <div class="mb-16 rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-2 md:p-6">
-      <div class="overflow-x-auto rounded-xl">
-        <table class="w-full text-center text-white">
+    <div class="mb-12 max-w-6xl mx-auto rounded-xl overflow-hidden border border-white/20 bg-white/5 backdrop-blur-md shadow-[0_0_30px_rgba(0,0,0,0.3)]">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-white text-sm">
           <thead>
-            <tr class="bg-white/5 text-carnival-gold border-b border-white/10">
-              <th class="p-5 font-display text-lg tracking-wide">City</th>
-              <th class="p-5 font-display text-lg tracking-wide">Day</th>
-              <th class="p-5 font-display text-lg tracking-wide">Date</th>
-              <th class="p-5 font-display text-lg tracking-wide">Venue</th>
+            <tr class="bg-carnival-purple/50 text-carnival-gold border-b border-white/20 uppercase tracking-widest text-xs">
+              <th class="px-6 py-4 font-bold border-r border-white/10 w-32">City</th>
+              <th class="px-6 py-4 font-bold border-r border-white/10 w-24">Day</th>
+              <th class="px-6 py-4 font-bold border-r border-white/10 w-32">Date</th>
+              <th class="px-6 py-4 font-bold">Venue</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-white/5">
+          <tbody class="divide-y divide-white/10 text-white/90">
+            <!-- Jammu -->
             <tr class="hover:bg-white/5 transition-colors duration-200">
-              <td class="p-5 font-medium">Jammu</td>
-              <td class="p-5 text-white/70">Saturday</td>
-              <td class="p-5 text-white/70">26th April</td>
-              <td class="p-5 text-white/70">Taj Westend</td>
+              <td class="px-6 py-4 font-bold border-r border-white/10 text-carnival-pink">Jammu</td>
+              <td class="px-6 py-4 border-r border-white/10">Saturday</td>
+              <td class="px-6 py-4 border-r border-white/10 font-mono text-carnival-gold">26th April</td>
+              <td class="px-6 py-4 space-y-1">
+                <div class="font-bold text-white">Edu Carnival Expo, IAS Complex</div>
+                <div class="text-white/60 text-xs">Gandhi Nagar, Jammu, 180004</div>
+                <div class="text-carnival-gold text-xs font-mono mt-1">Ph: 7780977469</div>
+              </td>
             </tr>
+            <!-- Gangtok -->
             <tr class="hover:bg-white/5 transition-colors duration-200">
-              <td class="p-5 font-medium">Gangtok</td>
-              <td class="p-5 text-white/70">Monday</td>
-              <td class="p-5 text-white/70">28th April</td>
-              <td class="p-5 text-white/70">Mayfair Spa Resort</td>
+              <td class="px-6 py-4 font-bold border-r border-white/10 text-carnival-pink">Gangtok</td>
+              <td class="px-6 py-4 border-r border-white/10">Monday</td>
+              <td class="px-6 py-4 border-r border-white/10 font-mono text-carnival-gold">28th April</td>
+              <td class="px-6 py-4 space-y-1">
+                 <div class="font-bold text-white">Edu Carnival Expo, Arithang</div>
+                 <div class="text-white/60 text-xs">MG Marg, Gangtok - 737101</div>
+              </td>
             </tr>
+            <!-- Imphal -->
             <tr class="hover:bg-white/5 transition-colors duration-200">
-              <td class="p-5 font-medium">Imphal</td>
-              <td class="p-5 text-white/70">Thursday</td>
-              <td class="p-5 text-white/70">1st May</td>
-              <td class="p-5 text-white/70">Classic Grande</td>
+              <td class="px-6 py-4 font-bold border-r border-white/10 text-carnival-pink">Imphal</td>
+              <td class="px-6 py-4 border-r border-white/10">Thursday</td>
+              <td class="px-6 py-4 border-r border-white/10 font-mono text-carnival-gold">1st May</td>
+              <td class="px-6 py-4 space-y-1">
+                <div class="font-bold text-white">Edu Carnival Expo, Avenue Consulting</div>
+                <div class="text-white/60 text-xs">Uripok Khoisnam Leikai, Near Meinothong, Imphal West-795001, Manipur</div>
+                <div class="text-carnival-gold text-xs font-mono mt-1">Ph: 70851 88043</div>
+              </td>
             </tr>
+            <!-- Dimapur -->
             <tr class="hover:bg-white/5 transition-colors duration-200">
-              <td class="p-5 font-medium">Dimapur</td>
-              <td class="p-5 text-white/70">Saturday</td>
-              <td class="p-5 text-white/70">3rd May</td>
-              <td class="p-5 text-white/70">Noune Resort</td>
+              <td class="px-6 py-4 font-bold border-r border-white/10 text-carnival-pink">Dimapur</td>
+              <td class="px-6 py-4 border-r border-white/10">Saturday</td>
+              <td class="px-6 py-4 border-r border-white/10 font-mono text-carnival-gold">3rd May</td>
+              <td class="px-6 py-4 space-y-1">
+                 <div class="font-bold text-white">Edu Carnival Expo, Bright Education</div>
+                 <div class="text-white/60 text-xs">Peseyie Complex, Near christian hr sec school, Nyamo Lotha Road, Dimapur - 797112</div>
+              </td>
             </tr>
+            <!-- Dibrugarh -->
             <tr class="hover:bg-white/5 transition-colors duration-200">
-              <td class="p-5 font-medium">Dibrugarh</td>
-              <td class="p-5 text-white/70">Tuesday</td>
-              <td class="p-5 text-white/70">6th May</td>
-              <td class="p-5 text-white/70">Hotel Tea County</td>
+              <td class="px-6 py-4 font-bold border-r border-white/10 text-carnival-pink">Dibrugarh</td>
+              <td class="px-6 py-4 border-r border-white/10">Tuesday</td>
+              <td class="px-6 py-4 border-r border-white/10 font-mono text-carnival-gold">6th May</td>
+              <td class="px-6 py-4 space-y-1">
+                <div class="font-bold text-white">Edu Carnival Expo, Super counsellors, Intech</div>
+                <div class="text-white/60 text-xs">Near SBI Gabharupathar Branch, K. C. Gogoi Path, Dibrugarh - 786001, Assam</div>
+                <div class="text-carnival-gold text-xs font-mono mt-1">Ph: 7002051900, 9854103975</div>
+              </td>
             </tr>
           </tbody>
         </table>
