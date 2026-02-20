@@ -66,8 +66,6 @@ export class StallsComponent implements OnInit {
 
     this.api.create('stall-bookings', payload).subscribe({
       next: () => {
-        console.log('Booking success callback');
-        console.log('Triggering toast...');
         this.toast.success('Stall booked successfully! We will contact you soon.', 5000);
         this.closeBookingModal();
         this.cdr.detectChanges();

@@ -36,7 +36,6 @@ export class AdminStallsComponent implements OnInit {
   loadCities() {
     this.api.getAll('cities').subscribe(data => {
       this.cities = data;
-      console.log('Loaded cities:', this.cities.length);
       this.cdr.detectChanges();
     });
   }

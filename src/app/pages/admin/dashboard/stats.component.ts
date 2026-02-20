@@ -26,6 +26,14 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
         <h4>Inquiries</h4>
         <p class="number">{{ inquiryCount }}</p>
       </div>
+      <div class="stat-card">
+        <h4>Wheel Winners</h4>
+        <p class="number">{{ winnerCount }}</p>
+      </div>
+      <div class="stat-card">
+        <h4>Prizes Left</h4>
+        <p class="number">{{ prizeCount }}</p>
+      </div>
     </div>
 
     <!-- Charts Section -->
@@ -64,6 +72,8 @@ export class DashboardStatsComponent implements OnInit {
   exhibitorCount = 0;
   participantCount = 0;
   inquiryCount = 0;
+  winnerCount = 0;
+  prizeCount = 0;
 
   // Bar Chart
   public barChartOptions: ChartOptions<'bar'> = { responsive: true };
@@ -96,6 +106,8 @@ export class DashboardStatsComponent implements OnInit {
       this.exhibitorCount = stats.exhibitor_regs || 0;
       this.participantCount = stats.participant_regs || 0;
       this.inquiryCount = stats.inquiries || 0;
+      this.winnerCount = stats.total_winners || 0;
+      this.prizeCount = stats.available_prizes || 0;
 
       this.barChartData.datasets[0].data = [
         this.exhibitorCount,

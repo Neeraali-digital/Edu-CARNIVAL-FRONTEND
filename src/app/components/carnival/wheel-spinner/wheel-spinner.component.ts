@@ -1,6 +1,8 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import confetti from 'canvas-confetti';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
     selector: 'app-wheel-spinner',
@@ -9,13 +11,41 @@ import confetti from 'canvas-confetti';
     templateUrl: './wheel-spinner.html',
     styleUrl: './wheel-spinner.css',
 })
-export class WheelSpinnerComponent {
+export class WheelSpinnerComponent implements OnInit {
     rotationDegree = 0;
     isSpinning = false;
     prize: string | null = null;
+    winningCode: string | null = null;
     selectedPrizeIndex = -1;
+    hasSpun = false;
 
-    constructor(private cdr: ChangeDetectorRef) { }
+    prizes: any[] = [];
+
+    constructor(
+        private cdr: ChangeDetectorRef,
+        private api: ApiService,
+        private router: Router
+    ) { }
+
+    get isRegistered(): boolean {
+        return typeof window !== 'undefined' && localStorage.getItem('edu_carnival_registered') === 'true';
+    }
+
+    ngOnInit() {
+        const savedPrize = localStorage.getItem('edu_carnival_spin_prize');
+        const savedCode = localStorage.getItem('edu_carnival_spin_code');
+        if (savedPrize) {
+            this.prize = savedPrize;
+            this.winningCode = savedCode;
+            this.hasSpun = true;
+        }
+
+        // Fetch active prizes from backend to build segments
+        this.api.getAll('wheel/prizes').subscribe(data => {
+            this.prizes = data.filter(p => p.is_active);
+            this.cdr.detectChanges();
+        });
+    }
 
     mathCos(deg: number) {
         return Math.cos((deg * Math.PI) / 180);
@@ -25,87 +55,89 @@ export class WheelSpinnerComponent {
         return Math.sin((deg * Math.PI) / 180);
     }
 
-    prizes = [
-        { name: 'FREE PASS', color: '#ec4899' },
-        { name: '50% OFF', color: '#2e1065' },
-        { name: 'EDU KIT', color: '#fbbf24' },
-        { name: 'VIP ACCESS', color: '#ec4899' },
-        { name: 'STICKERS', color: '#2e1065' },
-        { name: 'NOTEBOOK', color: '#fbbf24' },
-        { name: 'MUG', color: '#ec4899' },
-        { name: 'LUCKY KEY', color: '#2e1065' },
-    ];
-
     spinWheel() {
-        if (this.isSpinning) return;
+        if (this.isSpinning || this.hasSpun || this.prizes.length === 0) return;
+
+        // Double check local storage
+        if (localStorage.getItem('edu_carnival_spin_prize')) {
+            this.hasSpun = true;
+            this.prize = localStorage.getItem('edu_carnival_spin_prize');
+            this.winningCode = localStorage.getItem('edu_carnival_spin_code');
+            return;
+        }
 
         this.isSpinning = true;
         this.prize = null;
-        this.cdr.detectChanges(); // Update UI to remove previous prize if any
+        this.winningCode = null;
+        this.cdr.detectChanges();
 
-        // Pick a random prize index
-        const prizeIndex = Math.floor(Math.random() * this.prizes.length);
-        this.selectedPrizeIndex = prizeIndex;
+        // Call backend to determine winner
+        this.api.spinWheel().subscribe({
+            next: (res) => {
+                const prizeIndex = this.prizes.findIndex(p => p.name === res.prize);
+                this.selectedPrizeIndex = prizeIndex !== -1 ? prizeIndex : 0;
 
-        // Calculate rotation to land on the specific prize
-        // Each slice is 45 degrees.
-        // 0 index is at 0-45 deg (starting from top clockwise)
-        // To land on index 'i', we need the pointer (top) to be at 'i * 45' deg relative to start.
-        // So the wheel must rotate such that the start point moves to '- (i * 45 + 22.5)' deg relative to pointer.
-        // Since we want positive rotation:
-        const sliceAngle = 360 / this.prizes.length;
-        const extraSpins = 8 + Math.floor(Math.random() * 5); // 8-12 full spins
+                const sliceAngle = 360 / this.prizes.length;
+                const extraSpins = 8 + Math.floor(Math.random() * 5);
+                const segmentCenter = (this.selectedPrizeIndex + 0.5) * sliceAngle;
+                const totalRotation = (extraSpins * 360) - segmentCenter;
 
-        // Calculate degree to land in the middle of the slice
-        const targetDegree = 360 - (prizeIndex * sliceAngle) - (sliceAngle / 2);
-        const totalRotation = this.rotationDegree + (extraSpins * 360) + (targetDegree - (this.rotationDegree % 360));
+                this.rotationDegree = totalRotation;
+                this.cdr.detectChanges();
 
-        this.rotationDegree = totalRotation;
-        this.cdr.detectChanges(); // Ensure rotation starts
+                setTimeout(() => {
+                    this.isSpinning = false;
+                    this.hasSpun = true;
+                    this.prize = res.prize;
+                    this.winningCode = res.code;
 
-        // Wait for 3 seconds (animation duration)
-        setTimeout(() => {
-            this.isSpinning = false;
-            this.prize = this.prizes[prizeIndex].name;
-            this.triggerBlast();
-            this.cdr.detectChanges(); // Force update to show prize
-        }, 3000);
+                    localStorage.setItem('edu_carnival_spin_prize', res.prize);
+                    localStorage.setItem('edu_carnival_spin_code', res.code);
+
+                    if (!this.prize?.toLowerCase().includes('better luck')) {
+                        this.triggerBlast();
+                    }
+                    this.cdr.detectChanges();
+                }, 5000);
+            },
+            error: (err) => {
+                console.error(err);
+                this.isSpinning = false;
+                alert('Connection error. Please try again.');
+                this.cdr.detectChanges();
+            }
+        });
+    }
+
+    copyCode() {
+        if (this.winningCode) {
+            navigator.clipboard.writeText(this.winningCode);
+            alert('Code copied! Use it during registration.');
+        }
+    }
+
+    goToRegistration() {
+        this.router.navigate(['/registration/participant']);
     }
 
     private triggerBlast() {
         const duration = 3 * 1000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
         const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
         const interval: any = setInterval(() => {
             const timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {
-                return clearInterval(interval);
-            }
+            if (timeLeft <= 0) return clearInterval(interval);
 
             const particleCount = 50 * (timeLeft / duration);
-            confetti({
-                ...defaults,
-                particleCount,
-                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-            });
-            confetti({
-                ...defaults,
-                particleCount,
-                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-            });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
         }, 250);
 
-        // Initial big blast
         confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 },
+            particleCount: 150, spread: 70, origin: { y: 0.6 },
             colors: ['#ec4899', '#fbbf24', '#2e1065'],
         });
     }
 }
-

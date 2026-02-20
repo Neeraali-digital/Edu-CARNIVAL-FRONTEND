@@ -29,11 +29,19 @@ export class ApiService {
         return this.http.put<any>(`${this.baseUrl}/${endpoint}/${id}/`, data);
     }
 
+    patch(endpoint: string, id: any, data: any): Observable<any> {
+        return this.http.patch<any>(`${this.baseUrl}/${endpoint}/${id}/`, data);
+    }
+
     delete(endpoint: string, id: any): Observable<any> {
         return this.http.delete<any>(`${this.baseUrl}/${endpoint}/${id}/`);
     }
 
     login(username: string, password: string): Observable<any> {
         return this.http.post<any>(`${this.baseUrl}/auth/login/`, { username, password });
+    }
+
+    spinWheel(): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}/wheel/spin/`, {});
     }
 }

@@ -161,6 +161,10 @@ import { ApiService } from '../../../services/api.service';
                             <label>School/College</label>
                             <p>{{ selectedRegistration.school_college }}</p>
                         </div>
+                        <div *ngIf="selectedRegistration.prize_code" class="detail-item">
+                            <label>Prize Code</label>
+                            <p style="color: #d946ef; font-weight: 700;">{{ selectedRegistration.prize_code }}</p>
+                        </div>
                         <div class="detail-item full-width">
                             <label>Interests</label>
                             <p>{{ selectedRegistration.interests }}</p>

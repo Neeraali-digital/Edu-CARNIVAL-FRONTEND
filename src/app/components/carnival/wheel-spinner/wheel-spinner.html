@@ -10,20 +10,21 @@
       <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
         <!-- Loop for segments and text -->
         <g *ngFor="let p of prizes; let i = index">
-          <path [attr.d]="'M50 50 L' + (50 + 50 * mathCos(i * 45)) + ' ' + (50 + 50 * mathSin(i * 45)) + ' A50 50 0 0 1 ' + (50 + 50 * mathCos((i + 1) * 45)) + ' ' + (50 + 50 * mathSin((i + 1) * 45)) + ' Z'" 
+          <path [attr.d]="'M50 50 L' + (50 + 50 * mathCos(i * (360/prizes.length))) + ' ' + (50 + 50 * mathSin(i * (360/prizes.length))) + ' A50 50 0 0 1 ' + (50 + 50 * mathCos((i + 1) * (360/prizes.length))) + ' ' + (50 + 50 * mathSin((i + 1) * (360/prizes.length))) + ' Z'" 
                 [attr.fill]="p.color"
                 class="stroke-white/10 stroke-1" />
           
           <!-- Text Labels -->
-          <text [attr.x]="50 + 35 * mathCos(i * 45 + 22.5)" 
-                [attr.y]="50 + 35 * mathSin(i * 45 + 22.5)" 
+          <text [attr.x]="50 + 32 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))" 
+                [attr.y]="50 + 32 * mathSin(i * (360/prizes.length) + (360/prizes.length/2))" 
                 fill="white" 
-                font-size="4" 
+                [attr.font-size]="p.label.length > 15 ? 2.2 : 2.8" 
                 font-weight="bold"
                 text-anchor="middle"
-                [attr.transform]="'rotate(' + (i * 45 + 22.5 + 90) + ', ' + (50 + 35 * mathCos(i * 45 + 22.5)) + ', ' + (50 + 35 * mathSin(i * 45 + 22.5)) + ')'"
+                dominant-baseline="middle"
+                [attr.transform]="'rotate(' + (i * (360/prizes.length) + (360/prizes.length/2) + 90) + ', ' + (50 + 32 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))) + ', ' + (50 + 32 * mathSin(i * (360/prizes.length) + (360/prizes.length/2))) + ')'"
                 class="pointer-events-none drop-shadow-md">
-            {{p.name}}
+            {{p.label}}
           </text>
         </g>
       </svg>
@@ -44,7 +45,7 @@
 
   <!-- Result Display -->
   <div class="mt-10 text-center space-y-6 relative z-10 w-full">
-    <div *ngIf="!prize && !isSpinning">
+    <div *ngIf="!prize && !isSpinning && !hasSpun">
         <h3 class="text-2xl font-display font-bold text-white mb-2">Feeling Lucky?</h3>
         <p class="text-white/60 text-sm max-w-xs mx-auto">Spin to win exclusive merch and scholarships!</p>
     </div>
@@ -58,21 +59,45 @@
         <span class="text-white font-semibold">Spinning for prizes...</span>
     </div>
     
-    <div *ngIf="prize && !isSpinning" class="animate-fade-in-up">
-      <div class="inline-block py-3 px-8 bg-gradient-to-r from-carnival-gold via-white to-carnival-gold bg-clip-text text-transparent font-black text-3xl mb-2">
-        WINNER!
+    <div *ngIf="prize || hasSpun" class="animate-fade-in-up">
+      <div class="inline-block py-3 px-8 bg-gradient-to-r from-carnival-gold via-white to-carnival-gold bg-clip-text text-transparent font-black text-3xl mb-2 uppercase text-center w-full">
+        {{ prize?.includes('Better Luck') ? 'Try Again Next Time!' : (hasSpun && !isSpinning ? 'YOU WON!' : 'WINNER!') }}
       </div>
       <div class="py-4 px-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl">
         <span class="text-carnival-pink text-sm uppercase font-bold tracking-widest block mb-1">You unlocked</span>
         <h4 class="text-white text-2xl font-bold">{{ prize }}</h4>
+        
+        <div *ngIf="winningCode" class="mt-4 p-3 bg-black/40 rounded-xl border border-white/10 flex flex-col items-center gap-2">
+           <span class="text-white/40 text-[10px] uppercase font-bold">Your Unique Redemption Code</span>
+           <div class="flex items-center gap-3">
+              <code class="text-carnival-gold font-mono text-lg font-bold letter-spacing-1">{{winningCode}}</code>
+              <button (click)="copyCode()" class="p-2 hover:bg-white/10 rounded-lg transition-colors" title="Copy Code">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </button>
+           </div>
+        </div>
+
+        <p class="text-white/50 text-xs mt-4">Redeemable at the event venue. {{ isRegistered ? '' : 'Please register with this code.' }}</p>
+        
+        <button *ngIf="!isRegistered; else registeredMsg" (click)="goToRegistration()" class="mt-4 w-full py-3 bg-white text-carnival-purple font-bold rounded-xl hover:bg-carnival-gold hover:text-white transition-all">
+          Register to Claim
+        </button>
+
+        <ng-template #registeredMsg>
+          <div class="mt-4 p-3 bg-green-500/20 border border-green-500/30 rounded-xl text-green-400 font-bold text-sm">
+             ✓ Registration Successful! <br> 
+             <span class="text-[10px] font-normal text-white/60">Your prize is now linked to your phone number.</span>
+          </div>
+        </ng-template>
       </div>
     </div>
 
-    <button (click)="spinWheel()" [disabled]="isSpinning" 
+    <button *ngIf="!hasSpun" (click)="spinWheel()" [disabled]="isSpinning || prizes.length === 0" 
       class="group relative w-full py-4 bg-gradient-to-r from-carnival-pink via-purple-600 to-carnival-pink bg-[length:200%_auto] hover:bg-right text-white font-bold rounded-2xl shadow-[0_10px_20px_rgba(236,72,153,0.3)] hover:shadow-[0_15px_30px_rgba(236,72,153,0.5)] transform hover:-translate-y-1 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:translate-y-0 disabled:shadow-none">
-      <span class="relative z-10">{{ isSpinning ? 'SPINNING...' : 'SPIN THE WHEEL' }}</span>
+      <span class="relative z-10">{{ isSpinning ? 'SPINNING...' : (prizes.length === 0 ? 'LOADING...' : 'SPIN THE WHEEL') }}</span>
       <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10"></div>
     </button>
   </div>
 </div>
-

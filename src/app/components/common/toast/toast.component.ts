@@ -19,7 +19,6 @@ export class ToastComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscription = this.toastService.toast$.subscribe(toast => {
-            console.log('Toast received:', toast); // Debug log
             if (toast) {
                 this.toast = toast;
                 this.isVisible = true;

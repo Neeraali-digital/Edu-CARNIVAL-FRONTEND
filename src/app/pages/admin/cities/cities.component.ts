@@ -60,7 +60,6 @@ export class AdminCitiesComponent implements OnInit {
 
   saveCity() {
     this.isSubmitting = true;
-    console.log('Submitting city...', this.currentCity);
     const formData = new FormData();
     formData.append('name', this.currentCity.name);
     formData.append('slug', this.currentCity.slug);
@@ -71,6 +70,7 @@ export class AdminCitiesComponent implements OnInit {
     formData.append('is_current_expo', this.currentCity.is_current_expo ? 'true' : 'false');
     if (this.currentCity.location) formData.append('location', this.currentCity.location);
     if (this.currentCity.place) formData.append('place', this.currentCity.place);
+    if (this.currentCity.regional_representative) formData.append('regional_representative', this.currentCity.regional_representative);
 
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
@@ -82,7 +82,6 @@ export class AdminCitiesComponent implements OnInit {
 
     request$.subscribe({
       next: (res) => {
-        console.log('City saved successfully', res);
         this.loadCities();
         this.closeModal();
       },

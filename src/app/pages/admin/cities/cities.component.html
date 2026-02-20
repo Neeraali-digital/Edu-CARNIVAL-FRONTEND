@@ -123,6 +123,10 @@
              Description is required.
            </div>
         </div>
+        <div class="form-group">
+          <label>Regional Representative Info</label>
+          <textarea [(ngModel)]="currentCity.regional_representative" name="regional_representative" rows="4" placeholder="Representative name, address, phone..."></textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>

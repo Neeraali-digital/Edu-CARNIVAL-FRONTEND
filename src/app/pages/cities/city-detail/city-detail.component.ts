@@ -18,10 +18,8 @@ export class CityDetailComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             const cityId = params['id'];
-            console.log('City ID from route:', cityId);
             this.api.getOne('cities', cityId).subscribe({
                 next: (data) => {
-                    console.log('City Data received:', data);
                     this.city = data;
                     this.cdr.detectChanges();
                 },

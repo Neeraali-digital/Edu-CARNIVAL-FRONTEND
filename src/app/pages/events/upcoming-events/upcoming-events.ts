@@ -18,7 +18,6 @@ export class UpcomingEventsComponent implements OnInit {
   ngOnInit() {
     this.api.getAll('cities').subscribe({
       next: (data) => {
-        console.log('Upcoming Events Data:', data);
         if (Array.isArray(data)) {
           this.cities = data.sort((a: any, b: any) => {
             const dateA = a.start_date ? new Date(a.start_date).getTime() : 0;

@@ -21,6 +21,7 @@ import { AdminInquiriesComponent } from './pages/admin/inquiries/inquiries.compo
 import { AdminGalleryComponent } from './pages/admin/gallery/gallery.component';
 import { AdminStallsComponent } from './pages/admin/stalls/stalls.component';
 import { AdminProgramScheduleComponent } from './pages/admin/program-schedule/program-schedule.component';
+import { AdminWheelManagementComponent } from './pages/admin/wheel-management/wheel-management.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -59,6 +60,7 @@ export const routes: Routes = [
             { path: 'gallery', component: AdminGalleryComponent },
             { path: 'stalls', component: AdminStallsComponent },
             { path: 'program-schedule', component: AdminProgramScheduleComponent },
+            { path: 'wheel-management', component: AdminWheelManagementComponent },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },
