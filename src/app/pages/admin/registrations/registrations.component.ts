@@ -2,10 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../../services/api.service';
 
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-admin-registrations',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -18,6 +20,18 @@ import { ApiService } from '../../../services/api.service';
         </button>
       </div>
       
+      <div class="search-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input 
+          type="text" 
+          placeholder="Search by name, email, or phone..." 
+          [(ngModel)]="searchQuery" 
+          (input)="onSearchChange()"
+        >
+      </div>
+
       <div class="tabs">
         <button [class.active]="activeTab === 'exhibitors'" (click)="activeTab = 'exhibitors'">Exhibitors</button>
         <button [class.active]="activeTab === 'participants'" (click)="activeTab = 'participants'">Visitors</button>
@@ -38,7 +52,7 @@ import { ApiService } from '../../../services/api.service';
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let reg of exhibitors">
+            <tr *ngFor="let reg of filteredExhibitors">
               <td>{{ reg.full_name }}</td>
               <td>{{ reg.company_name }}</td>
               <td>{{ reg.email }}</td>
@@ -61,8 +75,8 @@ import { ApiService } from '../../../services/api.service';
                 </div>
               </td>
             </tr>
-            <tr *ngIf="exhibitors.length === 0">
-               <td colspan="7" class="text-center">No exhibitor registrations yet.</td>
+            <tr *ngIf="filteredExhibitors.length === 0">
+               <td colspan="7" class="text-center">No registrations found matching your search.</td>
             </tr>
           </tbody>
         </table>
@@ -77,18 +91,18 @@ import { ApiService } from '../../../services/api.service';
               <th>School/College</th>
               <th>Email</th>
               <th>Phone</th>
-              <th>Interests</th>
+              <th>Prize Code</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let reg of participants">
+            <tr *ngFor="let reg of filteredParticipants">
               <td>{{ reg.full_name }}</td>
               <td>{{ reg.school_college }}</td>
               <td>{{ reg.email }}</td>
               <td>{{ reg.phone_number }}</td>
-              <td>{{ reg.interests }}</td>
+              <td style="color: #d946ef; font-weight: 700;">{{ reg.prize_code || '---' }}</td>
               <td>{{ reg.created_at | date:'short' }}</td>
               <td>
                 <div class="action-group">
@@ -106,8 +120,8 @@ import { ApiService } from '../../../services/api.service';
                 </div>
               </td>
             </tr>
-            <tr *ngIf="participants.length === 0">
-               <td colspan="7" class="text-center">No visitor registrations yet.</td>
+            <tr *ngIf="filteredParticipants.length === 0">
+               <td colspan="7" class="text-center">No registrations found matching your search.</td>
             </tr>
           </tbody>
         </table>
@@ -180,7 +194,34 @@ import { ApiService } from '../../../services/api.service';
     </div>
   `,
   styles: [`
-    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .search-bar {
+      margin-bottom: 2rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 0 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+    .search-bar svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #94a3b8;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: transparent;
+      color: #1e293b;
+    }
+    .search-bar input::placeholder { color: #94a3b8; }
+
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
     .tabs { margin-bottom: 2rem; border-bottom: 2px solid #eee; }
     .tabs button { 
       padding: 1rem 2rem; 
@@ -284,8 +325,11 @@ import { ApiService } from '../../../services/api.service';
 export class AdminRegistrationsComponent implements OnInit {
   exhibitors: any[] = [];
   participants: any[] = [];
+  filteredExhibitors: any[] = [];
+  filteredParticipants: any[] = [];
   activeTab = 'exhibitors';
   selectedRegistration: any = null;
+  searchQuery: string = '';
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
@@ -301,6 +345,7 @@ export class AdminRegistrationsComponent implements OnInit {
   loadExhibitors() {
     this.api.getAll('registrations/exhibitor').subscribe(data => {
       this.exhibitors = data.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      this.applyFilter();
       this.cdr.detectChanges();
     });
   }
@@ -308,8 +353,35 @@ export class AdminRegistrationsComponent implements OnInit {
   loadParticipants() {
     this.api.getAll('registrations/participant').subscribe(data => {
       this.participants = data.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      this.applyFilter();
       this.cdr.detectChanges();
     });
+  }
+
+  onSearchChange() {
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    const query = this.searchQuery.toLowerCase().trim();
+    if (!query) {
+      this.filteredExhibitors = [...this.exhibitors];
+      this.filteredParticipants = [...this.participants];
+    } else {
+      this.filteredExhibitors = this.exhibitors.filter(reg =>
+        reg.full_name?.toLowerCase().includes(query) ||
+        reg.email?.toLowerCase().includes(query) ||
+        reg.phone_number?.toLowerCase().includes(query) ||
+        reg.company_name?.toLowerCase().includes(query)
+      );
+      this.filteredParticipants = this.participants.filter(reg =>
+        reg.full_name?.toLowerCase().includes(query) ||
+        reg.email?.toLowerCase().includes(query) ||
+        reg.phone_number?.toLowerCase().includes(query) ||
+        reg.school_college?.toLowerCase().includes(query)
+      );
+    }
+    this.cdr.detectChanges();
   }
 
   viewRegistration(reg: any) {

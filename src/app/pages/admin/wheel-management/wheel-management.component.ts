@@ -28,7 +28,19 @@ import { ApiService } from '../../../services/api.service';
       <div *ngIf="activeTab === 'winners'">
         <div class="section-header">
           <h3 class="dark-text">Recent Winners</h3>
-          <span class="badge">{{ winners.length }} Total Spins</span>
+          <span class="badge">{{ filteredWinners.length }} Total Spins</span>
+        </div>
+
+        <div class="search-bar">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input 
+            type="text" 
+            placeholder="Search by prize code or IP..." 
+            [(ngModel)]="searchQuery" 
+            (input)="onSearchChange()"
+          >
         </div>
         
         <table class="data-table">
@@ -43,7 +55,7 @@ import { ApiService } from '../../../services/api.service';
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let winner of winners">
+            <tr *ngFor="let winner of filteredWinners">
               <td><code class="code-pill">{{ winner.unique_code }}</code></td>
               <td>
                 <span class="prize-tag" [style.background-color]="winner.prize_details?.color + '22'" [style.color]="winner.prize_details?.color">
@@ -66,8 +78,8 @@ import { ApiService } from '../../../services/api.service';
                 </button>
               </td>
             </tr>
-            <tr *ngIf="winners.length === 0">
-               <td colspan="6" class="text-center text-slate-400">No winners recorded yet.</td>
+             <tr *ngIf="filteredWinners.length === 0">
+               <td colspan="6" class="text-center text-slate-400">No winners found matching your search.</td>
             </tr>
           </tbody>
         </table>
@@ -278,14 +290,42 @@ import { ApiService } from '../../../services/api.service';
     .text-slate-500 { color: #64748b !important; }
     .text-slate-700 { color: #334155 !important; }
     .text-slate-400 { color: #94a3b8 !important; }
+
+    .search-bar {
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 0 1rem;
+      border: 1px solid #e2e8f0;
+    }
+    .search-bar svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #94a3b8;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+      background: transparent;
+      color: #1e293b;
+    }
+    .search-bar input::placeholder { color: #94a3b8; }
   `]
 })
 export class AdminWheelManagementComponent implements OnInit {
   winners: any[] = [];
+  filteredWinners: any[] = [];
   prizes: any[] = [];
   activeTab = 'winners';
   selectedPrize: any = null;
   isLoading = false;
+  searchQuery: string = '';
   editData = {
     remaining_quantity: 0,
     total_quantity: 0,
@@ -313,6 +353,7 @@ export class AdminWheelManagementComponent implements OnInit {
     this.api.getAll('wheel/winners').subscribe({
       next: (data) => {
         this.winners = data.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        this.applyFilter();
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -322,6 +363,24 @@ export class AdminWheelManagementComponent implements OnInit {
         this.cdr.detectChanges();
       }
     });
+  }
+
+  onSearchChange() {
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    const query = this.searchQuery.toLowerCase().trim();
+    if (!query) {
+      this.filteredWinners = [...this.winners];
+    } else {
+      this.filteredWinners = this.winners.filter(winner =>
+        winner.unique_code?.toLowerCase().includes(query) ||
+        winner.ip_address?.toLowerCase().includes(query) ||
+        winner.prize_details?.name?.toLowerCase().includes(query)
+      );
+    }
+    this.cdr.detectChanges();
   }
 
   loadPrizes() {
