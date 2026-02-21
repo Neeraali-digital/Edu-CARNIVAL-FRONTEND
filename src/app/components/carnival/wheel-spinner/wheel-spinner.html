@@ -15,16 +15,22 @@
                 class="stroke-white/10 stroke-1" />
           
           <!-- Text Labels -->
-          <text [attr.x]="50 + 32 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))" 
-                [attr.y]="50 + 32 * mathSin(i * (360/prizes.length) + (360/prizes.length/2))" 
+          <text [attr.x]="50 + 28 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))" 
+                [attr.y]="50 + 28 * mathSin(i * (360/prizes.length) + (360/prizes.length/2))" 
                 fill="white" 
-                [attr.font-size]="p.label.length > 15 ? 2.2 : 2.8" 
+                [attr.font-size]="p.label.length > 15 ? 3.2 : 3.8" 
                 font-weight="bold"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                [attr.transform]="'rotate(' + (i * (360/prizes.length) + (360/prizes.length/2) + 90) + ', ' + (50 + 32 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))) + ', ' + (50 + 32 * mathSin(i * (360/prizes.length) + (360/prizes.length/2))) + ')'"
+                [attr.transform]="'rotate(' + (i * (360/prizes.length) + (360/prizes.length/2) + 90) + ', ' + (50 + 28 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))) + ', ' + (50 + 28 * mathSin(i * (360/prizes.length) + (360/prizes.length/2))) + ')'"
                 class="pointer-events-none drop-shadow-md">
-            {{p.label}}
+            <ng-container *ngIf="p.label.includes('|'); else singleLine">
+              <tspan [attr.x]="50 + 28 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))" dy="-0.6em">{{p.label.split('|')[0].trim()}}</tspan>
+              <tspan [attr.x]="50 + 28 * mathCos(i * (360/prizes.length) + (360/prizes.length/2))" dy="1.2em">{{p.label.split('|')[1].trim()}}</tspan>
+            </ng-container>
+            <ng-template #singleLine>
+              {{p.label}}
+            </ng-template>
           </text>
         </g>
       </svg>
