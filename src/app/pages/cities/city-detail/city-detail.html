@@ -98,6 +98,7 @@
              </div>
            </div>
 
+
           <!-- <div>
             <h2 class="text-3xl font-display font-bold mb-8 text-carnival-gold border-l-4 border-carnival-pink pl-6">Program Schedule</h2>
             <div class="space-y-6">
@@ -136,6 +137,28 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- Google Map Section (Full Width) -->
+      <div *ngIf="safeMapUrl" class="mt-20">
+        <h2 class="text-3xl font-display font-bold mb-8 text-carnival-gold border-l-4 border-carnival-pink pl-6">Venue Location Map</h2>
+        <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-white/5 backdrop-blur-sm group">
+          <iframe 
+            [src]="safeMapUrl" 
+            class="w-full h-[300px] md:h-[450px] border-0 grayscale hover:grayscale-0 transition-all duration-700" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="p-4 bg-white/5 text-center">
+            <a [href]="city?.map_url?.split('&output=embed')[0]" target="_blank" class="text-carnival-pink hover:text-carnival-gold transition-colors text-sm font-bold flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Open in Google Maps
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Back Button -->
