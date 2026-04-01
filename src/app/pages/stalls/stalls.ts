@@ -30,14 +30,44 @@ export class StallsComponent implements OnInit {
 
   ngOnInit() {
     this.loadStalls();
-    // Cities loaded internally via stalls relation
   }
 
   loadStalls() {
-    this.api.getAll('stalls').subscribe(data => {
-      this.stalls = data;
-      this.cdr.detectChanges();
-    });
+    this.stalls = [
+      {
+        id: 1,
+        title: 'Premium Stall - Imphal',
+        city_details: { id: 1, name: 'Imphal' },
+        price: 45000,
+        description: 'Premium stall at the City Convention Center, Imphal. High visibility area with maximum footfall.',
+        image: ''
+      },
+      {
+        id: 2,
+        title: 'Standard Stall - Imphal',
+        city_details: { id: 1, name: 'Imphal' },
+        price: 35000,
+        description: 'Standard stall at the City Convention Center, Imphal. Perfect for institutional showcases.',
+        image: ''
+      },
+      {
+        id: 3,
+        title: 'Premium Stall - Dibrugarh',
+        city_details: { id: 2, name: 'Dibrugarh' },
+        price: 45000,
+        description: 'Premium stall at Cygnett Hotel, Dibrugarh. Prime location within the exhibition hall.',
+        image: ''
+      },
+      {
+        id: 4,
+        title: 'Standard Stall - Dibrugarh',
+        city_details: { id: 2, name: 'Dibrugarh' },
+        price: 35000,
+        description: 'Standard stall at Cygnett Hotel, Dibrugarh. Cost-effective option for quality leads.',
+        image: ''
+      }
+    ];
+    this.cdr.detectChanges();
   }
 
   // loadCities removed as not needed directly

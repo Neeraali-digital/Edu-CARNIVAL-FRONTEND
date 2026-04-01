@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
+import { CITIES } from '../../../data/cities';
 
 @Component({
     selector: 'app-city-detail',
@@ -17,16 +18,9 @@ export class CityDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            const cityId = params['id'];
-            this.api.getOne('cities', cityId).subscribe({
-                next: (data) => {
-                    this.city = data;
-                    this.cdr.detectChanges();
-                },
-                error: (err) => {
-                    console.error('Error fetching city details:', err);
-                }
-            });
+            const slug = params['id'];
+            this.city = CITIES.find(c => c.slug === slug);
+            this.cdr.detectChanges();
         });
     }
 }

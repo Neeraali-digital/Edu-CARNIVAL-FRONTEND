@@ -19,7 +19,7 @@
       </h1>
       
       <p class="text-lg md:text-2xl text-white/70 max-w-3xl mx-auto mb-10 leading-relaxed">
-        Step into the future of education. A grand spectacle of learning, innovation, and opportunity across 4 cities.
+        Step into the future of education. A grand spectacle of learning, innovation, and opportunity across multiple cities.
       </p>
       
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -117,11 +117,11 @@
         <div class="w-24 h-1 bg-gradient-to-r from-carnival-pink to-purple-600 mx-auto rounded-full"></div>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="flex flex-wrap justify-center gap-8">
         <!-- City Card Loop -->
         <div *ngFor="let city of cities" 
              [routerLink]="['/city', city.slug]"
-             class="group relative h-64 rounded-3xl overflow-hidden cursor-pointer shadow-2xl hover:shadow-carnival-pink/20 transition-all duration-500 hover:-translate-y-2">
+             class="group relative h-64 w-full sm:w-80 rounded-3xl overflow-hidden cursor-pointer shadow-2xl hover:shadow-carnival-pink/20 transition-all duration-500 hover:-translate-y-2">
           <!-- Real City IMG -->
           <img [src]="city.image" [alt]="city.name" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 transform group-hover:scale-110">
           
@@ -511,53 +511,6 @@
     </div>
   </section>
 
-  <!-- Fun Zone / Spin the Wheel -->
-  <section class="py-20 relative overflow-hidden bg-[#240d3a]">
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- Wheel Component -->
-        <div class="flex justify-center">
-           <app-wheel-spinner></app-wheel-spinner>
-        </div>
-        
-        <!-- Text -->
-         <div class="text-left">
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Feeling <span class="text-carnival-gold">Lucky ?</span></h2>
-          <p class="text-white/70 text-lg mb-4 leading-relaxed">
-            Edu carnival is not just about exploring colleges — it also features a special “Spin & Win” gift opportunity!
-          </p>
-          <p class="text-white/70 text-lg mb-6 leading-relaxed">
-            Participants can win exciting gifts through the Spin & Win option. Gifts can be collected only at any Educarnival event location on the event day.
-          </p>
-          
-          <h3 class="text-xl font-bold text-white mb-4">Please note:</h3>
-
-          <ul class="space-y-4 text-white/80">
-            <li class="flex items-start gap-3">
-              <span class="mt-1 w-6 h-6 rounded-full bg-carnival-pink flex items-center justify-center text-xs text-white shrink-0">✓</span>
-              <span>Campus tours are available to eligible students at selected partner universities in India during the Edu Carnival.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-1 w-6 h-6 rounded-full bg-carnival-pink flex items-center justify-center text-xs text-white shrink-0">✓</span>
-              <span>Gifts are eligible only for students below 25 years of age.</span>
-            </li>
-             <li class="flex items-start gap-3">
-              <span class="mt-1 w-6 h-6 rounded-full bg-carnival-pink flex items-center justify-center text-xs text-white shrink-0">✓</span>
-              <span>Scholarships are available for spot admissions confirmed on the same day.</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 rounded-full bg-carnival-pink flex items-center justify-center text-xs text-white shrink-0">✓</span>
-              <span>Guaranteed prizes for every participant</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-6 h-6 rounded-full bg-carnival-pink flex items-center justify-center text-xs text-white shrink-0">✓</span>
-              <span>Redeemable at any city venue.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
    <!-- CTA Section -->
    <section class="py-24 relative overflow-hidden">

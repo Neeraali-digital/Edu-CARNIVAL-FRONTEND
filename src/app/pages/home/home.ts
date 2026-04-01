@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { WheelSpinnerComponent } from '../../components/carnival/wheel-spinner/wheel-spinner.component';
 import { ApiService } from '../../services/api.service';
+import { CITIES } from '../../data/cities';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, WheelSpinnerComponent],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class HomeComponent implements OnInit {
-  cities: any[] = [];
+  cities = CITIES;
   partnerLogos: string[] = [];
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) {
@@ -24,9 +24,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.getAll('cities').subscribe(data => {
-      this.cities = data;
-      this.cdr.detectChanges();
-    });
+    this.cdr.detectChanges();
   }
 }
