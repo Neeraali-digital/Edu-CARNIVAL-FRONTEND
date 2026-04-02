@@ -17,11 +17,23 @@ export class VideoGalleryComponent implements OnInit {
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    // Add static placeholders for now
+    this.videos = [
+      { id: 1, title: 'Edu Carnival Highlight 1', video_url: 'https://www.youtube.com/embed/' },
+      { id: 2, title: 'Edu Carnival Highlight 2', video_url: 'https://www.youtube.com/embed/' },
+      { id: 3, title: 'Student Testimonials', video_url: 'https://www.youtube.com/embed/' },
+      { id: 4, title: 'Seminar Session', video_url: 'https://www.youtube.com/embed/' },
+      { id: 5, title: 'Exhibition Highlights', video_url: 'https://www.youtube.com/embed/' },
+      { id: 6, title: 'University Interaction', video_url: 'https://www.youtube.com/embed/' }
+    ];
+
     this.api.getAll('videos').subscribe(data => {
-      this.videos = data.map((video: any) => ({
-        ...video,
-        video_url: this.getEmbedUrl(video.video_url)
-      }));
+      if (data && data.length > 0) {
+        this.videos = data.map((video: any) => ({
+          ...video,
+          video_url: this.getEmbedUrl(video.video_url)
+        }));
+      }
       this.cdr.detectChanges();
     });
   }

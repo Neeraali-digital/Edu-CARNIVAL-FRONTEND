@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) {
     // Initialize partner logos array
+    // Initialize partner logos array - skipping missing logo 08
     for (let i = 1; i <= 32; i++) {
+      if (i === 8) continue;
       const logoNum = i < 10 ? `0${i}` : `${i}`;
       this.partnerLogos.push(`32 Logos For Web/logos for web-${logoNum}.png`);
     }

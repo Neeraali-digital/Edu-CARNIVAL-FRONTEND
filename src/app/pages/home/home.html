@@ -132,7 +132,14 @@
           <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 z-20">
             <div *ngIf="city.is_current_expo" class="mb-2 px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full animate-pulse shadow-lg">LIVE NOW</div>
             <h3 class="text-white font-display font-bold text-2xl tracking-wider drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{{city.name}}</h3>
-            <div class="h-1 w-0 group-hover:w-16 bg-carnival-gold transition-all duration-300 rounded-full mt-2"></div>
+            
+            <!-- Venue and Date Details -->
+            <div class="flex flex-col items-center mt-1">
+              <span class="text-carnival-gold font-bold text-sm">{{ city.date }}</span>
+              <span class="text-white/60 text-[10px] uppercase font-black tracking-widest mt-0.5">{{ city.place }}</span>
+            </div>
+
+            <div class="h-1 w-0 group-hover:w-16 bg-carnival-gold transition-all duration-300 rounded-full mt-3"></div>
             <span class="text-white/0 group-hover:text-white/100 transition-all duration-300 mt-2 text-xs font-semibold uppercase tracking-tighter">View Details</span>
           </div>
         </div>
@@ -433,17 +440,48 @@
   <section class="py-20 px-10 relative bg-[#1a0b2e]/80 border-y border-white/5">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-2xl md:text-4xl font-display font-bold text-white/90">Our Partner <span class="text-carnival-gold">Institutions</span></h2>
+        <h2 class="text-2xl md:text-4xl font-display font-bold text-white/90">Our <span class="text-carnival-gold">Partners</span></h2>
         <div class="w-16 h-1 bg-gradient-to-r from-carnival-pink to-purple-600 mx-auto rounded-full mt-4"></div>
       </div>
 
-      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 md:gap-6 text-center">
+      <div class="grid grid-flow-col grid-rows-4 overflow-x-auto gap-4 md:grid-flow-row md:grid-rows-none md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 md:overflow-visible custom-scrollbar pb-6 md:pb-0">
         <!-- Partner Logos Loop -->
         <div *ngFor="let logo of partnerLogos" 
-             class="group h-24 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center p-4 hover:bg-white/10 hover:border-carnival-gold/30 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-carnival-gold/10">
+             class="group h-24 w-32 md:w-auto flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0">
           <img [src]="logo" 
                alt="Partner Logo" 
                class="max-h-full max-w-full object-contain transition-all duration-500 transform group-hover:scale-110">
+        </div>
+      </div>
+
+      <!-- Additional Partners Layout (Tasks) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-20 border-t border-white/10 pt-16">
+        <!-- Digital Partner Section -->
+        <div class="flex flex-col items-center">
+          <div class="text-center mb-8">
+            <h3 class="text-xl md:text-2xl font-display font-bold text-white/90 uppercase tracking-widest">Digital <span class="text-carnival-pink">Partner</span></h3>
+            <div class="w-12 h-1 bg-carnival-pink mx-auto rounded-full mt-3"></div>
+          </div>
+          <div class="group h-40 w-full max-w-sm flex items-center justify-center transition-all duration-500 relative">
+            <img src="/digital partner.png" alt="Digital Partner" class="max-h-full max-w-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-105">
+          </div>
+        </div>
+
+        <!-- Consultancy Partners Section -->
+        <div class="flex flex-col items-center">
+          <div class="text-center mb-8">
+            <h3 class="text-xl md:text-2xl font-display font-bold text-white/90 uppercase tracking-widest">Consultancy <span class="text-purple-400">Partners</span></h3>
+            <div class="w-12 h-1 bg-purple-400 mx-auto rounded-full mt-3"></div>
+          </div>
+          <div class="grid grid-cols-2 gap-6 w-full max-w-sm">
+            <!-- Placeholders for 4 logos (2 cols, 2 rows) -->
+            <div *ngFor="let i of [1,2,3,4]" class="h-28 flex flex-col items-center justify-center transition-all duration-300">
+               <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mb-2">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+               </div>
+               <span class="text-white/30 text-[10px] uppercase font-bold tracking-tighter">Partner {{i}}</span>
+            </div>
+          </div>
         </div>
       </div>
 
