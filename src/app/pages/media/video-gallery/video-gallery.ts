@@ -13,6 +13,7 @@ import { SafeUrlPipe } from '../../../pipes/safe-url.pipe';
 })
 export class VideoGalleryComponent implements OnInit {
   videos: any[] = [];
+  selectedVideo: any = null;
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
@@ -57,5 +58,13 @@ export class VideoGalleryComponent implements OnInit {
     }
 
     return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+  }
+
+  openFullscreen(video: any) {
+    this.selectedVideo = video;
+  }
+
+  closeFullscreen() {
+    this.selectedVideo = null;
   }
 }

@@ -9,16 +9,55 @@
     <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
       
        <!-- Dynamic Video Items -->
-       <div *ngFor="let video of videos" class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-carnival-gold/50 active:scale-105 transition-all duration-300 group">
+       <div *ngFor="let video of videos" 
+            (click)="openFullscreen(video)"
+            class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-carnival-gold/50 active:scale-105 transition-all duration-300 group cursor-pointer">
          <div class="relative aspect-video bg-black">
-           <iframe class="w-full h-full" [src]="video.video_url | safeUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+           <!-- Thumbnail/Overlay to catch clicks -->
+           <div class="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/0 transition-colors flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full bg-carnival-pink/80 text-white flex items-center justify-center translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+           </div>
+           <iframe class="w-full h-full pointer-events-none" [src]="video.video_url | safeUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
          </div>
          <div class="p-4">
            <h3 class="text-lg font-bold text-white mb-1 group-hover:text-carnival-gold transition-colors">{{ video.title }}</h3>
-           <p class="text-white/50 text-xs">Video Content</p>
+           <p class="text-white/50 text-xs text-transparent bg-clip-text bg-gradient-to-r from-carnival-pink to-purple-400 font-bold uppercase tracking-tighter">Click to Enlarge</p>
          </div>
        </div>
 
     </div>
+  </div>
+
+  <!-- Video Lightbox Modal -->
+  <div *ngIf="selectedVideo" 
+       class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-10 animate-fade-in"
+       (click)="closeFullscreen()">
+    
+    <!-- Close Button -->
+    <button (click)="closeFullscreen()" class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-[110]">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Video Container -->
+    <div class="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10 animate-zoom-in" (click)="$event.stopPropagation()">
+      <iframe class="w-full h-full" 
+              [src]="selectedVideo.video_url | safeUrl" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Title below video -->
+    <div class="mt-8 text-center animate-fade-in">
+        <h3 class="text-white text-2xl font-display font-bold">{{ selectedVideo.title }}</h3>
+        <p class="text-carnival-pink uppercase tracking-widest font-bold mt-2 text-sm">EDU CARNIVAL MEDIA</p>
+    </div>
+
   </div>
 </div>

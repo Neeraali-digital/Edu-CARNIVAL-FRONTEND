@@ -14,6 +14,7 @@ export class PhotoGalleryComponent implements OnInit {
   groupedPhotos: { year: number, photos: any[] }[] = [];
 
   isLoading = true;
+  selectedPhoto: any = null;
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
@@ -82,5 +83,13 @@ export class PhotoGalleryComponent implements OnInit {
     this.groupedPhotos = Object.keys(groups)
       .map(year => ({ year: parseInt(year), photos: groups[parseInt(year)] }))
       .sort((a, b) => b.year - a.year);
+  }
+
+  openFullscreen(photo: any) {
+    this.selectedPhoto = photo;
+  }
+
+  closeFullscreen() {
+    this.selectedPhoto = null;
   }
 }
