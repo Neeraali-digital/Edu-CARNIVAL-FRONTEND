@@ -67,17 +67,17 @@
           <!-- 2x2 -->
           <div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-carnival-pink/30 transition-colors group">
             <div class="text-2xl font-bold text-white mb-1">2m x 2m</div>
-            <div class="text-carnival-pink font-medium text-sm">4 sq. m</div>
+            <div class="text-carnival-pink font-medium text-sm">50k plus GST</div>
           </div>
           <!-- 3x2 -->
           <div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-carnival-pink/30 transition-colors group">
             <div class="text-2xl font-bold text-white mb-1">3m x 2m</div>
-            <div class="text-carnival-pink font-medium text-sm">6 sq. m</div>
+            <div class="text-carnival-pink font-medium text-sm">75k plus GST</div>
           </div>
           <!-- 4x2 -->
           <div class="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-carnival-pink/30 transition-colors group">
             <div class="text-2xl font-bold text-white mb-1">4m x 2m</div>
-            <div class="text-carnival-pink font-medium text-sm">8 sq. m</div>
+            <div class="text-carnival-pink font-medium text-sm">1L plus GST</div>
           </div>
           <!-- Custom -->
           <div class="p-4 rounded-xl bg-gradient-to-br from-carnival-pink/10 to-transparent border border-carnival-pink/20 transition-colors group">
@@ -220,12 +220,14 @@
 
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+
+    
+    <!-- Layout preview cards section hidden as requested -->
+    <!-- <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       
-      <!-- List Loop -->
       <div *ngFor="let stall of stalls" class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-sm p-4 md:p-6 flex flex-col">
         
-        <!-- Header Info -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <div>
             <h2 class="text-2xl font-display font-bold text-white mb-2">{{ stall.title }}</h2>
@@ -244,26 +246,24 @@
           </button>
         </div>
 
-        <!-- Large Layout Image -->
         <div class="w-full rounded-2xl overflow-hidden border border-white/10 bg-black/20 relative group flex justify-center bg-black mb-6">
           <img [src]="stall.image || 'https://placehold.co/1200x600/2e1065/white?text=Layout+Preview'" 
                class="w-auto h-64 md:h-80 object-contain" 
                alt="Stall Layout">
           
-          <!-- Hover Overlay (Optional hint) -->
           <div class="absolute inset-0 bg-black/0 hover:bg-black/10 transition pointer-events-none flex items-center justify-center">
-             <!-- Maybe zoom icon or similar? Keeping it clean for now as requested -->
           </div>
         </div>
 
-        <!-- Description -->
         <div class="mt-6">
           <p class="text-white/80 leading-relaxed max-w-4xl">{{ stall.description }}</p>
         </div>
 
       </div>
 
-    </div>
+    </div> -->
+
+    
   </div>
 
   <!-- Booking Modal -->

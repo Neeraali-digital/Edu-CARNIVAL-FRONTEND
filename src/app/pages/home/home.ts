@@ -14,6 +14,7 @@ import { CITIES } from '../../data/cities';
 export class HomeComponent implements OnInit {
   cities = CITIES;
   partnerLogos: string[] = [];
+  consultancyLogos: string[] = [];
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) {
     // Initialize partner logos array
@@ -23,6 +24,13 @@ export class HomeComponent implements OnInit {
       const logoNum = i < 10 ? `0${i}` : `${i}`;
       this.partnerLogos.push(`32 Logos For Web/logos for web-${logoNum}.png`);
     }
+
+    // Initialize consultancy logos
+    this.consultancyLogos = [
+      'cosultancy parteners/Wayzon logo Education Consultancy-02.jpg (2).jpeg',
+      'cosultancy parteners/WhatsApp Image 2026-04-06 at 16.56.46.jpeg',
+      'cosultancy parteners/embark logo png.png'
+    ];
   }
 
   ngOnInit() {
