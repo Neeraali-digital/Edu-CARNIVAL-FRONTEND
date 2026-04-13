@@ -437,7 +437,7 @@
   </section>
 
   <!-- Partners / Logos Section -->
-  <section class="py-20 px-10 relative bg-[#1a0b2e]/80 border-y border-white/5">
+  <section class="py-20 px-4 relative bg-[#1a0b2e]/80 border-y border-white/5">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
         <h2 class="text-2xl md:text-4xl font-display font-bold text-white/90">Our <span class="text-carnival-gold">Partners</span></h2>
@@ -448,7 +448,7 @@
         <div #partnerScroll
              (mouseenter)="pauseScroll()" (mouseleave)="resumeScroll()"
              (touchstart)="pauseScroll()" (touchend)="resumeScroll()"
-             class="grid grid-flow-col grid-rows-4 overflow-x-auto gap-y-4 gap-x-12 md:grid-flow-row md:grid-rows-none md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 md:overflow-visible custom-scrollbar pb-6 md:pb-0 scroll-smooth">
+             class="grid grid-flow-col grid-rows-4 overflow-x-auto gap-y-4 gap-x-6 md:grid-flow-row md:grid-rows-none md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 md:overflow-visible custom-scrollbar pb-6 md:pb-0 scroll-smooth">
           <!-- Partner Logos Loop -->
           <div *ngFor="let logo of partnerLogos" 
                class="group h-20 w-32 md:w-auto flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0">
