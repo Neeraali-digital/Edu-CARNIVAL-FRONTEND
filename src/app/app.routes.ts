@@ -25,7 +25,7 @@ import { AdminWheelManagementComponent } from './pages/admin/wheel-management/wh
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent, title: 'Edu Carnival - Home' },
+    { path: '', component: HomeComponent, title: 'Education Expo in India 2026 – College Admission Fair | Edu Carnival' },
     { path: 'home', redirectTo: '', pathMatch: 'full' },
     { path: 'city/:id', component: CityDetailComponent, title: 'City Details - Edu Carnival' },
 

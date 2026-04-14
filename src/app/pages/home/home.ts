@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 import { ApiService } from '../../services/api.service';
 import { CITIES } from '../../data/cities';
 
@@ -24,6 +25,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   cities = CITIES;
   partnerLogos: string[] = [];
   consultancyLogos: string[] = [];
+  
+  aboutText = `Edu Carnival is a dedicated team specializing in organizing Education Expo events and education fair across India since 2016, with a strong focus on the upcoming Education Expo India 2026. With years of experience, we have built a strong reputation for conducting impactful and student-focused expos that connect aspiring students with top institutions.
+We have successfully organized multiple Education Expo events across the country, with a strong presence in Northern and North-Eastern regions. Our expertise in hosting large-scale events makes us a trusted name for every education fair in North East India, attracting students, parents, and leading universities.
+Our education expos are known for the direct participation of reputed colleges and universities from India and abroad. Each Education Expo we organize ensures valuable interactions, expert guidance, and excellent opportunities for students to explore their academic future.
+`;
+  showFullText = false;
+  charLimit = 400;
 
   @ViewChild('partnerScroll') partnerScroll!: ElementRef;
   scrollAnimationId: any;
@@ -33,6 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private api: ApiService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
+    private meta: Meta
   ) {
     // Initialize partner logos array
     const logos: string[] = [];
@@ -54,6 +63,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.meta.updateTag({ 
+      name: 'description', 
+      content: 'Education Expo in India 2026 – College Admission Fair by Edu Carnival. Discover universities, courses, scholarships, and study abroad guidance.' 
+    });
     this.cdr.detectChanges();
   }
 
@@ -119,5 +132,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   resumeScroll() {
     this.isScrollingPaused = false;
+  }
+
+  toggleAboutText() {
+    this.showFullText = !this.showFullText;
   }
 }
