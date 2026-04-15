@@ -117,7 +117,7 @@
     </div>
   </section>
 
-  <section class="trust-section reveal-block" #revealRef>
+  <section class="trust-section" #revealRef>
     <div class="section-shell">
       <div class="section-header">
         <span class="eyebrow">University Trust Strip</span>
@@ -173,56 +173,50 @@
     </div>
   </section>
 
-  <section class="agenda-section" #revealRef>
+  <section class="psychometric-section" #revealRef>
     <div class="section-shell">
       <div class="section-header section-header-left">
-        <span class="eyebrow">Dynamic Event Schedule</span>
-        <h2>Agenda designed to move students from interest to action</h2>
+        <span class="eyebrow">Career Guidance</span>
+        <h2>Get Free <span style="color: var(--orange);">Psychometric Test</span></h2>
+        <p>A psychometric test is important for students as it helps assess their skills, interests, and personality traits, guiding them toward suitable career paths and academic decisions.</p>
       </div>
 
-      <div class="agenda-shell glass-card">
-        <div class="agenda-tabs">
-          <button
-            *ngFor="let tab of agendaTabs"
-            type="button"
-            class="agenda-tab"
-            [class.active]="tab.key === activeAgendaKey"
-            (click)="setAgenda(tab.key)"
-          >
-            <span>{{ tab.label }}</span>
-            <small>{{ tab.kicker }}</small>
-          </button>
-        </div>
-
-        <div class="agenda-content">
-          <div class="agenda-summary">
-            <span class="eyebrow">{{ activeAgenda.kicker }}</span>
-            <h3>{{ activeAgenda.label }}</h3>
-            <p>{{ activeAgenda.description }}</p>
+      <div class="steps-grid">
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
+          <span class="step-label">Step 1</span>
+          <h3>Book The Test</h3>
+          <p>Prepare for the test by understanding the process, book it by providing required info, and you're ready to go!</p>
+        </article>
 
-          <div class="agenda-timeline">
-            <article *ngFor="let session of activeAgenda.sessions" class="agenda-item">
-              <div class="agenda-time">{{ session.time }}</div>
-              <div class="agenda-details">
-                <h4>{{ session.title }}</h4>
-                <p>{{ session.highlight }}</p>
-                <span>{{ session.speaker }}</span>
-              </div>
-            </article>
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14l2 2 4-4"></path></svg>
           </div>
+          <span class="step-label">Step 2</span>
+          <h3>Take The Test</h3>
+          <p>Take the test by answering questions from qualitative, quantitative, behavioral, academic, & related fields.</p>
+        </article>
 
-          <aside class="agenda-sidecard">
-            <span class="eyebrow">Featured city</span>
-            <h4>{{ nextEvent?.name }}</h4>
-            <p>{{ nextEvent?.location }}</p>
-            <ul class="sidecard-list">
-              <li>{{ nextEvent?.date }}</li>
-              <li>Free entry for students and parents</li>
-              <li>Scholarship help desks and live counseling</li>
-            </ul>
-          </aside>
-        </div>
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <span class="step-label">Step 3</span>
+          <h3>Get Instant Result</h3>
+          <p>Post completion of the test, get access to the report based on your responses in the test.</p>
+        </article>
+
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <span class="step-label">Step 4</span>
+          <h3>Find The Right Course</h3>
+          <p>Get your report analyzed and make an informed decision with the help of our counselors.</p>
+        </article>
       </div>
     </div>
   </section>
