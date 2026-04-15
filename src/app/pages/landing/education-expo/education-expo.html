@@ -1,0 +1,376 @@
+<div class="education-expo-page">
+  <div
+    class="page-orb orb-blue"
+    [style.transform]="'translate3d(0, ' + scrollOffset * 0.16 + 'px, 0)'"
+  ></div>
+  <div
+    class="page-orb orb-green"
+    [style.transform]="'translate3d(0, ' + scrollOffset * -0.12 + 'px, 0)'"
+  ></div>
+
+  <!-- <section class="landing-nav-shell">
+    <div class="section-shell landing-nav">
+      <a routerLink="/education-expo" class="landing-brand" aria-label="Edu Carnival Education Expo landing page">
+        <img src="/logo.png" alt="Edu Carnival logo" />
+        <div>
+          <strong>EDU <span>CARNIVAL</span></strong>
+          <p>Higher Education Expo</p>
+        </div>
+      </a>
+
+      <nav class="landing-nav-links" aria-label="Landing page navigation">
+        <a routerLink="/">Home</a>
+        <a routerLink="/events/upcoming">Upcoming Expo</a>
+        <a routerLink="/registration/participant">Registration</a>
+        <a routerLink="/stalls">Explore</a>
+        <a routerLink="/contact">Contact</a>
+      </nav>
+
+      <a routerLink="/registration/participant" class="landing-nav-cta">Register Now</a>
+    </div>
+  </section> -->
+
+  <section class="hero-section reveal-block is-visible" #revealRef>
+    <div class="section-shell hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">2026 edition</span>
+        <h1 class="hero-title">
+          Unlock Your <span>Global Future</span>
+        </h1>
+        <p class="hero-text">
+          Meet top universities, get scholarship clarity, and help students move from
+          uncertainty to confident action in one immersive expo.
+        </p>
+
+        <div class="hero-actions">
+          <button
+            type="button"
+            class="magnetic-cta"
+            (click)="openModal()"
+            (mousemove)="onMagneticMove($event)"
+            (mouseleave)="resetMagnetic($event)"
+          >
+            <span>Reserve Free Pass</span>
+          </button>
+          <a routerLink="/registration/participant" class="secondary-cta">See Visitor Registration</a>
+        </div>
+
+        <div class="hero-stat-grid">
+          <article class="glass-card hero-stat">
+            <strong>32+</strong>
+            <span>partner universities on-site</span>
+          </article>
+          <article class="glass-card hero-stat">
+            <strong>1:1</strong>
+            <span>counseling and scholarship desks</span>
+          </article>
+          <article class="glass-card hero-stat">
+            <strong>98%</strong>
+            <span>of featured students report better clarity</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-visual" [style.transform]="'translate3d(0, ' + scrollOffset * -0.08 + 'px, 0)'">
+        <div class="visual-stack">
+          <div class="glass-card visual-panel visual-panel-top">
+            <span class="panel-label">Next Expo</span>
+            <strong>{{ nextEvent?.name }}</strong>
+            <p>{{ nextEvent?.date }} • {{ nextEvent?.place }}</p>
+          </div>
+
+          <div class="hero-frame">
+            <img src="/meet.jpeg" alt="Students and parents at Edu Carnival Expo" class="hero-image" />
+            <div class="hero-frame-glow"></div>
+          </div>
+
+          <div class="glass-card visual-panel visual-panel-bottom">
+            <span class="panel-label">Success Score</span>
+            <strong>98% secured scholarships</strong>
+            <p>Real counseling-led shortlists with faster decisions.</p>
+          </div>
+
+          <div class="glass-card mini-card">
+            <span class="mini-dot"></span>
+            <div>
+              <strong>18 mentors live</strong>
+              <p>Admissions, scholarships, and parents guidance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="urgency-section reveal-block is-visible" #revealRef>
+    <div class="section-shell">
+      <div class="glass-card urgency-card">
+        <div class="urgency-copy">
+          <span class="eyebrow urgency-eyebrow">Limited free attendee slots</span>
+          <h2>
+            Countdown to {{ nextEvent?.name }} begins now
+          </h2>
+          <p>
+            The next expo opens at {{ nextEvent?.place }}. Secure your pass before the rush
+            builds.
+          </p>
+        </div>
+
+        <div class="countdown-grid" aria-label="Countdown timer">
+          <div *ngFor="let segment of countdownSegments" class="countdown-unit">
+            <strong>{{ segment.value }}</strong>
+            <span>{{ segment.label }}</span>
+          </div>
+        </div>
+
+        <button type="button" class="countdown-cta" (click)="openModal()">Register in 2 Steps</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-section reveal-block" #revealRef>
+    <div class="section-shell">
+      <div class="section-header">
+        <span class="eyebrow">University Trust Strip</span>
+        <h2>Trusted by students targeting leading campuses</h2>
+        <p>
+          A fast-moving partner showcase designed to build instant confidence for students and
+          parents.
+        </p>
+      </div>
+
+      <div class="logo-grid-shell">
+        <div class="logo-grid">
+          <div *ngFor="let logo of partnerLogos" class="logo-grid-item">
+            <img [src]="logo" alt="Partner university logo" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="insight-section reveal-block" #revealRef>
+    <div class="section-shell">
+      <div class="section-header section-header-left">
+        <span class="eyebrow">Why this landing page converts</span>
+        <h2>Built for student intent and parent confidence</h2>
+      </div>
+
+      <div class="insight-grid">
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">Scholarships</span>
+          <h3>Funding clarity without the guesswork</h3>
+          <p>
+            Highlight scholarship desks, merit pathways, and budget-fit universities right at the
+            moment of highest interest.
+          </p>
+        </article>
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">Counseling</span>
+          <h3>Decision-ready shortlisting in one visit</h3>
+          <p>
+            Reduce friction with 1:1 counseling blocks, parent guidance, and a clear next step
+            after every conversation.
+          </p>
+        </article>
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">Admissions</span>
+          <h3>Low-friction capture for high-intent attendees</h3>
+          <p>
+            The modal lead flow asks for only what is needed: name, email, and degree interest.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="agenda-section reveal-block" #revealRef>
+    <div class="section-shell">
+      <div class="section-header section-header-left">
+        <span class="eyebrow">Dynamic Event Schedule</span>
+        <h2>Agenda designed to move students from interest to action</h2>
+      </div>
+
+      <div class="agenda-shell glass-card">
+        <div class="agenda-tabs">
+          <button
+            *ngFor="let tab of agendaTabs"
+            type="button"
+            class="agenda-tab"
+            [class.active]="tab.key === activeAgendaKey"
+            (click)="setAgenda(tab.key)"
+          >
+            <span>{{ tab.label }}</span>
+            <small>{{ tab.kicker }}</small>
+          </button>
+        </div>
+
+        <div class="agenda-content">
+          <div class="agenda-summary">
+            <span class="eyebrow">{{ activeAgenda.kicker }}</span>
+            <h3>{{ activeAgenda.label }}</h3>
+            <p>{{ activeAgenda.description }}</p>
+          </div>
+
+          <div class="agenda-timeline">
+            <article *ngFor="let session of activeAgenda.sessions" class="agenda-item">
+              <div class="agenda-time">{{ session.time }}</div>
+              <div class="agenda-details">
+                <h4>{{ session.title }}</h4>
+                <p>{{ session.highlight }}</p>
+                <span>{{ session.speaker }}</span>
+              </div>
+            </article>
+          </div>
+
+          <aside class="agenda-sidecard">
+            <span class="eyebrow">Featured city</span>
+            <h4>{{ nextEvent?.name }}</h4>
+            <p>{{ nextEvent?.location }}</p>
+            <ul class="sidecard-list">
+              <li>{{ nextEvent?.date }}</li>
+              <li>Free entry for students and parents</li>
+              <li>Scholarship help desks and live counseling</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section reveal-block" #revealRef>
+    <div class="section-shell">
+      <div class="section-header section-header-left">
+        <span class="eyebrow">Social Proof</span>
+        <h2>Student and parent stories that reduce hesitation</h2>
+      </div>
+
+      <div class="testimonial-grid">
+        <article *ngFor="let testimonial of testimonials" class="glass-card testimonial-card">
+          <div class="testimonial-score">
+            <strong>{{ testimonial.score }}</strong>
+            <span>{{ testimonial.metric }}</span>
+          </div>
+          <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
+          <div class="testimonial-meta">
+            <h3>{{ testimonial.name }}</h3>
+            <span>{{ testimonial.role }}</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="conversion-section reveal-block" #revealRef>
+    <div class="section-shell">
+      <div class="glass-card conversion-card">
+        <div class="conversion-copy">
+          <span class="eyebrow">Low-friction registration</span>
+          <h2>Capture intent before it cools down</h2>
+          <p>
+            Keep the existing home page for general browsing, and use this route as the focused
+            campaign destination for ads, WhatsApp promotions, and social traffic.
+          </p>
+        </div>
+
+        <div class="conversion-actions">
+          <button
+            type="button"
+            class="magnetic-cta conversion-button"
+            (click)="openModal()"
+            (mousemove)="onMagneticMove($event)"
+            (mouseleave)="resetMagnetic($event)"
+          >
+            <span>Get My Free Pass</span>
+          </button>
+          <a routerLink="/contact" class="secondary-cta subtle-link">Talk to the Expo Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+
+  <div class="modal-wrap" *ngIf="isModalOpen">
+    <div class="glass-card modal-panel" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+      <button type="button" class="modal-close" (click)="closeModal()" aria-label="Close registration form">
+        ✕
+      </button>
+
+      <div class="modal-header">
+        <span class="eyebrow">2-step attendee registration</span>
+        <h2 id="lead-modal-title">Reserve your Edu Carnival pass</h2>
+        <div class="step-indicator">
+          <span [class.active]="currentStep === 1">Step 1</span>
+          <span [class.active]="currentStep === 2">Step 2</span>
+        </div>
+      </div>
+
+      <form #leadForm="ngForm" (ngSubmit)="submitLead(leadForm)" class="lead-form" novalidate>
+        <div *ngIf="currentStep === 1" class="step-content">
+          <label class="field">
+            <span>Name</span>
+            <input
+              type="text"
+              name="name"
+              [(ngModel)]="leadFormData.name"
+              (blur)="fieldTouched.name = true"
+              placeholder="Your full name"
+              autocomplete="name"
+            />
+            <small class="error-text" *ngIf="fieldTouched.name && leadFormData.name.trim().length < 2">
+              Enter at least 2 characters.
+            </small>
+          </label>
+
+          <label class="field">
+            <span>Email</span>
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="leadFormData.email"
+              (blur)="fieldTouched.email = true"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+            <small
+              class="error-text"
+              *ngIf="fieldTouched.email && leadFormData.email && !leadFormData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)"
+            >
+              Enter a valid email address.
+            </small>
+          </label>
+
+          <button type="button" class="primary-submit" (click)="nextStep()">Continue</button>
+        </div>
+
+        <div *ngIf="currentStep === 2" class="step-content">
+          <div class="field">
+            <span>Degree Interest</span>
+            <div class="choice-grid">
+              <button
+                *ngFor="let option of degreeOptions"
+                type="button"
+                class="choice-chip"
+                [class.selected]="leadFormData.degreeInterest === option"
+                (click)="selectDegree(option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+            <small class="error-text" *ngIf="fieldTouched.degreeInterest && !leadFormData.degreeInterest">
+              Select the degree area that best matches this lead.
+            </small>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-cta step-back" (click)="previousStep()">Back</button>
+            <button type="submit" class="primary-submit" [disabled]="!canSubmitLead || isSubmitting">
+              {{ isSubmitting ? 'Submitting...' : 'Submit Pass Request' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

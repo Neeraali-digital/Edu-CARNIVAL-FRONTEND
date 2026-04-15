@@ -14,12 +14,13 @@ import { CommonModule } from '@angular/common';
 })
 export class App {
   title = 'edu-carnival';
-  isAdminRoute = false;
+  hideChrome = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => { // Listen for route changes
       if (event instanceof NavigationEnd) {
-        this.isAdminRoute = event.url.startsWith('/admin');
+        this.hideChrome =
+          event.url.startsWith('/admin') || event.url.startsWith('/education-expo');
       }
     });
   }
