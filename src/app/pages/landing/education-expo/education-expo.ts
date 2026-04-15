@@ -11,7 +11,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { CITIES, City } from '../../../data/cities';
 import { ApiService } from '../../../services/api.service';
@@ -45,6 +46,7 @@ interface Testimonial {
   quote: string;
   score: string;
   metric: string;
+  avatar?: string;
 }
 
 @Component({
@@ -60,6 +62,17 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
   readonly cities: City[] = [...CITIES].sort((left, right) =>
     (left.start_date ?? '9999-12-31').localeCompare(right.start_date ?? '9999-12-31'),
   );
+
+  get upcomingCities(): City[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return this.cities.filter(city => {
+      if (!city.start_date) return false;
+      const eventDate = new Date(`${city.start_date}T00:00:00+05:30`);
+      return eventDate >= today;
+    }).slice(0, 2); // Show next 2 venues
+  }
+
   readonly nextEvent = this.getNextEvent();
   readonly degreeOptions = [
     'Engineering & Technology',
@@ -178,6 +191,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
         'We came in uncertain, and within one visit we had a shortlist, scholarship direction, and clarity on which campuses truly fit my son.',
       score: '98%',
       metric: 'secured scholarship conversations after counseling',
+      avatar: 'https://i.pravatar.cc/150?u=ananya',
     },
     {
       name: 'Rahul Mehta',
@@ -186,6 +200,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
         'The expo helped me compare universities side by side and finally understand which programs matched my grades, budget, and long-term goals.',
       score: '3x',
       metric: 'faster shortlisting than researching online alone',
+      avatar: 'https://i.pravatar.cc/150?u=rahul',
     },
     {
       name: 'Meera Das',
@@ -194,6 +209,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
         'The counseling desk turned a confusing admissions process into a clear action plan I could actually follow with confidence.',
       score: '91%',
       metric: 'left with a final college shortlist in a single day',
+      avatar: 'https://i.pravatar.cc/150?u=meera',
     },
   ];
 
@@ -206,19 +222,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
     seconds: '00',
   };
   scrollOffset = 0;
-  isModalOpen = false;
-  currentStep = 1;
-  isSubmitting = false;
-  leadFormData = {
-    name: '',
-    email: '',
-    degreeInterest: '',
-  };
-  fieldTouched = {
-    name: false,
-    email: false,
-    degreeInterest: false,
-  };
+  isUrgencyStuck = false;
 
   private revealObserver?: IntersectionObserver;
   private countdownTimer?: number;
@@ -227,6 +231,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
     private api: ApiService,
     private toast: ToastService,
     private meta: Meta,
+    private cdr: ChangeDetectorRef,
   ) {
     const logos: string[] = [];
     for (let index = 1; index <= 32; index += 1) {
@@ -247,7 +252,10 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
     });
     this.updateCountdown();
     this.scrollOffset = window.scrollY || 0;
-    this.countdownTimer = window.setInterval(() => this.updateCountdown(), 1000);
+    this.countdownTimer = window.setInterval(() => {
+      this.updateCountdown();
+      this.cdr.detectChanges();
+    }, 1000);
   }
 
   ngAfterViewInit() {
@@ -276,68 +284,51 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
 
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.scrollOffset = window.scrollY || 0;
+    const scroll = window.scrollY || 0;
+    this.scrollOffset = scroll;
+
+    // Detect if urgency section should be stuck (compact mode)
+    // The hero section is roughly 600-800px.
+    this.isUrgencyStuck = scroll > 400;
   }
 
   @HostListener('document:keydown.escape')
   onEscapeKey() {
-    if (this.isModalOpen) {
-      this.closeModal();
-    }
+    // No-op
   }
 
   get activeAgenda(): AgendaTab {
     return this.agendaTabs.find((item) => item.key === this.activeAgendaKey) ?? this.agendaTabs[0];
   }
 
-  get countdownSegments() {
+  getCountdownSegments(startDate: string | undefined) {
+    if (!startDate) {
+      return [
+        { label: 'Days', value: '00' },
+        { label: 'Hours', value: '00' },
+        { label: 'Mins', value: '00' },
+        { label: 'Secs', value: '00' },
+      ];
+    }
+
+    const eventStart = new Date(`${startDate}T09:00:00+05:30`).getTime();
+    const diff = Math.max(eventStart - Date.now(), 0);
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
     return [
-      { label: 'Days', value: this.countdown.days },
-      { label: 'Hours', value: this.countdown.hours },
-      { label: 'Mins', value: this.countdown.minutes },
-      { label: 'Secs', value: this.countdown.seconds },
+      { label: 'Days', value: this.formatUnit(days) },
+      { label: 'Hours', value: this.formatUnit(hours) },
+      { label: 'Mins', value: this.formatUnit(minutes) },
+      { label: 'Secs', value: this.formatUnit(seconds) },
     ];
-  }
-
-  get canAdvanceStepOne(): boolean {
-    return this.isValidName(this.leadFormData.name) && this.isValidEmail(this.leadFormData.email);
-  }
-
-  get canSubmitLead(): boolean {
-    return this.canAdvanceStepOne && this.leadFormData.degreeInterest.trim().length > 0;
   }
 
   setAgenda(key: string) {
     this.activeAgendaKey = key;
-  }
-
-  openModal() {
-    this.isModalOpen = true;
-    this.currentStep = 1;
-    document.body.style.overflow = 'hidden';
-  }
-
-  closeModal() {
-    this.isModalOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  nextStep() {
-    this.fieldTouched.name = true;
-    this.fieldTouched.email = true;
-    if (!this.canAdvanceStepOne) {
-      return;
-    }
-    this.currentStep = 2;
-  }
-
-  previousStep() {
-    this.currentStep = 1;
-  }
-
-  selectDegree(option: string) {
-    this.leadFormData.degreeInterest = option;
-    this.fieldTouched.degreeInterest = true;
   }
 
   onMagneticMove(event: MouseEvent) {
@@ -359,66 +350,6 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
     }
     target.style.setProperty('--mx', '0px');
     target.style.setProperty('--my', '0px');
-  }
-
-  async submitLead(form: NgForm) {
-    this.fieldTouched.name = true;
-    this.fieldTouched.email = true;
-    this.fieldTouched.degreeInterest = true;
-
-    if (!this.canSubmitLead || this.isSubmitting) {
-      return;
-    }
-
-    this.isSubmitting = true;
-    const payload = {
-      name: this.leadFormData.name.trim(),
-      email: this.leadFormData.email.trim(),
-      subject: `Education Expo Lead - ${this.nextEvent?.name ?? 'Upcoming Event'}`,
-      message: [
-        `Degree Interest: ${this.leadFormData.degreeInterest}`,
-        `Preferred Event: ${this.nextEvent?.name ?? 'Upcoming Edu Carnival Expo'}`,
-        'Source: /education-expo',
-      ].join('\n'),
-    };
-
-    try {
-      await new Promise<void>((resolve, reject) => {
-        this.api.create('inquiries', payload).subscribe({
-          next: () => resolve(),
-          error: (error) => reject(error),
-        });
-      });
-
-      this.toast.success('Free pass request received. Our team will contact you shortly.');
-      this.resetFormState(form);
-      this.closeModal();
-    } catch {
-      try {
-        await fetch('https://formsubmit.co/ajax/ajith@neeraali.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            _subject: payload.subject,
-            Name: payload.name,
-            Email: payload.email,
-            'Degree Interest': this.leadFormData.degreeInterest,
-            Message: payload.message,
-          }),
-        });
-
-        this.toast.success('Free pass request received. Our team will contact you shortly.');
-        this.resetFormState(form);
-        this.closeModal();
-      } catch {
-        this.toast.error('We could not submit your pass request. Please try again.');
-      }
-    } finally {
-      this.isSubmitting = false;
-    }
   }
 
   private getNextEvent(): City | null {
@@ -457,32 +388,5 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
 
   private formatUnit(value: number): string {
     return value.toString().padStart(2, '0');
-  }
-
-  private isValidName(value: string): boolean {
-    return value.trim().length >= 2;
-  }
-
-  private isValidEmail(value: string): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-  }
-
-  private resetFormState(form: NgForm) {
-    this.currentStep = 1;
-    this.fieldTouched = {
-      name: false,
-      email: false,
-      degreeInterest: false,
-    };
-    this.leadFormData = {
-      name: '',
-      email: '',
-      degreeInterest: '',
-    };
-    form.resetForm({
-      name: '',
-      email: '',
-      degreeInterest: '',
-    });
   }
 }

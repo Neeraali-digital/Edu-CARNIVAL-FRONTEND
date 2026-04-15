@@ -30,8 +30,17 @@
     </div>
   </section> -->
 
-  <section class="hero-section reveal-block is-visible" #revealRef>
+  <section class="hero-section is-visible" #revealRef>
     <div class="section-shell hero-grid">
+
+      
+      <div class="hero-visual" [style.transform]="'translate3d(0, ' + scrollOffset * -0.08 + 'px, 0)'">
+        <div class="visual-stack">
+          <img src="/logo.png" alt="Edu Carnival Logo" class="logo-hero-img" />
+          <div class="hero-frame-glow"></div>
+        </div>
+      </div>
+
       <div class="hero-copy">
         <span class="eyebrow">2026 edition</span>
         <h1 class="hero-title">
@@ -43,16 +52,15 @@
         </p>
 
         <div class="hero-actions">
-          <button
-            type="button"
+          <a
+            routerLink="/registration/exhibitor"
             class="magnetic-cta"
-            (click)="openModal()"
             (mousemove)="onMagneticMove($event)"
             (mouseleave)="resetMagnetic($event)"
           >
-            <span>Reserve Free Pass</span>
-          </button>
-          <a routerLink="/registration/participant" class="secondary-cta">See Visitor Registration</a>
+            <span>Exhibitor Registration</span>
+          </a>
+          <a routerLink="/registration/participant" class="secondary-cta">Visitor Registration</a>
         </div>
 
         <div class="hero-stat-grid">
@@ -70,60 +78,41 @@
           </article>
         </div>
       </div>
-
-      <div class="hero-visual" [style.transform]="'translate3d(0, ' + scrollOffset * -0.08 + 'px, 0)'">
-        <div class="visual-stack">
-          <!-- <div class="glass-card visual-panel visual-panel-top">
-            <span class="panel-label">Next Expo</span>
-            <strong>{{ nextEvent?.name }}</strong>
-            <p>{{ nextEvent?.date }} • {{ nextEvent?.place }}</p>
-          </div> -->
-
-          <div class="hero-fram">
-            <img src="/logo.png" alt="Students and parents at Edu Carnival Expo" class="hero-image" />
-            <div class="hero-frame-glow"></div>
-          </div>
-
-          <!-- <div class="glass-card visual-panel visual-panel-bottom">
-            <span class="panel-label">Success Score</span>
-            <strong>98% secured scholarships</strong>
-            <p>Real counseling-led shortlists with faster decisions.</p>
-          </div>
-
-          <div class="glass-card mini-card">
-            <span class="mini-dot"></span>
-            <div>
-              <strong>18 mentors live</strong>
-              <p>Admissions, scholarships, and parents guidance</p>
-            </div>
-          </div> -->
-        </div>
-      </div>
     </div>
   </section>
 
-  <section class="urgency-section reveal-block is-visible" #revealRef>
-    <div class="section-shell">
-      <div class="glass-card urgency-card">
+  <section class="urgency-section is-visible" #revealRef [class.is-stuck]="isUrgencyStuck">
+    <div class="section-shell venues-grid">
+      <div *ngFor="let event of upcomingCities" class="glass-card urgency-card venue-card" [class.compact]="isUrgencyStuck">
         <div class="urgency-copy">
-          <span class="eyebrow urgency-eyebrow">Limited free attendee slots</span>
+          <!-- <span class="eyebrow urgency-eyebrow">Limited free attendee slots</span> -->
           <h2>
-            Countdown to {{ nextEvent?.name }} begins now
+            <span *ngIf="isUrgencyStuck">{{ event.name }}</span>
+            <span *ngIf="!isUrgencyStuck">Countdown to {{ event.name }} begins now</span>
           </h2>
-          <p>
-            The next expo opens at {{ nextEvent?.place }}. Secure your pass before the rush
-            builds.
+          <p *ngIf="!isUrgencyStuck">
+            {{ event.place }} • {{ event.date }}
           </p>
+          <div class="venue-contact" *ngIf="!isUrgencyStuck">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>+91 99804 87777 / 97405 68888</span>
+          </div>
         </div>
 
-        <div class="countdown-grid" aria-label="Countdown timer">
-          <div *ngFor="let segment of countdownSegments" class="countdown-unit">
+        <div class="countdown-grid" aria-label="Countdown timer" [class.compact]="isUrgencyStuck">
+          <div *ngFor="let segment of getCountdownSegments(event.start_date)" class="countdown-unit">
             <strong>{{ segment.value }}</strong>
             <span>{{ segment.label }}</span>
           </div>
         </div>
 
-        <button type="button" class="countdown-cta" (click)="openModal()">Register in 2 Steps</button>
+        <a
+          routerLink="/registration/exhibitor"
+          class="countdown-cta"
+          [class.compact]="isUrgencyStuck"
+        >
+          Register
+        </a>
       </div>
     </div>
   </section>
@@ -149,7 +138,7 @@
     </div>
   </section>
 
-  <section class="insight-section reveal-block" #revealRef>
+  <section class="insight-section" #revealRef>
     <div class="section-shell">
       <div class="section-header section-header-left">
         <span class="eyebrow">Why this landing page converts</span>
@@ -184,7 +173,7 @@
     </div>
   </section>
 
-  <section class="agenda-section reveal-block" #revealRef>
+  <section class="agenda-section" #revealRef>
     <div class="section-shell">
       <div class="section-header section-header-left">
         <span class="eyebrow">Dynamic Event Schedule</span>
@@ -238,7 +227,7 @@
     </div>
   </section>
 
-  <section class="testimonials-section reveal-block" #revealRef>
+  <section class="testimonials-section" #revealRef>
     <div class="section-shell">
       <div class="section-header section-header-left">
         <span class="eyebrow">Social Proof</span>
@@ -252,16 +241,19 @@
             <span>{{ testimonial.metric }}</span>
           </div>
           <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
-          <div class="testimonial-meta">
-            <h3>{{ testimonial.name }}</h3>
-            <span>{{ testimonial.role }}</span>
-          </div>
+            <div class="testimonial-header">
+              <img *ngIf="testimonial.avatar" [src]="testimonial.avatar" [alt]="testimonial.name" class="testimonial-avatar" />
+              <div class="testimonial-meta">
+                <h3>{{ testimonial.name }}</h3>
+                <span>{{ testimonial.role }}</span>
+              </div>
+            </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="conversion-section reveal-block" #revealRef>
+  <section class="conversion-section" #revealRef>
     <div class="section-shell">
       <div class="glass-card conversion-card">
         <div class="conversion-copy">
@@ -274,103 +266,18 @@
         </div>
 
         <div class="conversion-actions">
-          <button
-            type="button"
+          <a
+            routerLink="/registration/exhibitor"
             class="magnetic-cta conversion-button"
-            (click)="openModal()"
             (mousemove)="onMagneticMove($event)"
             (mouseleave)="resetMagnetic($event)"
           >
-            <span>Get My Free Pass</span>
-          </button>
+            <span>Exhibitor Registration</span>
+          </a>
           <a routerLink="/contact" class="secondary-cta subtle-link">Talk to the Expo Team</a>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
-
-  <div class="modal-wrap" *ngIf="isModalOpen">
-    <div class="glass-card modal-panel" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
-      <button type="button" class="modal-close" (click)="closeModal()" aria-label="Close registration form">
-        ✕
-      </button>
-
-      <div class="modal-header">
-        <span class="eyebrow">2-step attendee registration</span>
-        <h2 id="lead-modal-title">Reserve your Edu Carnival pass</h2>
-        <div class="step-indicator">
-          <span [class.active]="currentStep === 1">Step 1</span>
-          <span [class.active]="currentStep === 2">Step 2</span>
-        </div>
-      </div>
-
-      <form #leadForm="ngForm" (ngSubmit)="submitLead(leadForm)" class="lead-form" novalidate>
-        <div *ngIf="currentStep === 1" class="step-content">
-          <label class="field">
-            <span>Name</span>
-            <input
-              type="text"
-              name="name"
-              [(ngModel)]="leadFormData.name"
-              (blur)="fieldTouched.name = true"
-              placeholder="Your full name"
-              autocomplete="name"
-            />
-            <small class="error-text" *ngIf="fieldTouched.name && leadFormData.name.trim().length < 2">
-              Enter at least 2 characters.
-            </small>
-          </label>
-
-          <label class="field">
-            <span>Email</span>
-            <input
-              type="email"
-              name="email"
-              [(ngModel)]="leadFormData.email"
-              (blur)="fieldTouched.email = true"
-              placeholder="you@example.com"
-              autocomplete="email"
-            />
-            <small
-              class="error-text"
-              *ngIf="fieldTouched.email && leadFormData.email && !leadFormData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)"
-            >
-              Enter a valid email address.
-            </small>
-          </label>
-
-          <button type="button" class="primary-submit" (click)="nextStep()">Continue</button>
-        </div>
-
-        <div *ngIf="currentStep === 2" class="step-content">
-          <div class="field">
-            <span>Degree Interest</span>
-            <div class="choice-grid">
-              <button
-                *ngFor="let option of degreeOptions"
-                type="button"
-                class="choice-chip"
-                [class.selected]="leadFormData.degreeInterest === option"
-                (click)="selectDegree(option)"
-              >
-                {{ option }}
-              </button>
-            </div>
-            <small class="error-text" *ngIf="fieldTouched.degreeInterest && !leadFormData.degreeInterest">
-              Select the degree area that best matches this lead.
-            </small>
-          </div>
-
-          <div class="modal-actions">
-            <button type="button" class="secondary-cta step-back" (click)="previousStep()">Back</button>
-            <button type="submit" class="primary-submit" [disabled]="!canSubmitLead || isSubmitting">
-              {{ isSubmitting ? 'Submitting...' : 'Submit Pass Request' }}
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 </div>
