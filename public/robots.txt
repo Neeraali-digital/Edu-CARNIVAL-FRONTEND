@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+LLM-Policy: /llms.txt
 
 Sitemap: https://www.educarnival.in/sitemap.xml

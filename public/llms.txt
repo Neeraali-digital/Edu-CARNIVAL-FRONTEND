@@ -1,0 +1,11 @@
+# LLM-Policy for Edu Carnival
+# This file provides guidance for AI and LLM crawlers.
+
+User-agent: *
+Allow: /
+
+# Purpose: Edu Carnival is an Education Expo platform helping students find universities and courses.
+# Key Pages:
+# - /education-expo: Main landing page for the 2026 expo.
+# - /events/upcoming: Schedule of upcoming education fairs.
+# - /registration/participant: Registration for students.
