@@ -85,19 +85,17 @@
     <div class="section-shell">
       <div class="contact-strip-grid">
         <div class="contact-strip-item">
-          <div class="free-badge-inline">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-            <span>Free Entry</span>
+          <div class="free-badge-prominent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <span>FREE ENTRY</span>
           </div>
         </div>
-        <div *ngFor="let event of upcomingCities" class="contact-strip-item">
+        <div class="contact-strip-item">
           <div class="contact-strip-label">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            <span class="label-full">Contact for {{ event.name }}:</span>
-            <span class="label-short">{{ event.name }}:</span>
+            <span class="label-full">Contact for Enquiry:</span>
+            <span class="label-short">Contact:</span>
           </div>
           <a href="tel:+919980487777" class="contact-strip-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             +91 99804 87777 / 97405 68888
           </a>
         </div>
@@ -246,19 +244,17 @@
     <div class="section-shell">
       <div class="contact-strip-grid">
         <div class="contact-strip-item">
-          <div class="free-badge-inline">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-            <span>Free Entry</span>
+          <div class="free-badge-prominent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <span>FREE ENTRY</span>
           </div>
         </div>
-        <div *ngFor="let event of upcomingCities" class="contact-strip-item">
+        <div class="contact-strip-item">
           <div class="contact-strip-label">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            <span class="label-full">Contact for {{ event.name }}:</span>
-            <span class="label-short">{{ event.name }}:</span>
+            <span class="label-full">Contact for Enquiry:</span>
+            <span class="label-short">Contact:</span>
           </div>
           <a href="tel:+919980487777" class="contact-strip-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             +91 99804 87777 / 97405 68888
           </a>
         </div>
@@ -375,7 +371,56 @@
     </div>
   </section>
 
-  <section class="conversion-section" #revealRef>
+  <section class="gallery-section" #revealRef>
+    <div class="section-shell">
+      <div class="section-header">
+        <span class="eyebrow">Our Journey</span>
+        <h2>Moments from Previous Expos</h2>
+        <p>A look back at the vibrant energy, interactions, and success stories from our past events in 2018, 2024, and 2025.</p>
+      </div>
+
+      <div class="collage-grid">
+        <div class="collage-item large">
+          <img src="/2025/WhatsApp Image 2026-04-01 at 14.14.41.jpeg" alt="Edu Carnival 2025 Moment" loading="lazy">
+          <div class="collage-tag">2025 Best Moments</div>
+        </div>
+        <div class="collage-item">
+          <img src="/2024/WhatsApp Image 2026-04-02 at 12.46.49.jpeg" alt="Edu Carnival 2024 Moment" loading="lazy">
+          <div class="collage-tag">2024 Energy</div>
+        </div>
+        <div class="collage-item">
+          <img src="/2018/WhatsApp Image 2026-04-01 at 14.37.27.jpeg" alt="Edu Carnival 2018 Moment" loading="lazy">
+          <div class="collage-tag">The Beginning (2018)</div>
+        </div>
+        <div class="collage-item wide">
+          <img src="/2025/WhatsApp Image 2026-04-01 at 14.14.46.jpeg" alt="Edu Carnival 2025 Crowd" loading="lazy">
+          <div class="collage-tag">Massive Student Turnout</div>
+        </div>
+        <div class="collage-item">
+          <img src="/2018/WhatsApp Image 2026-04-01 at 14.37.28.jpeg" alt="Edu Carnival 2018 Flashback" loading="lazy">
+          <div class="collage-tag">Early Success Stories</div>
+        </div>
+        <div class="collage-item">
+          <img src="/2024/WhatsApp Image 2026-04-02 at 12.46.50 (1).jpeg" alt="Edu Carnival 2024 Interaction" loading="lazy">
+          <div class="collage-tag">Expert Guidance</div>
+        </div>
+        <div class="collage-item wide">
+          <img src="/2025/WhatsApp Image 2026-04-01 at 14.14.47.jpeg" alt="Edu Carnival 2025 Venue" loading="lazy">
+          <div class="collage-tag">Prestigious Venues</div>
+        </div>
+        <div class="collage-item">
+          <img src="/2024/WhatsApp Image 2026-04-02 at 12.46.50.jpeg" alt="Edu Carnival 2024 Team" loading="lazy">
+          <div class="collage-tag">One-on-One Counseling</div>
+        </div>
+        <div class="collage-item">
+          <img src="/2018/WhatsApp Image 2026-04-01 at 14.37.30.jpeg" alt="Edu Carnival 2018 Legacy" loading="lazy">
+          <div class="collage-tag">6 Years of Excellence</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="conversion-section gallery-spacing-top" #revealRef>
     <div class="section-shell">
       <div class="glass-card conversion-card">
         <div class="conversion-copy">
@@ -424,26 +469,6 @@
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="trust-section" #revealRef>
-    <div class="section-shell">
-      <div class="section-header">
-        <span class="eyebrow">University Trust Strip</span>
-        <h2>Trusted by students targeting leading campuses</h2>
-        <p>
-          A fast-moving partner showcase designed to build instant confidence for students and
-          parents.
-        </p>
-      </div>
-
-      <div class="logo-grid-shell">
-        <div class="logo-grid">
-          <div *ngFor="let logo of partnerLogos" class="logo-grid-item">
-            <img [src]="logo" alt="Partner university logo" loading="lazy" />
           </div>
         </div>
       </div>
