@@ -1,7 +1,7 @@
 .blog-detail-page {
   background: #2e1065; /* carnival-purple */
   min-height: 100vh;
-  padding-top: 100px;
+  padding-top: 50px;
   color: #fdf4ff;
   font-family: var(--font-body, 'Inter', sans-serif);
   overflow-x: hidden;
