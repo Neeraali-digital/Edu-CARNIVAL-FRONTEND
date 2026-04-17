@@ -715,9 +715,10 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
+.insight-grid,
 .steps-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 0.8rem;
   margin-top: 1.5rem;
 }
@@ -773,6 +774,7 @@
 }
 
 @media (min-width: 640px) {
+  .insight-grid,
   .steps-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1041,42 +1043,73 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.35rem;
   white-space: nowrap;
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
 }
 
-@media (min-width: 640px) {
-  .contact-strip-item {
-    gap: 1rem;
-  }
-}
+.label-full { display: none; }
+.label-short { display: inline; }
 
 .contact-strip-label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.72rem;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .contact-strip-label svg {
+  display: none;
   color: #ec4899;
 }
 
 .contact-strip-link {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.25rem;
   color: var(--green);
   text-decoration: none;
-  font-weight: 800;
-  font-size: 1.05rem;
+  font-weight: 700;
+  font-size: 0.78rem;
   transition: transform 0.2s ease;
+  flex-shrink: 1;
 }
 
-.contact-strip-link:hover {
-  transform: scale(1.02);
+.contact-strip-link svg {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .contact-strip-item {
+    width: auto;
+    gap: 1rem;
+    font-size: 1rem;
+    overflow: visible;
+  }
+
+  .label-full { display: inline; }
+  .label-short { display: none; }
+
+  .contact-strip-label {
+    font-size: 0.88rem;
+    gap: 0.5rem;
+  }
+
+  .contact-strip-label svg,
+  .contact-strip-link svg {
+    display: block;
+  }
+
+  .contact-strip-link {
+    font-size: 1.05rem;
+    gap: 0.6rem;
+    font-weight: 800;
+  }
 }
 
 .contact-strip-section.spacing-bottom {

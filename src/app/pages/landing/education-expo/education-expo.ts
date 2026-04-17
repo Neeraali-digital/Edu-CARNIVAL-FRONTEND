@@ -199,7 +199,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
     const scroll = window.scrollY || 0;
     this.scrollOffset = scroll;
     const isDesktop = window.innerWidth >= 768;
-    this.isUrgencyStuck = isDesktop && scroll > 600;
+    this.isUrgencyStuck = isDesktop && scroll > 650;
   }
 
   @HostListener('document:keydown.escape')
