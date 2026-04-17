@@ -1,0 +1,38 @@
+<div class="blogs-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content animate-fade-in-up">
+        <h1 class="page-title">Edu Carnival <span class="accent-text">Insights</span></h1>
+        <p class="subtitle">Stay updated with the latest trends, guides, and stories from the world of Higher Education.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blogs Grid -->
+  <section class="blogs-section">
+    <div class="container">
+      <div class="blogs-grid">
+        <div class="blog-card animate-fade-in-up" *ngFor="let blog of blogs; let i = index" [routerLink]="['/blogs', blog.id]" [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="card-image-wrapper">
+            <img [src]="blog.image" [alt]="blog.title" class="blog-image">
+            <div class="category-tag">{{ blog.category }}</div>
+          </div>
+          <div class="card-content">
+            <div class="blog-meta">
+              <span class="date"><i class="far fa-calendar-alt mr-2"></i> {{ blog.date }}</span>
+              <span class="dot"></span>
+              <span class="author">By {{ blog.author }}</span>
+            </div>
+            <h2 class="blog-title">{{ blog.title }}</h2>
+            <p class="blog-description">{{ blog.description }}</p>
+            <div class="read-more">
+              <span>Read Full Story</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
