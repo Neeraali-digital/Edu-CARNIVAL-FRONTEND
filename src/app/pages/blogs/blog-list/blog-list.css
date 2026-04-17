@@ -13,7 +13,7 @@
 
 /* Hero Section */
 .hero-section {
-  padding: 160px 0 80px;
+  padding: 60px 0 80px;
   background: radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.15), transparent 40%),
               radial-gradient(circle at 90% 80%, rgba(147, 51, 234, 0.15), transparent 40%);
   text-align: center;
