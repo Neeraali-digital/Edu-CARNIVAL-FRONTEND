@@ -41,4 +41,27 @@ export class BlogDetailComponent implements OnInit {
     this.metaService.updateTag({ property: 'og:description', content: blog.metaDescription || blog.description });
     this.metaService.updateTag({ property: 'og:image', content: blog.image });
   }
+
+  sharePost(platform: string): void {
+    const url = window.location.href;
+    const title = this.blog?.title || 'Edu Carnival Blog';
+    let shareUrl = '';
+
+    switch (platform) {
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        break;
+      case 'whatsapp':
+        shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
+        break;
+      case 'instagram':
+        // Instagram doesn't have a direct share URL for web. Redirecting to profile as requested.
+        shareUrl = 'https://www.instagram.com/educarnival_expo?igsh=NHRodTV4dTE3cGdy';
+        break;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, '_blank');
+    }
+  }
 }
