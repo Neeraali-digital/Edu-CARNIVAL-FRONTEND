@@ -129,7 +129,7 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
   ngOnInit() {
     this.meta.updateTag({
       name: 'description',
-      content: 'Unlock Your Global Future at Edu Carnival. Meet partner universities, explore scholarships, and register for your free education expo pass.',
+      content: 'Higher Education Exhibition at Edu Carnival. Meet partner universities, explore scholarships, and register for your free education expo pass.',
     });
     this.updateCountdown();
     this.scrollOffset = window.scrollY || 0;
@@ -198,7 +198,8 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
   onWindowScroll() {
     const scroll = window.scrollY || 0;
     this.scrollOffset = scroll;
-    this.isUrgencyStuck = scroll > 400;
+    const isDesktop = window.innerWidth >= 768;
+    this.isUrgencyStuck = isDesktop && scroll > 600;
   }
 
   @HostListener('document:keydown.escape')
@@ -283,5 +284,18 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
 
   private formatUnit(value: number): string {
     return value.toString().padStart(2, '0');
+  }
+
+  getEventDays(startDate: string | undefined): string {
+    if (!startDate) return '';
+    const date1 = new Date(`${startDate}T00:00:00+05:30`);
+    const date2 = new Date(date1);
+    date2.setDate(date2.getDate() + 1);
+    
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long' };
+    const day1 = date1.toLocaleDateString('en-US', options);
+    const day2 = date2.toLocaleDateString('en-US', options);
+    
+    return `${day1} & ${day2}`;
   }
 }

@@ -44,7 +44,7 @@
       <div class="hero-copy">
         <span class="eyebrow">2026 edition</span>
         <h1 class="hero-title">
-          Unlock Your <span>Global Future</span>
+          Higher Education <span>Exhibition</span>
         </h1>
         <p class="hero-text">
           Meet top universities, get scholarship clarity, and help students move from
@@ -58,9 +58,9 @@
             (mousemove)="onMagneticMove($event)"
             (mouseleave)="resetMagnetic($event)"
           >
-            <span>Exhibitor Registration</span>
+            <span>Exhibitor Enquiry Form</span>
           </a>
-          <a routerLink="/registration/participant" class="secondary-cta">Visitor Registration</a>
+          <a routerLink="/registration/participant" class="secondary-cta">Students Registration</a>
         </div>
 
         <div class="hero-stat-grid">
@@ -81,21 +81,50 @@
     </div>
   </section>
 
+  <section class="contact-strip-section spacing-bottom" *ngIf="upcomingCities.length > 0">
+    <div class="section-shell">
+      <div class="contact-strip-grid">
+        <div class="contact-strip-item">
+          <div class="free-badge-inline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <span>Free Entry</span>
+          </div>
+        </div>
+        <div *ngFor="let event of upcomingCities" class="contact-strip-item">
+          <div class="contact-strip-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Contact for {{ event.name }}:</span>
+          </div>
+          <a href="tel:+919980487777" class="contact-strip-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            +91 99804 87777 / 97405 68888
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="urgency-section is-visible" #revealRef [class.is-stuck]="isUrgencyStuck">
     <div class="section-shell venues-grid">
       <div *ngFor="let event of upcomingCities" class="glass-card urgency-card venue-card" [class.compact]="isUrgencyStuck">
         <div class="urgency-copy">
-          <!-- <span class="eyebrow urgency-eyebrow">Limited free attendee slots</span> -->
-          <h2>
-            <span *ngIf="isUrgencyStuck">{{ event.name }}</span>
-            <span *ngIf="!isUrgencyStuck">Countdown to {{ event.name }} begins now</span>
-          </h2>
-          <p *ngIf="!isUrgencyStuck">
-            {{ event.place }} • {{ event.date }}
-          </p>
-          <div class="venue-contact" *ngIf="!isUrgencyStuck">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <span>+91 99804 87777 / 97405 68888</span>
+          <div class="event-highlights" *ngIf="!isUrgencyStuck">
+            <div class="highlight-item venue-location">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span><strong>{{ event.name }}</strong> — {{ event.place }}</span>
+            </div>
+            <div class="highlight-item event-date">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span>{{ getEventDays(event.start_date) }}, {{ event.date }}</span>
+            </div>
+            <div class="highlight-item event-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>9:30 AM to 6:30 PM</span>
+            </div>
+            <div class="highlight-item venue-contact">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+91 99804 87777 / 97405 68888</span>
+            </div>
           </div>
         </div>
 
@@ -106,17 +135,298 @@
           </div>
         </div>
 
+        <h2 class="countdown-heading" *ngIf="!isUrgencyStuck">
+          Countdown to {{ event.name }} begins now
+        </h2>
+        <h2 *ngIf="isUrgencyStuck" class="sticky-city-name">{{ event.name }}</h2>
+
         <a
           routerLink="/registration/exhibitor"
           class="countdown-cta"
           [class.compact]="isUrgencyStuck"
         >
-          Register
+          Exhibitor Enquiry Form
         </a>
       </div>
     </div>
   </section>
 
+
+
+  <section class="insight-section" #revealRef>
+    <div class="section-shell">
+      <div class="section-header section-header-left">
+        <span class="eyebrow">Participation Benefits</span>
+        <h2>Benefits for an Institution to participate</h2>
+      </div>
+
+      <div class="insight-grid benefits-grid">
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">Advertisement and Promotions</span>
+          <h3>Maximize Your Reach</h3>
+          <p>
+            Exposure through local TV channels, newspapers, and social media platforms. 
+            Enhanced visibility using flex boards, banners, and collaborations with local influencers.
+          </p>
+        </article>
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">Targeted Direct Access</span>
+          <h3>Quality Student Engagement</h3>
+          <p>
+            Opportunity to engage with the right target audience. 
+            Direct interaction with students who are actively seeking admission.
+          </p>
+        </article>
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">Spot Admission Possibilities</span>
+          <h3>Faster Decision Making</h3>
+          <p>
+            High possibility of closing admissions on the spot. 
+            Students visit stalls with responsible family decision-makers.
+          </p>
+        </article>
+        <article class="glass-card insight-card">
+          <span class="insight-kicker">North-East Branding</span>
+          <h3>Establish Market Presence</h3>
+          <p>
+            Helps expand the institution's presence in the North-East market. 
+            Builds a stronger brand identity for the institution in the region.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="psychometric-section student-benefits-section" #revealRef>
+    <div class="section-shell">
+      <div class="section-header section-header-left">
+        <span class="eyebrow">Student Perks</span>
+        <h2>Benefits for Students Attending the <span style="color: var(--orange);">Edu Carnival Expo</span></h2>
+        <p>We provide comprehensive support to ensure every student leaves with a clear path forward and the resources to achieve their academic dreams.</p>
+      </div>
+
+      <div class="steps-grid">
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h3>Psychometric Assessment</h3>
+          <p>Free Psychometric Assessment to help identify your unique strengths, personality traits, and ideal career paths.</p>
+        </article>
+
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+          </div>
+          <h3>Scholarship Access</h3>
+          <p>Direct access to exclusive scholarship opportunities and merit-based pathways from participating institutions.</p>
+        </article>
+
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3>Expert Counselling</h3>
+          <p>Complimentary Career Counselling Sessions with expert advisors to build your personalized education roadmap.</p>
+        </article>
+
+        <article class="glass-card step-card">
+          <div class="step-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3>Loan Assistance</h3>
+          <p>Professional Education Loan Assistance to help you navigate funding options for higher studies across India and abroad.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-strip-section spacing-top" *ngIf="upcomingCities.length > 0">
+    <div class="section-shell">
+      <div class="contact-strip-grid">
+        <div class="contact-strip-item">
+          <div class="free-badge-inline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <span>Free Entry</span>
+          </div>
+        </div>
+        <div *ngFor="let event of upcomingCities" class="contact-strip-item">
+          <div class="contact-strip-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Contact for {{ event.name }}:</span>
+          </div>
+          <a href="tel:+919980487777" class="contact-strip-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            +91 99804 87777 / 97405 68888
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sponsorship-section pt-14" #revealRef>
+    <div class="section-shell prospectus-container">
+      <div class="section-header text-center">
+        <span class="eyebrow">Exhibitor Prospectus</span>
+        <h2>Sponsorship & Stall Opportunities</h2>
+        <div class="prospectus-hr"></div>
+      </div>
+
+      <!-- Tiers -->
+      <div class="prospectus-tiers">
+        <!-- Title Sponsor -->
+        <div class="prospectus-card premium-tier">
+          <div class="prospectus-badge gold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <span class="badge-label">TITLE</span>
+          </div>
+          <div class="prospectus-info">
+            <div class="prospectus-info-header">
+              <h3>Title Sponsor</h3>
+              <div class="prospectus-price highlight-gold">₹5,00,000</div>
+            </div>
+            <ul class="prospectus-list">
+              <li>Highest level of brand visibility at both <strong>Imphal</strong> and <strong>Dibrugarh</strong> venues</li>
+              <li>Complimentary <strong>4m x 4m stall</strong> at both locations</li>
+              <li>Prime logo placement across all promotional materials ensuring maximum visibility</li>
+              <li><strong>2-hour promotional speaking slot</strong> in the seminar hall</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prospectus-grid">
+          <!-- Co-Sponsor -->
+          <div class="prospectus-card">
+            <div class="prospectus-badge silver">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+            </div>
+            <div class="prospectus-info-header-sm">
+              <h3>Co-Sponsor</h3>
+              <div class="prospectus-price highlight-silver">₹3,00,000</div>
+            </div>
+            <ul class="prospectus-list-sm">
+              <li>Complimentary <strong>4m x 2m stall</strong> at both venues</li>
+              <li><strong>1-hour promotional speaking slot</strong> in the seminar hall</li>
+              <li>Brand visibility across event-related print and digital materials</li>
+            </ul>
+          </div>
+
+          <!-- Institution Partner -->
+          <div class="prospectus-card">
+            <div class="prospectus-badge blue">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 22-1-1-1 1H8l-1.05-1.04C5.1 19.33 4 16.7 4 14V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8c0 2.7-1.1 5.33-2.95 6.96L16 22h-3Z"></path><path d="M12 22v-9"></path><path d="M8 8h8"></path><path d="M8 12h8"></path></svg>
+            </div>
+            <div class="prospectus-info-header-sm">
+              <h3>Institution Partner</h3>
+              <div class="prospectus-price highlight-blue">₹3,00,000</div>
+            </div>
+            <ul class="prospectus-list-sm">
+              <li>Complimentary <strong>4m x 2m stall</strong> at both venues</li>
+              <li><strong>1-hour seminar hall session</strong> to promote your institution</li>
+              <li>Recognition as official Institutional Partner with logo placement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stall Pricing -->
+      <div class="prospectus-pricing-block glass-card">
+        <div class="pricing-header-wrap">
+          <div class="pricing-title">
+            <h3>Stall Options & Pricing</h3>
+            <span>(Per Location)</span>
+          </div>
+          <div class="pricing-divider"></div>
+        </div>
+        
+        <div class="pricing-main-grid">
+          <div class="pricing-table">
+            <div class="pricing-item">
+              <span class="label">2m x 2m Stall</span>
+              <span class="value">₹50,000</span>
+            </div>
+            <div class="pricing-item">
+              <span class="label">3m x 2m Stall</span>
+              <span class="value">₹75,000</span>
+            </div>
+            <div class="pricing-item">
+              <span class="label">4m x 2m Stall</span>
+              <span class="value">₹1,00,000</span>
+            </div>
+          </div>
+
+          <div class="inclusions-area">
+            <h4>Inclusions</h4>
+            <div class="inclusions-grid">
+              <div class="inc-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Lunch & High Tea</div>
+              <div class="inc-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Octonorm Setup</div>
+              <div class="inc-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Name Fascia</div>
+              <div class="inc-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Table & Chairs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prospectus-footer">
+          <p><strong>Note:</strong> GST extra as applicable. Stall branding/printing costs charged separately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="conversion-section" #revealRef>
+    <div class="section-shell">
+      <div class="glass-card conversion-card">
+        <div class="conversion-copy">
+          <span class="eyebrow">Ready to level up?</span>
+          <h2>Capture intent before it cools down</h2>
+          <p>Join 100+ prestigious institutions and connect with thousands of motivated students. Secure your spot now!</p>
+        </div>
+        
+        <div class="conversion-hub-grid">
+          <div class="conversion-actions-stack">
+            <a routerLink="/registration/exhibitor" class="magnetic-cta conversion-button">
+              <span>Exhibitor Enquiry Form</span>
+            </a>
+            <a routerLink="/registration/participant" class="secondary-cta subtle-link">Students Registration</a>
+          </div>
+
+          <div class="conversion-connect">
+            <div class="connect-group">
+              <span class="connect-label">Support & Enquiries</span>
+              <div class="connect-links">
+                <a href="tel:+919980487777" class="connect-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  +91 99804 87777 / 97405 68888
+                </a>
+                <a href="mailto:info@educarnival.in" class="connect-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  info@educarnival.in
+                </a>
+              </div>
+            </div>
+
+            <div class="social-wrapper">
+              <span class="connect-label">Follow Us</span>
+              <div class="social-links-grid">
+                <a href="https://facebook.com" target="_blank" class="social-icon-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-icon-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="social-icon-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://youtube.com" target="_blank" class="social-icon-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="trust-section" #revealRef>
     <div class="section-shell">
       <div class="section-header">
@@ -133,142 +443,6 @@
           <div *ngFor="let logo of partnerLogos" class="logo-grid-item">
             <img [src]="logo" alt="Partner university logo" loading="lazy" />
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="insight-section" #revealRef>
-    <div class="section-shell">
-      <div class="section-header section-header-left">
-        <span class="eyebrow">Why this landing page converts</span>
-        <h2>Built for student intent and parent confidence</h2>
-      </div>
-
-      <div class="insight-grid">
-        <article class="glass-card insight-card">
-          <span class="insight-kicker">Scholarships</span>
-          <h3>Funding clarity without the guesswork</h3>
-          <p>
-            Highlight scholarship desks, merit pathways, and budget-fit universities right at the
-            moment of highest interest.
-          </p>
-        </article>
-        <article class="glass-card insight-card">
-          <span class="insight-kicker">Counseling</span>
-          <h3>Decision-ready shortlisting in one visit</h3>
-          <p>
-            Reduce friction with 1:1 counseling blocks, parent guidance, and a clear next step
-            after every conversation.
-          </p>
-        </article>
-        <article class="glass-card insight-card">
-          <span class="insight-kicker">Admissions</span>
-          <h3>Low-friction capture for high-intent attendees</h3>
-          <p>
-            The modal lead flow asks for only what is needed: name, email, and degree interest.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="psychometric-section" #revealRef>
-    <div class="section-shell">
-      <div class="section-header section-header-left">
-        <span class="eyebrow">Career Guidance</span>
-        <h2>Get Free <span style="color: var(--orange);">Psychometric Test</span></h2>
-        <p>A psychometric test is important for students as it helps assess their skills, interests, and personality traits, guiding them toward suitable career paths and academic decisions.</p>
-      </div>
-
-      <div class="steps-grid">
-        <article class="glass-card step-card">
-          <div class="step-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          </div>
-          <span class="step-label">Step 1</span>
-          <h3>Book The Test</h3>
-          <p>Prepare for the test by understanding the process, book it by providing required info, and you're ready to go!</p>
-        </article>
-
-        <article class="glass-card step-card">
-          <div class="step-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14l2 2 4-4"></path></svg>
-          </div>
-          <span class="step-label">Step 2</span>
-          <h3>Take The Test</h3>
-          <p>Take the test by answering questions from qualitative, quantitative, behavioral, academic, & related fields.</p>
-        </article>
-
-        <article class="glass-card step-card">
-          <div class="step-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          </div>
-          <span class="step-label">Step 3</span>
-          <h3>Get Instant Result</h3>
-          <p>Post completion of the test, get access to the report based on your responses in the test.</p>
-        </article>
-
-        <article class="glass-card step-card">
-          <div class="step-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          </div>
-          <span class="step-label">Step 4</span>
-          <h3>Find The Right Course</h3>
-          <p>Get your report analyzed and make an informed decision with the help of our counselors.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="testimonials-section" #revealRef>
-    <div class="section-shell">
-      <div class="section-header section-header-left">
-        <span class="eyebrow">Social Proof</span>
-        <h2>Student and parent stories that reduce hesitation</h2>
-      </div>
-
-      <div class="testimonial-grid">
-        <article *ngFor="let testimonial of testimonials" class="glass-card testimonial-card">
-          <div class="testimonial-score">
-            <strong>{{ testimonial.score }}</strong>
-            <span>{{ testimonial.metric }}</span>
-          </div>
-          <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
-            <div class="testimonial-header">
-              <img *ngIf="testimonial.avatar" [src]="testimonial.avatar" [alt]="testimonial.name" class="testimonial-avatar" />
-              <div class="testimonial-meta">
-                <h3>{{ testimonial.name }}</h3>
-                <span>{{ testimonial.role }}</span>
-              </div>
-            </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="conversion-section" #revealRef>
-    <div class="section-shell">
-      <div class="glass-card conversion-card">
-        <div class="conversion-copy">
-          <span class="eyebrow">Low-friction registration</span>
-          <h2>Capture intent before it cools down</h2>
-          <p>
-            Keep the existing home page for general browsing, and use this route as the focused
-            campaign destination for ads, WhatsApp promotions, and social traffic.
-          </p>
-        </div>
-
-        <div class="conversion-actions">
-          <a
-            routerLink="/registration/exhibitor"
-            class="magnetic-cta conversion-button"
-            (mousemove)="onMagneticMove($event)"
-            (mouseleave)="resetMagnetic($event)"
-          >
-            <span>Exhibitor Registration</span>
-          </a>
-          <a routerLink="/contact" class="secondary-cta subtle-link">Talk to the Expo Team</a>
         </div>
       </div>
     </div>

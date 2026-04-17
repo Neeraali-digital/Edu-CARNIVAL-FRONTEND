@@ -30,7 +30,7 @@ import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'Education Expo in India 2026 – College Admission Fair | Edu Carnival' },
     { path: 'home', redirectTo: '', pathMatch: 'full' },
-    { path: 'education-expo', component: EducationExpoLandingComponent, title: 'Unlock Your Global Future | Edu Carnival Education Expo' },
+    { path: 'education-expo', component: EducationExpoLandingComponent, title: 'Higher Education Exhibition | Edu Carnival Education Expo' },
     { path: 'city/:id', component: CityDetailComponent, title: 'City Details - Edu Carnival' },
 
     // Events
