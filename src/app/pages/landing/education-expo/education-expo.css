@@ -210,6 +210,12 @@
   padding: 2rem 0 2rem;
 }
 
+@media (max-width: 767px) {
+  .hero-section {
+    padding: 0.5rem 0 1rem;
+  }
+}
+
 .hero-grid {
   display: grid;
   gap: 2rem;
@@ -350,6 +356,12 @@
   position: relative;
 }
 
+@media (max-width: 767px) {
+  .visual-stack {
+    min-height: 15rem;
+  }
+}
+
 .logo-hero-img {
   width: min(440px, 95%);
   height: auto;
@@ -357,6 +369,13 @@
   z-index: 5;
   filter: drop-shadow(0 0 45px rgba(236, 72, 153, 0.5));
   animation: floaty 8s ease-in-out infinite;
+}
+
+@media (max-width: 767px) {
+  .logo-hero-img {
+    width: 60%;
+    max-width: 240px;
+  }
 }
 
 .hero-image {
@@ -406,7 +425,7 @@
 .insight-kicker {
   display: inline-block;
   color: var(--blue);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
@@ -1028,6 +1047,10 @@
 
   .step-card p {
     font-size: 0.98rem;
+  }
+
+  .insight-kicker {
+    font-size: 0.95rem;
   }
 
   .urgency-card {
