@@ -8,7 +8,7 @@ import { ToastService } from '../../../services/toast.service';
 @Component({
   selector: 'app-participant-registration',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './participant-registration.html',
   styleUrl: './participant-registration.css'
 })

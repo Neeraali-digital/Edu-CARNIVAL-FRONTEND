@@ -13,6 +13,8 @@ import { VideoGalleryComponent } from './pages/media/video-gallery/video-gallery
 import { CityDetailComponent } from './pages/cities/city-detail/city-detail.component';
 import { BlogListComponent } from './pages/blogs/blog-list/blog-list';
 import { BlogDetailComponent } from './pages/blogs/blog-detail/blog-detail';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy';
+
 
 // Admin Components
 import { AdminLoginComponent } from './pages/admin/login/login.component';
@@ -51,6 +53,8 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent, title: 'Contact Us - Edu Carnival' },
     { path: 'blogs', component: BlogListComponent, title: 'Blogs - Edu Carnival' },
     { path: 'blogs/:id', component: BlogDetailComponent, title: 'Blog Details - Edu Carnival' },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent, title: 'Privacy Policy - Edu Carnival' },
+
 
     // Admin Panel
     { path: 'admin/login', component: AdminLoginComponent, title: 'Admin Login - Edu Carnival' },
