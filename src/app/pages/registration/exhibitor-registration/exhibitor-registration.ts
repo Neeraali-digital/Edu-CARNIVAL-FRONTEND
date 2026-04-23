@@ -46,7 +46,7 @@ export class ExhibitorRegistrationComponent {
       */
 
       // 2. Send email directly from frontend using formsubmit.co
-      const response = await fetch('https://formsubmit.co/ajax/ajith@neeraali.com', {
+      const response = await fetch('https://formsubmit.co/ajax/info@educarnival.in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
