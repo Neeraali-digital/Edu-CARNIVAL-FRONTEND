@@ -19,20 +19,14 @@ export class ParticipantRegistrationComponent {
     school_college: '',
     email: '',
     phone_number: '',
-    interests: '',
-    prize_code: ''
+    interests: ''
   };
   submitted = false;
   isSubmitting = false;
 
   constructor(private api: ApiService, private toast: ToastService) { }
 
-  ngOnInit() {
-    const code = localStorage.getItem('edu_carnival_spin_code');
-    if (code) {
-      this.formData.prize_code = code;
-    }
-  }
+  ngOnInit() { }
 
   async onSubmit() {
     this.isSubmitting = true;
@@ -65,8 +59,7 @@ export class ParticipantRegistrationComponent {
           "School/College": this.formData.school_college,
           "Email": this.formData.email,
           "Phone Number": this.formData.phone_number,
-          "Interests/Queries": this.formData.interests,
-          "Prize Code": this.formData.prize_code || 'None'
+          "Interests/Queries": this.formData.interests
         })
       });
 
@@ -76,7 +69,7 @@ export class ParticipantRegistrationComponent {
 
       // Success handling
       this.submitted = true;
-      this.toast.success('Registration successful! Your prize is linked to your registration.', 5000);
+      this.toast.success('Registration successful!', 5000);
       localStorage.setItem('edu_carnival_registered', 'true');
       this.participantForm.resetForm();
 

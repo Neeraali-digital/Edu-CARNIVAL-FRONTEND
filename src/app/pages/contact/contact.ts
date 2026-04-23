@@ -62,7 +62,7 @@ export class ContactComponent {
       }
 
       // Success handling
-      this.toast.success('Thank you for contacting us!');
+      this.toast.success('Thank you for contacting us! We will get back to you soon.');
       this.contactForm.resetForm({ subject: 'General Inquiry' });
 
     } catch (err) {
