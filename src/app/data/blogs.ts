@@ -437,6 +437,98 @@ export const BLOGS: Blog[] = [
         date: 'April 24, 2026',
         author: 'Edu Carnival Team',
         category: 'Fair Guide'
+    },
+    {
+        id: 'study-in-india-expo-2026',
+        title: 'Study in India Expo 2025: What to Expect, How to Prepare & Why Every Student Should Attend',
+        description: 'India has over 1,100 universities and 45,000+ colleges — and for most students, that sheer number is paralyzing rather than empowering. If you have ever felt stuck trying to compare course options, scholarship criteria, or campus facilities across dozens of institutions, a Study in India expo is built exactly for you.',
+        metaTitle: 'Study in India Expo 2026 | Explore Top Universities & Career Options',
+        metaDescription: 'Attending a Study in India expo? Discover what to expect, why it matters for your future, and how Educarnival makes every visit count. Register free today.',
+        content: `
+            <div class="blog-post-content">
+                <p class="intro-text">India has over 1,100 universities and 45,000+ colleges — and for most students, that sheer number is paralyzing rather than empowering. If you have ever felt stuck trying to compare course options, scholarship criteria, or campus facilities across dozens of institutions, a Study in India expo is built exactly for you.</p>
+                <p>In a single afternoon, a Study in India education fair puts you face-to-face with admissions teams from 30 to 75+ universities, gives you access to live career counselling, and often lets you apply — or even secure a scholarship — on the spot. Here is everything you need to know before you walk through the doors.</p>
+
+                <div class="fact-box">
+                    <p><strong>📊  Quick Stat:</strong>  India's tertiary enrolment crossed 50 million students in 2025 — surpassing China — making it the world's largest higher education ecosystem. (Times of India, 2025)</p>
+                </div>
+
+                <h2>What Is a Study in India Expo?</h2>
+                <p>A Study in India expo is a free, structured education fair where India's top universities, professional colleges, and specialised institutes gather under one roof to meet students and parents directly.</p>
+                <p>At the expo, you do not submit a form and wait for a callback. You walk up to a stall, speak to the actual admissions officer, ask the hard questions — placement records, hostel safety, scholarship eligibility — and get real answers in real time. It is the most efficient hour you will spend in your college search.</p>
+                
+                <h2>Who Should Attend a Study in India Education Fair?</h2>
+                <p>These expos are designed for a wide range of visitors, not just Class 12 students:</p>
+                <ul class="benefit-list">
+                    <li><strong>Class 10 & 12 students:</strong> Exploring undergraduate options across engineering, medicine, law, design, and liberal arts</li>
+                    <li><strong>Graduate students:</strong> Comparing postgraduate, MBA, M.Tech, or research fellowship programmes</li>
+                    <li><strong>Parents:</strong> Evaluating fee structures, campus safety, accreditation, and scholarship availability before committing</li>
+                    <li><strong>Working professionals:</strong> Looking at executive education, distance learning, or career-change programmes</li>
+                </ul>
+                <p>Expos actively encourage students to attend with their parents — because the decisions made here are family decisions, and having both perspectives in the same conversation saves weeks of back-and-forth at home.</p>
+                
+                <h2>What Happens Inside a Study in India Expo?</h2>
+                <h3>Direct Conversations with University Admissions Teams</h3>
+                <p>The main floor features stalls from participating universities and top private institutions. You approach any stall, ask your questions, and leave with brochures, contact details, and a much clearer picture of fit. No appointment. No waiting room.</p>
+                
+                <h3>On-Spot Admissions and Merit Scholarships</h3>
+                <p>This is the feature most students overlook: several universities at Study in India expos facilitate on-the-spot conditional admission and merit-based scholarship assessments during the event. If you carry your marksheet and entrance exam scorecard, you could walk out with a scholarship offer you did not expect walking in.</p>
+                
+                <h3>Career Guidance Seminars</h3>
+                <p>Running parallel to the stalls are 20–40 minute seminars on topics like choosing the right stream after Class 12, career opportunities in AI and sustainability, and navigating CUET, NEET, and CAT admissions. These sessions are free and often surface insights that no website will give you.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>📋  What to Carry:</strong>  Latest marksheet  •  JEE / NEET / CUET / CAT scorecard  •  School or college ID  •  A notebook — you will need it</p>
+                </div>
+
+                <h2>Courses and Streams Available at Study in India Expos</h2>
+                <p>The range of programmes represented goes far beyond the traditional engineering and medical options. Typical expos feature 200+ bachelor's and master's programmes across:</p>
+                <ul class="benefit-list">
+                    <li><strong>Technology & Engineering:</strong> B.Tech, M.Tech, AI/ML, Data Science, Cybersecurity, Robotics</li>
+                    <li><strong>Medical & Allied Health:</strong> MBBS, BDS, B.Pharm, Physiotherapy, Nursing, Public Health</li>
+                    <li><strong>Management & Business:</strong> BBA, MBA, Business Analytics, Finance, Entrepreneurship</li>
+                    <li><strong>Law:</strong> BA LLB, BBA LLB, LLM from National Law Universities and top private institutions</li>
+                    <li><strong>Design, Media & Communications:</strong> B.Des, Mass Communication, Film & Digital Media</li>
+                    <li><strong>New-Age Disciplines:</strong> Sustainability Studies, Sports Science, Culinary Arts, Liberal Arts</li>
+                </ul>
+                <p>The breadth is one of the strongest arguments for attending in person rather than researching online — you will almost certainly discover programmes and universities you had not considered before walking in.</p>
+
+                <h2>How to Prepare: Before, During & After the Expo</h2>
+                <h3>Before You Go</h3>
+                <ul class="benefit-list">
+                    <li><strong>Pre-register online:</strong> Get priority entry and skip the queue — registration is always free</li>
+                    <li><strong>Shortlist 5–8 universities:</strong> Check which institutions are participating and identify must-visit stalls</li>
+                    <li><strong>Prepare specific questions:</strong> Ask about placement rates, faculty credentials, hostel facilities, and scholarship criteria</li>
+                </ul>
+
+                <h3>On the Day</h3>
+                <ul class="benefit-list">
+                    <li><strong>Visit priority stalls first:</strong> Expos fill up fast — reach your top choices within the first hour</li>
+                    <li><strong>Attend one seminar:</strong> Career guidance sessions often answer questions you did not know to ask</li>
+                    <li><strong>Ask about on-spot scholarship eligibility:</strong> Even if you are unsure whether you qualify — always ask</li>
+                </ul>
+
+                <h3>After the Expo</h3>
+                <ul class="benefit-list">
+                    <li><strong>Follow up within 48 hours:</strong> Email or WhatsApp the admissions contacts you collected while the conversation is fresh</li>
+                    <li><strong>Verify independently:</strong> Cross-check what you heard against NIRF rankings, NAAC ratings, and official placement data</li>
+                    <li><strong>Book a counselling session:</strong> Use your expo experience as the foundation for deeper, personalised guidance</li>
+                </ul>
+
+                <h2>Make Your Expo Visit Count — With Educarnival</h2>
+                <p>A Study in India expo compresses weeks of research into a single, high-impact afternoon. But the students who benefit most are not the ones who simply show up — they are the ones who arrive prepared, ask the right questions, and follow up with expert support after the event.</p>
+                <p>That is exactly what Educarnival is built for. From pre-expo university shortlisting to post-expo counselling and scholarship strategy, we help Indian students and parents turn a great expo visit into the right college decision.</p>
+
+                <div class="final-cta">
+                    <h3>🎓  Ready to Get More from Your Next Study in India Expo?</h3>
+                    <p>Educarnival offers free pre-expo counselling, personalised university shortlists, and expert follow-up support — so you walk into every expo with a strategy and walk out with a clear plan.</p>
+                    <a href="/registration/participant" class="cta-button">Register Now →</a>
+                </div>
+            </div>
+        `,
+        image: '/blogs/blog-study-india.png',
+        date: 'April 30, 2026',
+        author: 'Edu Carnival Team',
+        category: 'Study in India'
     }
 ];
-
