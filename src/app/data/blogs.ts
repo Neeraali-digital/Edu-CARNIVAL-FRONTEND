@@ -89,7 +89,7 @@ export const BLOGS: Blog[] = [
                 <h3>Diversity of institutions</h3>
                 <p>A quality higher education fair should include engineering, medical, law, arts, and management institutions — not just one stream — so every student leaves with options.</p>
 
-                <h2>Edu Carnival 2025: Coming to Dibrugarh & Imphal</h2>
+                <h2>Edu Carnival 2026: Coming to Dibrugarh & Imphal</h2>
                 <p>We are thrilled to announce that the Edu Carnival education expo will be held at two exciting locations in North East India this year. Whether you are in upper Assam or the heart of Manipur, your dream college is now just a short drive away.</p>
                 <p>Join the education expo in Dibrugarh to explore top universities, courses, and expert guidance tailored for your academic journey. Students in Manipur can also take advantage of the education expo in Imphal, where leading institutions and study abroad consultants will be available to guide you every step of the way.</p>
                 
@@ -440,7 +440,7 @@ export const BLOGS: Blog[] = [
     },
     {
         id: 'study-in-india-expo-2026',
-        title: 'Study in India Expo 2025: What to Expect, How to Prepare & Why Every Student Should Attend',
+        title: 'Study in India Expo 2026: What to Expect, How to Prepare & Why Every Student Should Attend',
         description: 'India has over 1,100 universities and 45,000+ colleges — and for most students, that sheer number is paralyzing rather than empowering. If you have ever felt stuck trying to compare course options, scholarship criteria, or campus facilities across dozens of institutions, a Study in India expo is built exactly for you.',
         metaTitle: 'Study in India Expo 2026 | Explore Top Universities & Career Options',
         metaDescription: 'Attending a Study in India expo? Discover what to expect, why it matters for your future, and how Educarnival makes every visit count. Register free today.',
@@ -450,7 +450,7 @@ export const BLOGS: Blog[] = [
                 <p>In a single afternoon, a Study in India education fair puts you face-to-face with admissions teams from 30 to 75+ universities, gives you access to live career counselling, and often lets you apply — or even secure a scholarship — on the spot. Here is everything you need to know before you walk through the doors.</p>
 
                 <div class="fact-box">
-                    <p><strong>📊  Quick Stat:</strong>  India's tertiary enrolment crossed 50 million students in 2025 — surpassing China — making it the world's largest higher education ecosystem. (Times of India, 2025)</p>
+                    <p><strong>📊  Quick Stat:</strong>  India's tertiary enrolment crossed 50 million students in 2026 — surpassing China — making it the world's largest higher education ecosystem. (Times of India, 2026)</p>
                 </div>
 
                 <h2>What Is a Study in India Expo?</h2>
