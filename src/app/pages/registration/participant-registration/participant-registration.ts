@@ -19,12 +19,16 @@ export class ParticipantRegistrationComponent {
     school_college: '',
     email: '',
     phone_number: '',
-    interests: ''
+    interests: '',
+    prize_code: ''
   };
   submitted = false;
   isSubmitting = false;
 
   constructor(private api: ApiService, private toast: ToastService) { }
+
+  // REPLACE THIS with your Google Web App URL after deployment
+  private readonly GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxkx3bwUe9sZPCqqG2S4EuGqwQ9bZF5rOfDDhxXQy2CxT8YowMGnoE-FqFljBSC2Gv-fg/exec';
 
   ngOnInit() { }
 
@@ -32,45 +36,36 @@ export class ParticipantRegistrationComponent {
     this.isSubmitting = true;
 
     try {
-      // 1. Submit to backend - COMMENTED OUT
-      /*
-      try {
-        await new Promise<void>((resolve, reject) => {
-          this.api.create('registrations/participant', this.formData).subscribe({
-            next: () => resolve(),
-            error: (err: any) => reject(err)
-          });
-        });
-      } catch (backendError) {
-        console.warn('Backend submission failed:', backendError);
-      }
-      */
+      const payload = {
+        sheetName: 'Visitors',
+        _subject: 'New Visitor Registration',
+        "Full Name": this.formData.full_name,
+        "Email": this.formData.email,
+        "Phone Number": this.formData.phone_number,
+        "School/College": this.formData.school_college,
+        "Interests": this.formData.interests,
+        "Prize Code": this.formData.prize_code
+      };
 
-      // 2. Send email directly from frontend using formsubmit.co
-      const response = await fetch('https://formsubmit.co/ajax/info@educarnival.in', {
+      // 1. Send email via FormSubmit
+      const emailResponse = fetch('https://formsubmit.co/ajax/info@educarnival.in', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: 'New Visitor Registration - Edu Carnival',
-          "Full Name": this.formData.full_name, 
-          "School/College": this.formData.school_college,
-          "Email": this.formData.email,
-          "Phone Number": this.formData.phone_number,
-          "Interests/Queries": this.formData.interests
-        })
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
-        throw new Error('Email service rejected the request.');
-      }
+      // 2. Send to Google Sheets
+      const sheetResponse = fetch(this.GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      });
+
+      await Promise.all([emailResponse, sheetResponse]);
 
       // Success handling
       this.submitted = true;
       this.toast.success('Registration successful!', 5000);
-      localStorage.setItem('edu_carnival_registered', 'true');
       this.participantForm.resetForm();
 
     } catch (err) {
@@ -79,5 +74,10 @@ export class ParticipantRegistrationComponent {
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  resetForm() {
+    this.submitted = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

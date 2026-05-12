@@ -16,7 +16,25 @@
          <!-- Form Header Decoration -->
          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-carnival-gold via-carnival-pink to-purple-600"></div>
 
-         <form #participantForm="ngForm" (ngSubmit)="onSubmit()" class="space-y-6">
+         <!-- Success Message -->
+         <div *ngIf="submitted" class="text-center py-10 animate-fade-in-up">
+            <div class="relative inline-block mb-6">
+              <div class="w-24 h-24 bg-gradient-to-tr from-carnival-pink to-purple-600 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="absolute -top-2 -right-2 w-8 h-8 bg-carnival-gold rounded-full animate-bounce"></div>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-4">Registration Successful!</h2>
+            <p class="text-white/60 mb-10 max-w-md mx-auto">Get ready for an unforgettable experience at Edu Carnival 2026. Your entry pass details have been sent to your email.</p>
+            <div class="flex flex-col gap-3">
+              <button (click)="resetForm()" class="w-full py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all font-bold">Register Another Person</button>
+              <a routerLink="/" class="text-white/40 hover:text-white transition-colors text-sm underline">Back to Home</a>
+            </div>
+         </div>
+
+         <form *ngIf="!submitted" #participantForm="ngForm" (ngSubmit)="onSubmit()" class="space-y-6">
            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
              <!-- Name -->
              <div class="group relative">

@@ -27,45 +27,39 @@ export class ExhibitorRegistrationComponent {
 
   constructor(private api: ApiService, private toast: ToastService) { }
 
+  // REPLACE THIS with your Google Web App URL after deployment
+  private readonly GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxkx3bwUe9sZPCqqG2S4EuGqwQ9bZF5rOfDDhxXQy2CxT8YowMGnoE-FqFljBSC2Gv-fg/exec';
+
   async onSubmit() {
     this.isSubmitting = true;
 
     try {
-      // 1. Submit to backend (if available) - COMMENTED OUT
-      /*
-      try {
-        await new Promise<void>((resolve, reject) => {
-          this.api.create('registrations/exhibitor', this.formData).subscribe({
-            next: () => resolve(),
-            error: (err: any) => reject(err)
-          });
-        });
-      } catch (backendError) {
-        console.warn('Backend submission skipped or failed, proceeding with frontend email:', backendError);
-      }
-      */
+      const payload = {
+        sheetName: 'Exhibitors',
+        _subject: 'New Exhibitor Registration',
+        "Full Name": this.formData.full_name,
+        "Company Name": this.formData.company_name,
+        "Email": this.formData.email,
+        "Phone Number": this.formData.phone_number,
+        "Location": this.formData.location,
+        "Message": this.formData.message
+      };
 
-      // 2. Send email directly from frontend using formsubmit.co
-      const response = await fetch('https://formsubmit.co/ajax/info@educarnival.in', {
+      // 1. Send email via FormSubmit
+      const emailResponse = fetch('https://formsubmit.co/ajax/info@educarnival.in', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: 'New Exhibitor Registration - Edu Carnival',
-          "Full Name": this.formData.full_name,
-          "Company Name": this.formData.company_name,
-          "Email": this.formData.email,
-          "Phone Number": this.formData.phone_number,
-          "Location": this.formData.location,
-          "Message": this.formData.message
-        })
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
-        throw new Error('Email service rejected the request.');
-      }
+      // 2. Send to Google Sheets
+      const sheetResponse = fetch(this.GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      });
+
+      await Promise.all([emailResponse, sheetResponse]);
 
       // Success handling
       this.submitted = true;
@@ -78,5 +72,10 @@ export class ExhibitorRegistrationComponent {
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  resetForm() {
+    this.submitted = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
