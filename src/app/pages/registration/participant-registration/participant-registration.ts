@@ -47,21 +47,19 @@ export class ParticipantRegistrationComponent {
         "Prize Code": this.formData.prize_code
       };
 
-      // 1. Send email via FormSubmit
-      const emailResponse = fetch('https://formsubmit.co/ajax/info@educarnival.in', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      // 2. Send to Google Sheets
-      const sheetResponse = fetch(this.GOOGLE_SHEET_URL, {
+      // 1. Send to Google Sheets (critical — drives success/failure)
+      await fetch(this.GOOGLE_SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
         body: JSON.stringify(payload)
       });
 
-      await Promise.all([emailResponse, sheetResponse]);
+      // 2. Fire-and-forget email via FormSubmit (best-effort, never blocks the user)
+      fetch('https://formsubmit.co/ajax/info@educarnival.in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => { /* FormSubmit down — silently ignore */ });
 
       // Success handling
       this.submitted = true;
