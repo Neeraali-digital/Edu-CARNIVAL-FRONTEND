@@ -259,9 +259,7 @@ export const BLOGS: Blog[] = [
                     </div>
                 </div>
 
-                <div class="highlight-box">
-                    <p>Published by the Educarnival Team | Updated for 2025 | #StudentRecruitmentExpo #Educarnival #StudyAbroad #HigherEducation #ScholarshipFair</p>
-                </div>
+                
             </div>
         `,
         image: '/blogs/blog-img-2026-04-01-14.14.45.jpeg',
