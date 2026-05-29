@@ -264,7 +264,7 @@ export const BLOGS: Blog[] = [
                 </div>
             </div>
         `,
-        image: '/blogs/blog-recruitment-expo.png',
+        image: '/blogs/blog-img-2026-04-01-14.14.45.jpeg',
         date: 'May 29, 2026',
         author: 'Edu Carnival Team',
         category: 'Student Recruitment'
@@ -361,7 +361,7 @@ export const BLOGS: Blog[] = [
                 </div>
             </div>
         `,
-        image: '/blogs/blog-north-east.png',
+        image: '/blogs/blog-img-2026-04-01-14.37.27.jpeg',
         date: 'April 17, 2026',
         author: 'Edu Carnival Team',
         category: 'Education Fair'
@@ -452,7 +452,7 @@ export const BLOGS: Blog[] = [
                 </div>
             </div>
         `,
-        image: '/blogs/blog-benefits.png',
+        image: '/blogs/blog-img-2026-04-01-14.37.28.jpeg',
         date: 'April 10, 2026',
         author: 'Edu Carnival Team',
         category: 'Guidance'
@@ -568,7 +568,7 @@ export const BLOGS: Blog[] = [
                 </div>
             </div>
         `,
-        image: '/blogs/blog-tips.png',
+        image: '/blogs/blog-img-2026-04-01-14.37.31.jpeg',
         date: 'April 12, 2026',
         author: 'Edu Carnival Team',
         category: 'Preparation'
@@ -690,7 +690,7 @@ export const BLOGS: Blog[] = [
                 </div>
             </div>
         `,
-        image: '/blogs/blog-fair-guide.png',
+        image: '/blogs/blog-img-2026-05-21-5.05.30-PM.jpeg',
         date: 'April 24, 2026',
         author: 'Edu Carnival Team',
         category: 'Fair Guide'
@@ -783,7 +783,7 @@ export const BLOGS: Blog[] = [
                 </div>
             </div>
         `,
-        image: '/blogs/blog-study-india.png',
+        image: '/blogs/blog-img-2026-05-21-5.05.34-PM.jpeg',
         date: 'April 30, 2026',
         author: 'Edu Carnival Team',
         category: 'Study in India'
