@@ -11,7 +11,7 @@ import { ApiService } from '../../../services/api.service';
   styleUrl: './photo-gallery.css'
 })
 export class PhotoGalleryComponent implements OnInit {
-  groupedPhotos: { year: number, photos: any[] }[] = [];
+  groupedPhotos: { year: number, photos: any[], headerTitle?: string }[] = [];
 
   isLoading = true;
   selectedPhoto: any = null;
@@ -23,6 +23,25 @@ export class PhotoGalleryComponent implements OnInit {
     
     // Static data for past events
     const staticPhotos = [
+      { id: 117, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.55.15 AM.jpeg' },
+      { id: 106, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.34.48 AM.jpeg' },
+      { id: 114, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.51.03 AM.jpeg' },
+      { id: 102, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.27.21 AM.jpeg' },
+      { id: 111, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.46.01 AM.jpeg' },
+      { id: 113, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.48.07 AM.jpeg' },
+      { id: 119, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.57.13 AM.jpeg' },
+      { id: 105, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.33.24 AM.jpeg' },
+      { id: 108, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.37.23 AM.jpeg' },
+      { id: 104, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.30.30 AM.jpeg' },
+      { id: 116, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.52.32 AM.jpeg' },
+      { id: 110, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.45.11 AM.jpeg' },
+      { id: 118, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.55.53 AM.jpeg' },
+      { id: 101, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.25.55 AM.jpeg' },
+      { id: 103, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.27.53 AM.jpeg' },
+      { id: 109, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.40.29 AM.jpeg' },
+      { id: 107, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.36.27 AM.jpeg' },
+      { id: 112, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.46.52 AM.jpeg' },
+      { id: 115, year: 2026, title: 'Edu Carnival Education Expo –May 2026 Dibrugarh & Imphal', image: '/2026/WhatsApp Image 2026-06-01 at 11.51.34 AM.jpeg' },
       { id: 1, year: 2025, title: 'Hyatt Hotel, Bangalore', image: '/2025/WhatsApp Image 2026-04-01 at 14.14.41.jpeg' },
       { id: 2, year: 2025, title: 'Event Highlights', image: '/2025/WhatsApp Image 2026-04-01 at 14.14.42.jpeg' },
       { id: 3, year: 2025, title: 'Registration Desk', image: '/2025/WhatsApp Image 2026-04-01 at 14.14.43.jpeg' },
@@ -81,7 +100,12 @@ export class PhotoGalleryComponent implements OnInit {
 
     // Convert to array and sort by year descending
     this.groupedPhotos = Object.keys(groups)
-      .map(year => ({ year: parseInt(year), photos: groups[parseInt(year)] }))
+      .map(year => {
+        const yearPhotos = groups[parseInt(year)];
+        const headerTitle = yearPhotos[0]?.title;
+        
+        return { year: parseInt(year), headerTitle: headerTitle, photos: yearPhotos };
+      })
       .sort((a, b) => b.year - a.year);
   }
 
