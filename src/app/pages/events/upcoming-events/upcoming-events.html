@@ -4,7 +4,7 @@
   <section class="relative py-20 px-4">
     <div class="container mx-auto text-center">
       <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Upcoming <span class="text-carnival-gold">Events</span></h1>
-      <p class="text-white/60 max-w-2xl mx-auto text-lg">Mark your calendars! Join us at these upcoming locations for the grand educational carnival.</p>
+      <p class="text-white/60 max-w-4xl mx-auto text-lg leading-relaxed">Edu Carnival 2026 is a premier postgraduate admissions expo focused on MBA, PGDM, and Master's programs offered by leading Indian and international universities. Hosted in Bengaluru and Kochi, the event attracts a highly targeted audience of graduates and final-year degree students exploring postgraduate study opportunities. The expo features participation from renowned universities and institutions across India and around the world.</p>
     </div>
   </section>
 
@@ -22,12 +22,16 @@
           <div class="relative h-[300px] md:h-[400px] overflow-hidden">
             <img [src]="city.image || 'https://placehold.co/800x600/2e1065/white?text=' + city.name" 
                  [alt]="city.name" 
+                 [ngClass]="{'grayscale opacity-80': city.is_completed}"
                  class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
             
             <!-- Badges -->
             <div class="absolute top-6 left-6 flex flex-col gap-3">
-              <div class="px-4 py-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full">
+              <div *ngIf="!city.is_completed" class="px-4 py-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full">
                 <span class="text-white font-bold text-xs uppercase tracking-widest">Upcoming Expo</span>
+              </div>
+              <div *ngIf="city.is_completed" class="px-4 py-2 bg-black/80 backdrop-blur-md border border-white/20 rounded-full">
+                <span class="text-white/60 font-bold text-xs uppercase tracking-widest">Completed</span>
               </div>
               <div *ngIf="city.is_current_expo" class="px-4 py-2 bg-red-600 rounded-full shadow-lg animate-pulse">
                 <span class="text-white font-black text-xs uppercase tracking-widest">LIVE NOW</span>

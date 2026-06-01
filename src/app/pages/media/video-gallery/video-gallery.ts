@@ -20,19 +20,20 @@ export class VideoGalleryComponent implements OnInit {
   ngOnInit() {
     // Add static placeholders for now
     this.videos = [
-      { id: 1, title: 'Edu Carnival Highlight 1', video_url: 'https://www.youtube.com/embed/' },
-      { id: 2, title: 'Edu Carnival Highlight 2', video_url: 'https://www.youtube.com/embed/' },
-      { id: 3, title: 'Student Testimonials', video_url: 'https://www.youtube.com/embed/' },
-      { id: 4, title: 'Seminar Session', video_url: 'https://www.youtube.com/embed/' },
-      { id: 5, title: 'Exhibition Highlights', video_url: 'https://www.youtube.com/embed/' },
-      { id: 6, title: 'University Interaction', video_url: 'https://www.youtube.com/embed/' }
+      { id: 1, title: '', video_url: 'https://www.youtube.com/embed/gXXsdY4iyVo', is_short: true },
+      { id: 2, title: '', video_url: 'https://www.youtube.com/embed/ABBGZKuRcIE', is_short: true },
+      { id: 3, title: '', video_url: 'https://www.youtube.com/embed/iuM7hMV668Y', is_short: true },
+      { id: 4, title: '', video_url: 'https://www.youtube.com/embed/wzeseUdPNX4', is_short: true },
+      { id: 5, title: '', video_url: 'https://www.youtube.com/embed/7_z1cenpsJs', is_short: true },
+      { id: 6, title: '', video_url: 'https://www.youtube.com/embed/2Fs-n8Soj6I', is_short: true }
     ];
 
     this.api.getAll('videos').subscribe(data => {
       if (data && data.length > 0) {
         this.videos = data.map((video: any) => ({
           ...video,
-          video_url: this.getEmbedUrl(video.video_url)
+          video_url: this.getEmbedUrl(video.video_url),
+          is_short: video.video_url?.includes('/shorts/')
         }));
       }
       this.cdr.detectChanges();
@@ -51,6 +52,10 @@ export class VideoGalleryComponent implements OnInit {
     // Handle youtu.be/ID
     else if (url.includes('youtu.be/')) {
       videoId = url.split('youtu.be/')[1].split('?')[0];
+    }
+    // Handle youtube.com/shorts/ID
+    else if (url.includes('/shorts/')) {
+      videoId = url.split('/shorts/')[1].split('?')[0];
     }
     // Handle youtube.com/embed/ID (already correct)
     else if (url.includes('embed/')) {
