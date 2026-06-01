@@ -58,6 +58,7 @@ Our education expos are known for the direct participation of reputed colleges a
       'cosultancy parteners/Wayzon logo Education Consultancy-02.jpg (2).jpeg',
       'cosultancy parteners/WhatsApp Image 2026-04-13 at 12.45.29.jpeg',
       'cosultancy parteners/WhatsApp Image 2026-04-06 at 16.56.46.jpeg',
+      'cosultancy parteners/heralds.png',
       'cosultancy parteners/embark logo png.png',
     ];
   }
