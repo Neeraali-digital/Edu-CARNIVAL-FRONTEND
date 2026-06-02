@@ -25,7 +25,9 @@ export class VideoGalleryComponent implements OnInit {
       { id: 3, title: '', video_url: 'https://www.youtube.com/embed/iuM7hMV668Y', is_short: true },
       { id: 4, title: '', video_url: 'https://www.youtube.com/embed/wzeseUdPNX4', is_short: true },
       { id: 5, title: '', video_url: 'https://www.youtube.com/embed/7_z1cenpsJs', is_short: true },
-      { id: 6, title: '', video_url: 'https://www.youtube.com/embed/2Fs-n8Soj6I', is_short: true }
+      { id: 6, title: '', video_url: 'https://www.youtube.com/embed/2Fs-n8Soj6I', is_short: true },
+      { id: 7, title: '', video_url: 'https://www.youtube.com/embed/GmFHz9vnVJo', is_short: true },
+      { id: 8, title: '', video_url: 'https://www.youtube.com/embed/n07-M3-1X2s', is_short: true }
     ];
 
     this.api.getAll('videos').subscribe(data => {

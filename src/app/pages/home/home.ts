@@ -22,8 +22,9 @@ import { CITIES } from '../../data/cities';
   styleUrl: './home.css',
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  cities = CITIES;
+  cities = CITIES.filter(city => !city.is_completed);
   partnerLogos: string[] = [];
+  uniquePartnerLogos: string[] = [];
   consultancyLogos: string[] = [];
   
   aboutText = `Edu Carnival is a dedicated team specializing in organizing Education Expo events and education fair across India since 2016, with a strong focus on the upcoming Education Expo India 2026. With years of experience, we have built a strong reputation for conducting impactful and student-focused expos that connect aspiring students with top institutions.
@@ -50,7 +51,9 @@ Our education expos are known for the direct participation of reputed colleges a
       const logoNum = i < 10 ? `0${i}` : `${i}`;
       logos.push(`32 Logos For Web/logos for web-${logoNum}.png`);
     }
-    // Duplicate for seamless scroll
+    // Unique logos for static grid (mobile + desktop)
+    this.uniquePartnerLogos = [...logos];
+    // Duplicate for seamless scroll (kept for backward compat)
     this.partnerLogos = [...logos, ...logos];
 
     // Initialize consultancy logos

@@ -12,6 +12,10 @@ export interface City {
   map_url?: string;
   schema?: any;
   is_completed?: boolean;
+  expo_title?: string;
+  expo_intro?: string;
+  why_attend?: string[];
+  why_exhibit?: string[];
 }
 
 export const CITIES: City[] = [
@@ -22,7 +26,22 @@ export const CITIES: City[] = [
     place: 'Hyatt hotel Hebbal',
     location: 'Hyatt hotel Hebbal, Bengaluru',
     image: '/hayat hotel.jpg',
-    description: 'EDU CARNIVAL - MBA & MASTERS EDUCATION EXPO (Indian & International Universities). Join us at Bengaluru for the premier MBA & Masters education expo.',
+    description: 'This exclusive education expo is designed for graduate students seeking admission to MBA and various Master\'s programs offered by leading Indian and international universities.\n\nJoin us to connect directly with top reputed universities and explore a wide range of higher education opportunities. Students can interact with university representatives, gain insights into programs, admission requirements, scholarships, and career prospects.\n\nThe expo also provides institutions with a unique opportunity to connect directly with targeted students who are actively looking for admission immediately after completing their degree programs.',
+    expo_title: 'EDU CARNIVAL – MBA & Master\'s Education Expo (Indian & International Universities)',
+    expo_intro: 'This exclusive education expo is designed for graduate students seeking admission to MBA and various Master\'s programs offered by leading Indian and international universities.',
+    why_attend: [
+      'Meet leading Indian and international universities',
+      'Explore MBA and Master\'s program options',
+      'Get direct admission guidance from university representatives',
+      'Learn about scholarships, eligibility, and career opportunities',
+      'Build valuable connections for your academic future'
+    ],
+    why_exhibit: [
+      'Connect with highly qualified graduate students',
+      'Generate quality admission leads',
+      'Promote your programs directly to prospective applicants',
+      'Enhance institutional visibility and student outreach'
+    ],
     is_current_expo: false,
     start_date: '2026-08-01',
     schema: {
@@ -55,10 +74,24 @@ export const CITIES: City[] = [
     name: 'Kochi',
     slug: 'kochi',
     date: 'August 08th 2026',
-    place: 'Kochi Marriot hotel',
-    location: 'Kochi Marriot hotel',
+    place: 'Kochi Marriott Hotel',
+    location: 'Kochi Marriott Hotel',
     image: '/marriot hotel.jpg',
-    description: 'EDU CARNIVAL - MBA & MASTERS EDUCATION EXPO (Indian & International Universities). Join us at Kochi for the premier MBA & Masters education expo.',
+    description: 'Kochi is one of the most preferred destinations for higher education events, attracting a large number of students who aspire to pursue MBA and Master\'s programs in India and abroad. The city offers access to a strong pool of graduates actively seeking opportunities to advance their academic and professional careers.\n\nThis exclusive education expo is designed for graduate students seeking admission to MBA and various Master\'s programs offered by leading Indian and international universities.\n\nJoin us to connect directly with top reputed universities and explore a wide range of higher education opportunities. Students can interact with university representatives, gain valuable insights into academic programs, admission requirements, scholarships, and career prospects.\n\nThe expo also provides institutions with a unique opportunity to engage directly with highly targeted students who are actively exploring admission opportunities immediately after completing their undergraduate degrees.',
+    expo_title: 'EDU CARNIVAL \u2013 MBA & Master\'s Education Expo (Indian & International Universities)',
+    why_attend: [
+      'Meet leading Indian and international universities',
+      'Explore MBA and Master\'s program options',
+      'Get direct admission guidance from university representatives',
+      'Learn about scholarships, eligibility, and career opportunities',
+      'Build valuable connections for your academic future'
+    ],
+    why_exhibit: [
+      'Connect with highly qualified graduate students',
+      'Generate quality admission leads',
+      'Promote your programs directly to prospective applicants',
+      'Enhance institutional visibility and student outreach'
+    ],
     is_current_expo: false,
     start_date: '2026-08-08',
     schema: {
