@@ -22,3 +22,84 @@
     scrollbar-width: thin;
     scrollbar-color: #ec4899 rgba(255, 255, 255, 0.05);
 }
+
+/* === Celebration Flags Breeze Animation === */
+
+.festival-banner-container {
+    width: 100%;
+    transform-origin: top center;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    animation: bannerBreeze 10s ease-in-out infinite alternate;
+}
+
+@keyframes bannerBreeze {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg) skewX(0deg) scale(1);
+    }
+    50% {
+        transform: rotateX(6deg) rotateY(0.8deg) skewX(0.3deg) scale(0.995);
+    }
+    100% {
+        transform: rotateX(-4deg) rotateY(-0.8deg) skewX(-0.3deg) scale(1.005);
+    }
+}
+
+/* Individual flag swaying along the ropes */
+.festival-flags-svg .flag {
+    transform-origin: top center;
+    transform-box: fill-box;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.festival-flags-svg .flag-anim-1 {
+    animation-name: flagBreeze1;
+    animation-duration: 3.2s;
+    animation-delay: 0.1s;
+}
+
+.festival-flags-svg .flag-anim-2 {
+    animation-name: flagBreeze2;
+    animation-duration: 3.8s;
+    animation-delay: 0.3s;
+}
+
+.festival-flags-svg .flag-anim-3 {
+    animation-name: flagBreeze3;
+    animation-duration: 3.5s;
+    animation-delay: 0.6s;
+}
+
+.festival-flags-svg .flag-anim-4 {
+    animation-name: flagBreeze2;
+    animation-duration: 4.1s;
+    animation-delay: 0.9s;
+}
+
+@keyframes flagBreeze1 {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(4deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+@keyframes flagBreeze2 {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-4.5deg); }
+    70% { transform: rotate(3.5deg); }
+}
+
+@keyframes flagBreeze3 {
+    0%, 100% { transform: rotate(0deg); }
+    35% { transform: rotate(5deg); }
+    80% { transform: rotate(-4deg); }
+}
+
+/* Make celebration flags larger on mobile screens */
+@media (max-width: 768px) {
+    .festival-flags-svg {
+        transform: scale(1.45);
+        transform-origin: top center;
+    }
+}
+
