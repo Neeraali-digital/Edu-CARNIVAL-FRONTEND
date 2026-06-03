@@ -51,6 +51,16 @@ Our education expos are known for the direct participation of reputed colleges a
       const logoNum = i < 10 ? `0${i}` : `${i}`;
       logos.push(`32 Logos For Web/logos for web-${logoNum}.png`);
     }
+    // Add new partner logos
+    logos.push(
+      '32 Logos For Web/Aditya .png',
+      '32 Logos For Web/Brindavan.png',
+      '32 Logos For Web/Chitkara .png',
+      '32 Logos For Web/Guru nanak .png',
+      '32 Logos For Web/IIT Madras.png',
+      '32 Logos For Web/harsha.png',
+      '32 Logos For Web/shree bhavani .png',
+    );
     // Unique logos for static grid (mobile + desktop)
     this.uniquePartnerLogos = [...logos];
     // Duplicate for seamless scroll (kept for backward compat)

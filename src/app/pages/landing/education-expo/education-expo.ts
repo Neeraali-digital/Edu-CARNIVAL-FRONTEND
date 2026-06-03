@@ -123,6 +123,16 @@ export class EducationExpoLandingComponent implements OnInit, AfterViewInit, OnD
       const formatted = index < 10 ? `0${index}` : `${index}`;
       logos.push(`/32 Logos For Web/logos for web-${formatted}.png`);
     }
+    // Add new partner logos
+    logos.push(
+      '/32 Logos For Web/Aditya .png',
+      '/32 Logos For Web/Brindavan.png',
+      '/32 Logos For Web/Chitkara .png',
+      '/32 Logos For Web/Guru nanak .png',
+      '/32 Logos For Web/IIT Madras.png',
+      '/32 Logos For Web/harsha.png',
+      '/32 Logos For Web/shree bhavani .png',
+    );
     this.partnerLogos = logos;
   }
 
