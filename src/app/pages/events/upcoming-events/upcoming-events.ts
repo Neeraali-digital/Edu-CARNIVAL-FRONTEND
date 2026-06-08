@@ -14,6 +14,14 @@ import { CITIES } from '../../../data/cities';
 export class UpcomingEventsComponent implements OnInit {
   cities = CITIES;
 
+  get upcomingCities() {
+    return this.cities.filter(c => !c.is_completed);
+  }
+
+  get completedCities() {
+    return this.cities.filter(c => c.is_completed);
+  }
+
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {

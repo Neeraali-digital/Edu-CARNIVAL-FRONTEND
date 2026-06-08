@@ -9,93 +9,19 @@
   </section>
 
   <!-- Featured Events Section -->
-  <section class="container mx-auto px-4 pb-32">
+  <section class="container mx-auto px-4 pb-16">
     <div class="max-w-6xl mx-auto">
       
-      <div *ngIf="cities.length > 0" class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
-        
-        <div *ngFor="let city of cities; let i = index" 
-             [routerLink]="['/city', city.slug]"
-             class="group relative flex flex-col bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-carnival-pink/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(236,72,153,0.15)] cursor-pointer">
-          
-          <!-- Image Section with Overlays -->
-          <div class="relative h-[300px] md:h-[400px] overflow-hidden">
-            <img [src]="city.image || 'https://placehold.co/800x600/2e1065/white?text=' + city.name" 
-                 [alt]="city.name" 
-                 [ngClass]="{'grayscale opacity-80': city.is_completed}"
-                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-            
-            <!-- Badges -->
-            <div class="absolute top-6 left-6 flex flex-col gap-3">
-              <div *ngIf="!city.is_completed" class="px-4 py-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full">
-                <span class="text-white font-bold text-xs uppercase tracking-widest">Upcoming Expo</span>
-              </div>
-              <div *ngIf="city.is_completed" class="px-4 py-2 bg-black/80 backdrop-blur-md border border-white/20 rounded-full">
-                <span class="text-white/60 font-bold text-xs uppercase tracking-widest">Completed</span>
-              </div>
-              <div *ngIf="city.is_current_expo" class="px-4 py-2 bg-red-600 rounded-full shadow-lg animate-pulse">
-                <span class="text-white font-black text-xs uppercase tracking-widest">LIVE NOW</span>
-              </div>
-            </div>
-
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1a0b2e] via-transparent to-transparent opacity-90"></div>
-            
-            <!-- Date Overlay -->
-            <div class="absolute bottom-6 left-8">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-carnival-pink rounded-2xl flex items-center justify-center shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div class="text-white">
-                  <p class="text-xs text-white/50 uppercase tracking-tighter font-bold">Event Dates</p>
-                  <p class="text-xl font-display font-bold">{{ city.date }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Info Section -->
-          <div class="p-8 md:p-10 flex-1">
-            <h3 class="text-3xl md:text-5xl font-display font-bold text-white mb-6 group-hover:text-carnival-gold transition-colors leading-tight">
-              {{ city.name }} <span class="text-white/20">/</span> Expo
-            </h3>
-            
-            <div class="space-y-6">
-              <div class="flex items-start gap-4">
-                <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-carnival-pink/30">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-carnival-pink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-xs text-white/40 uppercase tracking-wider font-bold mb-1">Venue Location</p>
-                  <p class="text-white/80 text-lg leading-snug">{{ city.location }}</p>
-                </div>
-              </div>
-
-              <!-- CTA Area inside card -->
-              <div class="pt-6 flex items-center justify-between border-t border-white/5">
-                <div class="flex items-center gap-2 text-carnival-gold font-bold group-hover:translate-x-2 transition-transform">
-                  <span>View Details</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-                <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                  <span class="text-white/20 text-xs font-black">2026</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div *ngIf="upcomingCities.length > 0">
+        <h2 class="text-3xl font-display font-bold text-white mb-8 border-b border-white/10 pb-4">Upcoming Events</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
+          <ng-container *ngFor="let city of upcomingCities">
+            <ng-container *ngTemplateOutlet="eventCard; context: {city: city}"></ng-container>
+          </ng-container>
         </div>
-
       </div>
 
-      <div *ngIf="cities.length === 0" class="text-center py-32">
+      <div *ngIf="upcomingCities.length === 0" class="text-center py-16">
         <div class="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -107,4 +33,96 @@
 
     </div>
   </section>
+
+  <!-- Completed Events Section -->
+  <section class="container mx-auto px-4 pb-32" *ngIf="completedCities.length > 0">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-display font-bold text-white mb-8 border-t border-b border-white/10 py-4">Completed Events</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
+        <ng-container *ngFor="let city of completedCities">
+          <ng-container *ngTemplateOutlet="eventCard; context: {city: city}"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card Template -->
+  <ng-template #eventCard let-city="city">
+    <div [routerLink]="['/city', city.slug]"
+         class="group relative flex flex-col bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-carnival-pink/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(236,72,153,0.15)] cursor-pointer">
+      
+      <!-- Image Section with Overlays -->
+      <div class="relative h-[300px] md:h-[400px] overflow-hidden">
+        <img [src]="city.image || 'https://placehold.co/800x600/2e1065/white?text=' + city.name" 
+             [alt]="city.name" 
+             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+        
+        <!-- Badges -->
+        <div class="absolute top-6 left-6 flex flex-col gap-3">
+          <div *ngIf="!city.is_completed" class="px-4 py-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full">
+            <span class="text-white font-bold text-xs uppercase tracking-widest">Upcoming Expo</span>
+          </div>
+          <div *ngIf="city.is_completed" class="px-4 py-2 bg-black/80 backdrop-blur-md border border-white/20 rounded-full">
+            <span class="text-white/60 font-bold text-xs uppercase tracking-widest">Completed</span>
+          </div>
+          <div *ngIf="city.is_current_expo" class="px-4 py-2 bg-red-600 rounded-full shadow-lg animate-pulse">
+            <span class="text-white font-black text-xs uppercase tracking-widest">LIVE NOW</span>
+          </div>
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1a0b2e] via-transparent to-transparent opacity-90"></div>
+        
+        <!-- Date Overlay -->
+        <div class="absolute bottom-6 left-8">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-carnival-pink rounded-2xl flex items-center justify-center shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div class="text-white">
+              <p class="text-xs text-white/50 uppercase tracking-tighter font-bold">Event Dates</p>
+              <p class="text-xl font-display font-bold">{{ city.date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="p-8 md:p-10 flex-1">
+        <h3 class="text-3xl md:text-5xl font-display font-bold text-white mb-6 group-hover:text-carnival-gold transition-colors leading-tight">
+          {{ city.name }} <span class="text-white/20">/</span> Expo
+        </h3>
+        
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-carnival-pink/30">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-carnival-pink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-wider font-bold mb-1">Venue Location</p>
+              <p class="text-white/80 text-lg leading-snug">{{ city.location }}</p>
+            </div>
+          </div>
+
+          <!-- CTA Area inside card -->
+          <div class="pt-6 flex items-center justify-between border-t border-white/5">
+            <div class="flex items-center gap-2 text-carnival-gold font-bold group-hover:translate-x-2 transition-transform">
+              <span>View Details</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+              <span class="text-white/20 text-xs font-black">2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
