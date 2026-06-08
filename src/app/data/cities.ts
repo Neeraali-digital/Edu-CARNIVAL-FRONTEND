@@ -70,56 +70,7 @@ export const CITIES: City[] = [
       }
     }
   },
-  {
-    name: 'Kochi',
-    slug: 'kochi',
-    date: 'August 08th 2026',
-    place: 'Kochi Marriott Hotel',
-    location: 'Kochi Marriott Hotel',
-    image: '/marriot hotel.jpg',
-    description: 'Kochi is one of the most preferred destinations for higher education events, attracting a large number of students who aspire to pursue MBA and Master\'s programs in India and abroad. The city offers access to a strong pool of graduates actively seeking opportunities to advance their academic and professional careers.\n\nThis exclusive education expo is designed for graduate students seeking admission to MBA and various Master\'s programs offered by leading Indian and international universities.\n\nJoin us to connect directly with top reputed universities and explore a wide range of higher education opportunities. Students can interact with university representatives, gain valuable insights into academic programs, admission requirements, scholarships, and career prospects.\n\nThe expo also provides institutions with a unique opportunity to engage directly with highly targeted students who are actively exploring admission opportunities immediately after completing their undergraduate degrees.',
-    expo_title: 'EDU CARNIVAL \u2013 MBA & Master\'s Education Expo (Indian & International Universities)',
-    why_attend: [
-      'Meet leading Indian and international universities',
-      'Explore MBA and Master\'s program options',
-      'Get direct admission guidance from university representatives',
-      'Learn about scholarships, eligibility, and career opportunities',
-      'Build valuable connections for your academic future'
-    ],
-    why_exhibit: [
-      'Connect with highly qualified graduate students',
-      'Generate quality admission leads',
-      'Promote your programs directly to prospective applicants',
-      'Enhance institutional visibility and student outreach'
-    ],
-    is_current_expo: false,
-    start_date: '2026-08-08',
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      "name": "MBA & MASTERS EDUCATION EXPO in Kochi | Edu Carnival 2026",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "location": {
-        "@type": "Place",
-        "name": "Kochi Marriot hotel",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Kochi",
-          "addressRegion": "Kerala",
-          "addressCountry": "IN"
-        }
-      },
-      "description": "Attend Edu Carnival 2026 in Kochi – explore top Indian & International Universities for MBA & Masters.",
-      "organizer": {
-        "@type": "Organization",
-        "name": "Edu Carnival",
-        "url": "https://www.educarnival.in"
-      }
-    }
-  },
+
   {
     name: 'Dibrugarh',
     slug: 'dibrugarh',
