@@ -20,6 +20,8 @@ export class VideoGalleryComponent implements OnInit {
   ngOnInit() {
     // Add static placeholders for now
     this.videos = [
+      { id: 9, title: '', video_url: 'https://www.youtube.com/embed/2dM_o3pl_Ms', is_short: true },
+      { id: 10, title: '', video_url: 'https://www.youtube.com/embed/TmWOefT-P2c', is_short: true },
       { id: 1, title: '', video_url: 'https://www.youtube.com/embed/gXXsdY4iyVo', is_short: true },
       { id: 2, title: '', video_url: 'https://www.youtube.com/embed/ABBGZKuRcIE', is_short: true },
       { id: 3, title: '', video_url: 'https://www.youtube.com/embed/iuM7hMV668Y', is_short: true },
