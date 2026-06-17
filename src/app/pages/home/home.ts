@@ -47,7 +47,7 @@ Our education expos are known for the direct participation of reputed colleges a
     // Initialize partner logos array
     const logos: string[] = [];
     for (let i = 1; i <= 32; i++) {
-      if (i === 8) continue;
+      if (i === 8 || i === 12 || i === 24) continue;
       const logoNum = i < 10 ? `0${i}` : `${i}`;
       logos.push(`32 Logos For Web/logos for web-${logoNum}.png`);
     }
@@ -73,6 +73,8 @@ Our education expos are known for the direct participation of reputed colleges a
       'cosultancy parteners/super.jpeg',
       'cosultancy parteners/heralds.png',
       'cosultancy parteners/embark.png',
+      'cosultancy parteners/mathews.png',
+      'cosultancy parteners/ultimate.png',
     ];
   }
 
