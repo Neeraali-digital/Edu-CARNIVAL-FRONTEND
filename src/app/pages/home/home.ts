@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   partnerLogos: string[] = [];
   uniquePartnerLogos: string[] = [];
   consultancyLogos: string[] = [];
+  travelLogos: string[] = [];
   
   aboutText = `Edu Carnival is a dedicated team specializing in organizing Education Expo events and education fair across India since 2016, with a strong focus on the upcoming Education Expo India 2026. With years of experience, we have built a strong reputation for conducting impactful and student-focused expos that connect aspiring students with top institutions.
 We have successfully organized multiple Education Expo events across the country, with a strong presence in Northern and North-Eastern regions. Our expertise in hosting large-scale events makes us a trusted name for every education fair in North East India, attracting students, parents, and leading universities.
@@ -44,59 +45,92 @@ Our education expos are known for the direct participation of reputed colleges a
     private ngZone: NgZone,
     private meta: Meta
   ) {
-    // Initialize partner logos array
-    const logos: string[] = [];
-    for (let i = 1; i <= 32; i++) {
-      if (i === 8 || i === 12 || i === 24) continue;
-      const logoNum = i < 10 ? `0${i}` : `${i}`;
-      logos.push(`32 Logos For Web/logos for web-${logoNum}.png`);
-    }
-    // Add new partner logos
-    logos.push(
-      '32 Logos For Web/Adarsha college.png',
-      '32 Logos For Web/Aditya .png',
-      '32 Logos For Web/Alpine group of institution.png',
-      '32 Logos For Web/Blue bell .png',
-      '32 Logos For Web/Brindavan.png',
-      '32 Logos For Web/Camellia institute of technology.png',
-      '32 Logos For Web/Chitkara .png',
-      '32 Logos For Web/Classic hospitality .png',
-      '32 Logos For Web/Dhana lakshmi srinivasan.png',
-      '32 Logos For Web/GRD.png',
-      '32 Logos For Web/Guru nanak .png',
-      '32 Logos For Web/HKBK Group of institution.png',
-      '32 Logos For Web/IIT Madras.png',
-      '32 Logos For Web/Josco institution.png',
-      '32 Logos For Web/MVN University.png',
-      '32 Logos For Web/OP Jindal global university.png',
-      '32 Logos For Web/SGT University.png',
-      '32 Logos For Web/SRM University.png',
-      '32 Logos For Web/ST Peter_s .png',
-      '32 Logos For Web/ST claret college.png',
-      '32 Logos For Web/Spurthy institution .png',
-      '32 Logos For Web/T John college.png',
-      '32 Logos For Web/Vijaya nagar college of nursing.png',
-      '32 Logos For Web/harsha.png',
-      '32 Logos For Web/iCONIC.png',
-      '32 Logos For Web/rustomjee .png',
+    const baseLogos: string[] = [
+      '32 Logos For Web/logos for web-16.png',
+      '32 Logos For Web/HKBK.png',
       '32 Logos For Web/shree bhavani .png',
-      '32 Logos For Web/srinivas university.png',
+      '32 Logos For Web/logos for web-23.png',
+      '32 Logos For Web/Camellia institute of technology.png',
+      '32 Logos For Web/logos for web-25.png',
+      '32 Logos For Web/classic hospitality.png',
+      '32 Logos For Web/ST claret college.png',
+      '32 Logos For Web/SRM University.png',
+      '32 Logos For Web/logos for web-09.png',
+      '32 Logos For Web/logos for web-03.png',
       '32 Logos For Web/st pauls .png',
-    );
+      '32 Logos For Web/logos for web-18.png',
+      '32 Logos For Web/Brindavan.png',
+      '32 Logos For Web/logos for web-11.png',
+      '32 Logos For Web/Chitkara .png',
+      '32 Logos For Web/logos for web-30.png',
+      '32 Logos For Web/logos for web-29.png',
+      '32 Logos For Web/rustomjee .png',
+      '32 Logos For Web/Spurthy institution .png',
+      '32 Logos For Web/logos for web-21.png',
+      '32 Logos For Web/logos for web-02.png',
+      '32 Logos For Web/harsha.png',
+      '32 Logos For Web/Josco .png',
+      '32 Logos For Web/logos for web-31.png',
+      '32 Logos For Web/logos for web-20.png',
+      '32 Logos For Web/logos for web-28.png',
+      '32 Logos For Web/adarsha college .png',
+      '32 Logos For Web/Alpine group of institution.png',
+      '32 Logos For Web/logos for web-13.png',
+      '32 Logos For Web/ST Peter_s .png',
+      '32 Logos For Web/logos for web-17.png',
+      '32 Logos For Web/logos for web-05.png',
+      '32 Logos For Web/logos for web-15.png',
+      '32 Logos For Web/logos for web-26.png',
+      '32 Logos For Web/logos for web-07.png',
+      '32 Logos For Web/iqoniqe.png',
+      '32 Logos For Web/T John college.png',
+      '32 Logos For Web/logos for web-27.png',
+      '32 Logos For Web/OP Jindal.png',
+      '32 Logos For Web/MVN University.png',
+      '32 Logos For Web/logos for web-19.png',
+      '32 Logos For Web/logos for web-01.png',
+      '32 Logos For Web/logos for web-14.png',
+      '32 Logos For Web/logos for web-04.png',
+      '32 Logos For Web/logos for web-06.png',
+      '32 Logos For Web/srinivas .png',
+      '32 Logos For Web/Aditya .png',
+      '32 Logos For Web/GRD.png',
+      '32 Logos For Web/SGT University.png',
+      '32 Logos For Web/logos for web-32.png',
+      '32 Logos For Web/Dhana lakshmi srinivasan.png',
+      '32 Logos For Web/vijay nagar .png',
+      '32 Logos For Web/IIT Madras.png',
+      '32 Logos For Web/Guru nanak .png',
+    ];
+
+    // Shuffle the array
+    for (let i = baseLogos.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [baseLogos[i], baseLogos[j]] = [baseLogos[j], baseLogos[i]];
+    }
+
     // Unique logos for static grid (mobile + desktop)
-    this.uniquePartnerLogos = [...logos];
+    this.uniquePartnerLogos = [...baseLogos];
     // Duplicate for seamless scroll (kept for backward compat)
-    this.partnerLogos = [...logos, ...logos];
+    this.partnerLogos = [...baseLogos, ...baseLogos];
 
     // Initialize consultancy logos
     this.consultancyLogos = [
-      'cosultancy parteners/wayzon.jpeg',
-      'cosultancy parteners/aspiros.jpeg',
-      'cosultancy parteners/super.jpeg',
-      'cosultancy parteners/heralds.png',
-      'cosultancy parteners/embark.png',
-      'cosultancy parteners/mathews.png',
-      'cosultancy parteners/ultimate.png',
+      'cosultancy parteners/wayzon.png',
+      'cosultancy parteners/Blue bell .png',
+      'cosultancy parteners/Embark .png',
+      'cosultancy parteners/Heralds1.png',
+      'cosultancy parteners/Mathews1.png',
+      'cosultancy parteners/Super1.png',
+      'cosultancy parteners/Ultimate1 .png',
+      'cosultancy parteners/logos for web-22.png',
+      'cosultancy parteners/Aspiros 1.png',
+    ];
+
+    // Initialize travel logos
+    this.travelLogos = [
+      'travel partners/Moventiti.png',
+      'travel partners/logos for web-10.png',
     ];
   }
 
