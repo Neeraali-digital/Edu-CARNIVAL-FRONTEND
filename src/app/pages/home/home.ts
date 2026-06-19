@@ -53,13 +53,35 @@ Our education expos are known for the direct participation of reputed colleges a
     }
     // Add new partner logos
     logos.push(
+      '32 Logos For Web/Adarsha college.png',
       '32 Logos For Web/Aditya .png',
+      '32 Logos For Web/Alpine group of institution.png',
+      '32 Logos For Web/Blue bell .png',
       '32 Logos For Web/Brindavan.png',
+      '32 Logos For Web/Camellia institute of technology.png',
       '32 Logos For Web/Chitkara .png',
+      '32 Logos For Web/Classic hospitality .png',
+      '32 Logos For Web/Dhana lakshmi srinivasan.png',
+      '32 Logos For Web/GRD.png',
       '32 Logos For Web/Guru nanak .png',
+      '32 Logos For Web/HKBK Group of institution.png',
       '32 Logos For Web/IIT Madras.png',
+      '32 Logos For Web/Josco institution.png',
+      '32 Logos For Web/MVN University.png',
+      '32 Logos For Web/OP Jindal global university.png',
+      '32 Logos For Web/SGT University.png',
+      '32 Logos For Web/SRM University.png',
+      '32 Logos For Web/ST Peter_s .png',
+      '32 Logos For Web/ST claret college.png',
+      '32 Logos For Web/Spurthy institution .png',
+      '32 Logos For Web/T John college.png',
+      '32 Logos For Web/Vijaya nagar college of nursing.png',
       '32 Logos For Web/harsha.png',
+      '32 Logos For Web/iCONIC.png',
+      '32 Logos For Web/rustomjee .png',
       '32 Logos For Web/shree bhavani .png',
+      '32 Logos For Web/srinivas university.png',
+      '32 Logos For Web/st pauls .png',
     );
     // Unique logos for static grid (mobile + desktop)
     this.uniquePartnerLogos = [...logos];
