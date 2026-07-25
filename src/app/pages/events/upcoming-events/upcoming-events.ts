@@ -15,7 +15,9 @@ export class UpcomingEventsComponent implements OnInit {
   cities = CITIES;
 
   get upcomingCities() {
-    return this.cities.filter(c => !c.is_completed);
+    return this.cities
+      .filter(c => !c.is_completed)
+      .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
   }
 
   get completedCities() {

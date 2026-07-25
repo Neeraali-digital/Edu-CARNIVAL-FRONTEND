@@ -22,7 +22,7 @@ import { CITIES } from '../../data/cities';
   styleUrl: './home.css',
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  cities = CITIES.filter(city => !city.is_completed);
+  cities = CITIES.filter(city => !city.is_completed).sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
   partnerLogos: string[] = [];
   uniquePartnerLogos: string[] = [];
   consultancyLogos: string[] = [];
