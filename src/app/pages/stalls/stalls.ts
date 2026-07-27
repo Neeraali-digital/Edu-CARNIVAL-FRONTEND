@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ToastService } from '../../services/toast.service';
+import { CITIES, City } from '../../data/cities';
 
 @Component({
   selector: 'app-stalls',
@@ -13,7 +14,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class StallsComponent implements OnInit {
   stalls: any[] = [];
-  cities: any[] = [];
+  upcomingCities: City[] = [];
   showModal = false;
   selectedStall: any = null;
 
@@ -29,48 +30,14 @@ export class StallsComponent implements OnInit {
   constructor(private api: ApiService, private cdr: ChangeDetectorRef, private toast: ToastService) { }
 
   ngOnInit() {
-    this.loadStalls();
+    this.upcomingCities = [...CITIES]
+      .filter(c => !c.is_completed)
+      .sort((a, b) => {
+        const da = a.start_date ? new Date(a.start_date).getTime() : Infinity;
+        const db = b.start_date ? new Date(b.start_date).getTime() : Infinity;
+        return da - db;
+      });
   }
-
-  loadStalls() {
-    this.stalls = [
-      {
-        id: 1,
-        title: 'Premium Stall - Imphal',
-        city_details: { id: 1, name: 'Imphal' },
-        price: 45000,
-        description: 'Premium stall at the City Convention Center, Imphal. High visibility area with maximum footfall.',
-        image: ''
-      },
-      {
-        id: 2,
-        title: 'Standard Stall - Imphal',
-        city_details: { id: 1, name: 'Imphal' },
-        price: 35000,
-        description: 'Standard stall at the City Convention Center, Imphal. Perfect for institutional showcases.',
-        image: ''
-      },
-      {
-        id: 3,
-        title: 'Premium Stall - Dibrugarh',
-        city_details: { id: 2, name: 'Dibrugarh' },
-        price: 45000,
-        description: 'Premium stall at Cygnett Hotel, Dibrugarh. Prime location within the exhibition hall.',
-        image: ''
-      },
-      {
-        id: 4,
-        title: 'Standard Stall - Dibrugarh',
-        city_details: { id: 2, name: 'Dibrugarh' },
-        price: 35000,
-        description: 'Standard stall at Cygnett Hotel, Dibrugarh. Cost-effective option for quality leads.',
-        image: ''
-      }
-    ];
-    this.cdr.detectChanges();
-  }
-
-  // loadCities removed as not needed directly
 
   openBookingModal(stall: any) {
     this.selectedStall = stall;
