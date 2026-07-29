@@ -87,8 +87,11 @@ export class VideoGalleryComponent implements OnInit {
   }
 
   onIframeLoad(id: string | number) {
-    this.loadedIframes[id] = true;
-    this.cdr.detectChanges();
+    // Wrap in setTimeout to prevent ViewContainerRef crashes if load fires synchronously
+    setTimeout(() => {
+      this.loadedIframes[id] = true;
+      this.cdr.markForCheck();
+    });
   }
 
   isLoaded(id: string | number): boolean {
@@ -101,5 +104,9 @@ export class VideoGalleryComponent implements OnInit {
 
   closeFullscreen() {
     this.selectedVideo = null;
+  }
+
+  trackByVideoId(index: number, video: any): any {
+    return video.id || index;
   }
 }

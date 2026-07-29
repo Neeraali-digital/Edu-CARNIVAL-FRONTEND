@@ -23,14 +23,14 @@
 
       
        <!-- Dynamic Video Items -->
-       <div *ngFor="let video of videos" 
+       <div *ngFor="let video of videos; trackBy: trackByVideoId" 
             (click)="openFullscreen(video)"
             class="w-full bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-carnival-gold/50 active:scale-105 transition-all duration-300 group cursor-pointer">
          
          <div class="relative bg-[#120726]" [ngClass]="video.is_short ? 'aspect-[9/16] w-full rounded-xl overflow-hidden' : 'aspect-video'">
            
            <!-- Skeleton & Poster Overlay while iframe loads -->
-           <div *ngIf="!isLoaded(video.id)" class="absolute inset-0 z-20 bg-gradient-to-br from-purple-950 via-[#180a2e] to-black animate-pulse flex flex-col items-center justify-center p-4">
+           <div [class.hidden]="isLoaded(video.id)" class="absolute inset-0 z-20 bg-gradient-to-br from-purple-950 via-[#180a2e] to-black animate-pulse flex flex-col items-center justify-center p-4">
              <img *ngIf="video.thumbnail" [src]="video.thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm" [alt]="video.title">
              <div class="relative z-10 w-12 h-12 rounded-full bg-carnival-pink/30 border border-carnival-pink/50 flex items-center justify-center mb-2">
                <svg class="w-6 h-6 text-carnival-pink animate-spin" fill="none" viewBox="0 0 24 24">
