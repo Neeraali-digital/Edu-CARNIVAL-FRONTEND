@@ -59,9 +59,15 @@ export class VideoGalleryComponent implements OnInit {
           is_short: video.video_url?.includes('/shorts/'),
           thumbnail: this.getThumbnailUrl(video.video_url)
         }));
+        const staticProcessed = rawStaticVideos.map(v => ({
+          ...v,
+          thumbnail: v.thumbnail || this.getThumbnailUrl(v.video_url)
+        }));
+
         this.videos = [
           featuredVideo,
-          ...fetched.filter((v: any) => !v.video_url?.includes('vGDiXwPBUww'))
+          ...fetched.filter((v: any) => !v.video_url?.includes('vGDiXwPBUww')),
+          ...staticProcessed.filter(v => v.id !== 100)
         ];
       }
       this.cdr.detectChanges();
