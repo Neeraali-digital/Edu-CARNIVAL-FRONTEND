@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ApiService } from '../../../services/api.service';
+
 import { SafeUrlPipe } from '../../../pipes/safe-url.pipe';
 
 @Component({
@@ -17,7 +17,7 @@ export class VideoGalleryComponent implements OnInit {
   isLoading = true;
   loadedIframes: { [key: string]: boolean } = {};
 
-  constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     const featuredVideo = { 
@@ -50,28 +50,6 @@ export class VideoGalleryComponent implements OnInit {
     }));
 
     this.isLoading = false;
-
-    this.api.getAll('videos').subscribe((data: any) => {
-      if (data && data.length > 0) {
-        const fetched = data.map((video: any) => ({
-          ...video,
-          video_url: this.getEmbedUrl(video.video_url),
-          is_short: video.video_url?.includes('/shorts/'),
-          thumbnail: this.getThumbnailUrl(video.video_url)
-        }));
-        const staticProcessed = rawStaticVideos.map(v => ({
-          ...v,
-          thumbnail: v.thumbnail || this.getThumbnailUrl(v.video_url)
-        }));
-
-        this.videos = [
-          featuredVideo,
-          ...fetched.filter((v: any) => !v.video_url?.includes('vGDiXwPBUww')),
-          ...staticProcessed.filter(v => v.id !== 100)
-        ];
-      }
-      this.cdr.detectChanges();
-    });
   }
 
   getThumbnailUrl(url: string): string {
