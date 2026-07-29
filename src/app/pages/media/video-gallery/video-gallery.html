@@ -5,26 +5,65 @@
       <p class="text-white/60">Watch highlights, interviews, and performances.</p>
     </div>
 
+    <!-- Initial Loading Skeleton Grid -->
+    <div *ngIf="isLoading" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+      <div *ngFor="let dummy of [1,2,3,4,5,6]" class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden animate-pulse p-4 space-y-4">
+        <div class="aspect-[9/16] max-w-[280px] mx-auto bg-white/10 rounded-xl flex items-center justify-center">
+          <div class="w-12 h-12 rounded-full bg-white/20"></div>
+        </div>
+        <div class="space-y-2">
+          <div class="h-4 bg-white/10 rounded w-3/4"></div>
+          <div class="h-3 bg-white/10 rounded w-1/2"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Video Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+    <div *ngIf="!isLoading" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
       
        <!-- Dynamic Video Items -->
        <div *ngFor="let video of videos" 
             (click)="openFullscreen(video)"
             class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-carnival-gold/50 active:scale-105 transition-all duration-300 group cursor-pointer">
-         <div class="relative bg-black" [ngClass]="video.is_short ? 'aspect-[9/16] max-w-[300px] mx-auto rounded-xl overflow-hidden' : 'aspect-video'">
-           <!-- Thumbnail/Overlay to catch clicks -->
+         
+         <div class="relative bg-[#120726]" [ngClass]="video.is_short ? 'aspect-[9/16] max-w-[300px] mx-auto rounded-xl overflow-hidden' : 'aspect-video'">
+           
+           <!-- Skeleton & Poster Overlay while iframe loads -->
+           <div *ngIf="!isLoaded(video.id)" class="absolute inset-0 z-20 bg-gradient-to-br from-purple-950 via-[#180a2e] to-black animate-pulse flex flex-col items-center justify-center p-4">
+             <img *ngIf="video.thumbnail" [src]="video.thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm" [alt]="video.title">
+             <div class="relative z-10 w-12 h-12 rounded-full bg-carnival-pink/30 border border-carnival-pink/50 flex items-center justify-center mb-2">
+               <svg class="w-6 h-6 text-carnival-pink animate-spin" fill="none" viewBox="0 0 24 24">
+                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+               </svg>
+             </div>
+             <span class="relative z-10 text-[10px] text-white/60 font-bold uppercase tracking-widest">Loading Video...</span>
+           </div>
+
+           <!-- Play Hover Overlay -->
            <div class="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/0 transition-colors flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-carnival-pink/80 text-white flex items-center justify-center translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <div class="w-12 h-12 rounded-full bg-carnival-pink/90 text-white flex items-center justify-center translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </div>
            </div>
-           <iframe class="w-full h-full pointer-events-none" [src]="video.video_url | safeUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+           <iframe loading="lazy" 
+                   (load)="onIframeLoad(video.id)" 
+                   [ngClass]="isLoaded(video.id) ? 'opacity-100' : 'opacity-0'"
+                   class="w-full h-full pointer-events-none transition-opacity duration-700" 
+                   [src]="video.video_url | safeUrl" 
+                   title="YouTube video player" 
+                   frameborder="0" 
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                   allowfullscreen>
+           </iframe>
          </div>
+
          <div class="p-4">
-           <h3 class="text-lg font-bold text-white mb-1 group-hover:text-carnival-gold transition-colors">{{ video.title }}</h3>
+           <h3 class="text-lg font-bold text-white mb-1 group-hover:text-carnival-gold transition-colors">{{ video.title || 'Edu Carnival Highlight' }}</h3>
            <p class="text-white/50 text-xs text-transparent bg-clip-text bg-gradient-to-r from-carnival-pink to-purple-400 font-bold uppercase tracking-tighter">Click to Enlarge</p>
          </div>
+
        </div>
 
     </div>

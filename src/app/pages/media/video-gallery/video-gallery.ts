@@ -14,61 +14,101 @@ import { SafeUrlPipe } from '../../../pipes/safe-url.pipe';
 export class VideoGalleryComponent implements OnInit {
   videos: any[] = [];
   selectedVideo: any = null;
+  isLoading = true;
+  loadedIframes: { [key: string]: boolean } = {};
 
   constructor(private api: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    // Add static placeholders for now
-    this.videos = [
-      { id: 11, title: '', video_url: 'https://www.youtube.com/embed/65MDO7svPac', is_short: true },
-      { id: 12, title: '', video_url: 'https://www.youtube.com/embed/wmnhKQdZmzE', is_short: true },
-      { id: 9, title: '', video_url: 'https://www.youtube.com/embed/2dM_o3pl_Ms', is_short: true },
-      { id: 10, title: '', video_url: 'https://www.youtube.com/embed/TmWOefT-P2c', is_short: true },
-      { id: 1, title: '', video_url: 'https://www.youtube.com/embed/gXXsdY4iyVo', is_short: true },
-      { id: 2, title: '', video_url: 'https://www.youtube.com/embed/ABBGZKuRcIE', is_short: true },
-      { id: 3, title: '', video_url: 'https://www.youtube.com/embed/iuM7hMV668Y', is_short: true },
-      { id: 4, title: '', video_url: 'https://www.youtube.com/embed/wzeseUdPNX4', is_short: true },
-      { id: 5, title: '', video_url: 'https://www.youtube.com/embed/7_z1cenpsJs', is_short: true },
-      { id: 6, title: '', video_url: 'https://www.youtube.com/embed/2Fs-n8Soj6I', is_short: true },
-      { id: 7, title: '', video_url: 'https://www.youtube.com/embed/GmFHz9vnVJo', is_short: true },
-      { id: 8, title: '', video_url: 'https://www.youtube.com/embed/n07-M3-1X2s', is_short: true }
+    const featuredVideo = { 
+      id: 100, 
+      title: 'Edu Carnival Highlight', 
+      video_url: 'https://www.youtube.com/embed/vGDiXwPBUww', 
+      is_short: true,
+      thumbnail: 'https://img.youtube.com/vi/vGDiXwPBUww/hqdefault.jpg' 
+    };
+
+    const rawStaticVideos: any[] = [
+      featuredVideo,
+      { id: 11, title: 'Edu Carnival Event', video_url: 'https://www.youtube.com/embed/65MDO7svPac', is_short: true },
+      { id: 12, title: 'Student Interactions', video_url: 'https://www.youtube.com/embed/wmnhKQdZmzE', is_short: true },
+      { id: 9, title: 'Exhibitor Feedback', video_url: 'https://www.youtube.com/embed/2dM_o3pl_Ms', is_short: true },
+      { id: 10, title: 'University Stalls', video_url: 'https://www.youtube.com/embed/TmWOefT-P2c', is_short: true },
+      { id: 1, title: 'Expo Atmosphere', video_url: 'https://www.youtube.com/embed/gXXsdY4iyVo', is_short: true },
+      { id: 2, title: 'Seminar Highlights', video_url: 'https://www.youtube.com/embed/ABBGZKuRcIE', is_short: true },
+      { id: 3, title: 'Career Guidance', video_url: 'https://www.youtube.com/embed/iuM7hMV668Y', is_short: true },
+      { id: 4, title: 'Spot Admissions', video_url: 'https://www.youtube.com/embed/wzeseUdPNX4', is_short: true },
+      { id: 5, title: 'Student Testimonials', video_url: 'https://www.youtube.com/embed/7_z1cenpsJs', is_short: true },
+      { id: 6, title: 'Campus Opportunities', video_url: 'https://www.youtube.com/embed/2Fs-n8Soj6I', is_short: true },
+      { id: 7, title: 'Higher Education Fair', video_url: 'https://www.youtube.com/embed/GmFHz9vnVJo', is_short: true },
+      { id: 8, title: 'Edu Carnival Highlights', video_url: 'https://www.youtube.com/embed/n07-M3-1X2s', is_short: true }
     ];
+
+    this.videos = rawStaticVideos.map(v => ({
+      ...v,
+      thumbnail: v.thumbnail || this.getThumbnailUrl(v.video_url)
+    }));
+
+    this.isLoading = false;
 
     this.api.getAll('videos').subscribe(data => {
       if (data && data.length > 0) {
-        this.videos = data.map((video: any) => ({
+        const fetched = data.map((video: any) => ({
           ...video,
           video_url: this.getEmbedUrl(video.video_url),
-          is_short: video.video_url?.includes('/shorts/')
+          is_short: video.video_url?.includes('/shorts/'),
+          thumbnail: this.getThumbnailUrl(video.video_url)
         }));
+        this.videos = [
+          featuredVideo,
+          ...fetched.filter((v: any) => !v.video_url?.includes('vGDiXwPBUww'))
+        ];
       }
       this.cdr.detectChanges();
     });
+  }
+
+  getThumbnailUrl(url: string): string {
+    if (!url) return '';
+    let videoId = '';
+    if (url.includes('embed/')) {
+      videoId = url.split('embed/')[1].split('?')[0];
+    } else if (url.includes('/shorts/')) {
+      videoId = url.split('/shorts/')[1].split('?')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else {
+      const matchWatch = url.match(/[?&]v=([^&]+)/);
+      if (matchWatch) videoId = matchWatch[1];
+    }
+    return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
   }
 
   getEmbedUrl(url: string): string {
     if (!url) return '';
     let videoId = '';
 
-    // Handle youtube.com/watch?v=ID
     const matchWatch = url.match(/[?&]v=([^&]+)/);
     if (matchWatch) {
       videoId = matchWatch[1];
-    }
-    // Handle youtu.be/ID
-    else if (url.includes('youtu.be/')) {
+    } else if (url.includes('youtu.be/')) {
       videoId = url.split('youtu.be/')[1].split('?')[0];
-    }
-    // Handle youtube.com/shorts/ID
-    else if (url.includes('/shorts/')) {
+    } else if (url.includes('/shorts/')) {
       videoId = url.split('/shorts/')[1].split('?')[0];
-    }
-    // Handle youtube.com/embed/ID (already correct)
-    else if (url.includes('embed/')) {
+    } else if (url.includes('embed/')) {
       return url;
     }
 
     return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+  }
+
+  onIframeLoad(id: string | number) {
+    this.loadedIframes[id] = true;
+    this.cdr.detectChanges();
+  }
+
+  isLoaded(id: string | number): boolean {
+    return !!this.loadedIframes[id];
   }
 
   openFullscreen(video: any) {

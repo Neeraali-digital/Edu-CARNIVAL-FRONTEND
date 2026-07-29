@@ -109,6 +109,17 @@ export class PhotoGalleryComponent implements OnInit {
       .sort((a, b) => b.year - a.year);
   }
 
+  loadedImages: { [key: string | number]: boolean } = {};
+
+  onImageLoad(id: string | number) {
+    this.loadedImages[id] = true;
+    this.cdr.detectChanges();
+  }
+
+  isLoaded(id: string | number): boolean {
+    return !!this.loadedImages[id];
+  }
+
   openFullscreen(photo: any) {
     this.selectedPhoto = photo;
   }

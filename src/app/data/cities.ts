@@ -410,5 +410,31 @@ export const CITIES: City[] = [
         "validFrom": "2026-04-01"
       }
     }
+  },
+  {
+    name: 'Imphal',
+    slug: 'imphal-may-2026',
+    date: 'May 20th & 21st',
+    place: 'Hotel Imphal by Classic',
+    location: 'Hotel Imphal by Classic, Imphal',
+    image: '/Imphal.jpg',
+    expo_title: 'Edu Carnival Education Fair – Imphal (May Edition)',
+    description: 'Why Imphal is the Ideal Destination for Edu Carnival Education Expo\n\nImphal is one of the most promising cities for student outreach in the North East region, with a growing number of students aspiring to pursue higher education opportunities across India and abroad. The city has a strong student community and a high demand for guidance on universities, professional courses, career pathways, and international education opportunities.\n\nEdu Carnival Education Expo in Imphal provides a valuable platform for students, parents, universities, and educational institutions to connect directly and explore the best opportunities in higher education.\n\nHosted at Hotel Imphal by Classic, the event attracted genuine student footfall and enabled direct interaction with premier academic institutions.',
+    why_attend: [
+      'Direct interaction with leading universities and educational institutions from India and abroad.',
+      'Opportunity to explore trending and high-demand courses across various fields.',
+      'Guidance on admissions, career choices, scholarships, and future study pathways.',
+      'Access to updated information about new-age programs and emerging career opportunities.'
+    ],
+    why_exhibit: [
+      'Reach high-potential students from Imphal and across Manipur actively seeking higher education.',
+      'Engage during peak admission decision periods.',
+      'Host at a reputed and comfortable venue ensuring high-quality footfall and meaningful interactions.',
+      'Build long-term brand presence and student recruitment networks in Manipur.'
+    ],
+    is_current_expo: false,
+    is_completed: true,
+    start_date: '2026-05-20',
+    map_url: 'https://maps.google.com/maps?q=Hotel%20Imphal%20by%20Classic&t=&z=15&ie=UTF8&iwloc=&output=embed'
   }
 ];

@@ -14,6 +14,9 @@ import { CITIES } from '../../../data/cities';
 export class UpcomingEventsComponent implements OnInit {
   cities = CITIES;
 
+  currentYear = new Date().getFullYear();
+  nextYear = this.currentYear + 1;
+
   get upcomingCities() {
     return this.cities
       .filter(c => !c.is_completed)
