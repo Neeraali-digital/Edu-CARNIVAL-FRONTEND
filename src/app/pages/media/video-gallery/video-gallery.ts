@@ -51,20 +51,29 @@ export class VideoGalleryComponent implements OnInit {
 
     this.isLoading = false;
 
-    this.api.getAll('videos').subscribe(data => {
-      if (data && data.length > 0) {
-        const fetched = data.map((video: any) => ({
-          ...video,
-          video_url: this.getEmbedUrl(video.video_url),
-          is_short: video.video_url?.includes('/shorts/'),
-          thumbnail: this.getThumbnailUrl(video.video_url)
-        }));
-        this.videos = [
-          featuredVideo,
-          ...fetched.filter((v: any) => !v.video_url?.includes('vGDiXwPBUww'))
-        ];
+    this.api.getAll('videos').subscribe({
+      next: (data) => {
+        if (data && data.length > 0) {
+          const fetched = data.map((video: any) => ({
+            ...video,
+            video_url: this.getEmbedUrl(video.video_url),
+            is_short: video.video_url?.includes('/shorts/'),
+            thumbnail: this.getThumbnailUrl(video.video_url)
+          }));
+          
+          const uniqueFetched = fetched.filter((v: any) => !v.video_url?.includes('vGDiXwPBUww'));
+          
+          this.videos = [
+            featuredVideo,
+            ...uniqueFetched,
+            ...rawStaticVideos.slice(1)
+          ];
+        }
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.cdr.detectChanges();
       }
-      this.cdr.detectChanges();
     });
   }
 

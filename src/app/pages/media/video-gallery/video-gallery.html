@@ -27,7 +27,7 @@
             (click)="openFullscreen(video)"
             class="w-full bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-carnival-gold/50 active:scale-105 transition-all duration-300 group cursor-pointer">
          
-         <div class="relative bg-[#120726]" [ngClass]="video.is_short ? 'aspect-[9/16] w-full rounded-xl overflow-hidden' : 'aspect-video'">
+         <div class="relative bg-[#120726]" [ngClass]="video.is_short ? 'aspect-[9/16] max-w-[280px] sm:max-w-[300px] mx-auto rounded-xl overflow-hidden' : 'aspect-video'">
            
            <!-- Skeleton & Poster Overlay while iframe loads -->
            <div *ngIf="!isLoaded(video.id)" class="absolute inset-0 z-20 bg-gradient-to-br from-purple-950 via-[#180a2e] to-black animate-pulse flex flex-col items-center justify-center p-4">
