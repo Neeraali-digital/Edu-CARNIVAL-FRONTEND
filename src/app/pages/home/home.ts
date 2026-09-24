@@ -14,6 +14,8 @@ import { Meta } from '@angular/platform-browser';
 import { CITIES } from '../../data/cities';
 
 const DESKTOP_MEDIA_QUERY = '(min-width: 768px)';
+const IMAGE_PRELOAD_CONCURRENCY = 3;
+const IMAGE_PRELOAD_IDLE_TIMEOUT_MS = 3000;
 
 @Component({
   selector: 'app-home',
@@ -39,6 +41,7 @@ Our education expos are known for the direct participation of reputed colleges a
   @ViewChild('partnerScroll') partnerScroll!: ElementRef;
   scrollAnimationId: any;
   isScrollingPaused = false;
+  private isDestroyed = false;
   private desktopMediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
   isDesktop = this.desktopMediaQuery.matches;
   private onDesktopChange = (event: MediaQueryListEvent) => { this.isDesktop = event.matches; this.cdr.markForCheck(); };
@@ -147,6 +150,7 @@ Our education expos are known for the direct participation of reputed colleges a
 
   ngAfterViewInit() {
     this.desktopMediaQuery.addEventListener('change', this.onDesktopChange);
+    this.preloadBelowFoldImages();
     // Only scroll when visible
     const observer = new IntersectionObserver(
       (entries) => {
@@ -172,8 +176,51 @@ Our education expos are known for the direct participation of reputed colleges a
 
 
   ngOnDestroy() {
+    this.isDestroyed = true;
     this.desktopMediaQuery.removeEventListener('change', this.onDesktopChange);
     this.stopAutoScroll();
+  }
+
+  // Warms the cache with the lazy images once the page is idle so they are
+  // already loaded when scrolled into view; low priority keeps navigation fast.
+  private preloadBelowFoldImages() {
+    const imageUrls = [
+      ...this.cities.map((city) => city.image),
+      '/about.jpeg',
+      '/meet.jpeg',
+      ...this.uniquePartnerLogos,
+      ...this.consultancyLogos,
+      ...this.travelLogos,
+      '/digital partner.png',
+    ];
+    const preloadNext = async () => {
+      while (!this.isDestroyed && imageUrls.length > 0) {
+        await this.preloadImage(imageUrls.shift()!);
+      }
+    };
+    const startPreloading = () => {
+      for (let worker = 0; worker < IMAGE_PRELOAD_CONCURRENCY; worker++) {
+        preloadNext();
+      }
+    };
+    this.ngZone.runOutsideAngular(() => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(startPreloading, { timeout: IMAGE_PRELOAD_IDLE_TIMEOUT_MS });
+      } else {
+        setTimeout(startPreloading, IMAGE_PRELOAD_IDLE_TIMEOUT_MS);
+      }
+    });
+  }
+
+  private preloadImage(url: string): Promise<void> {
+    return new Promise((resolve) => {
+      const image = new Image();
+      image.fetchPriority = 'low';
+      image.onload = () => resolve();
+      // A failed preload is not fatal: the visible <img> requests it again.
+      image.onerror = () => resolve();
+      image.src = url;
+    });
   }
 
   startAutoScroll() {
