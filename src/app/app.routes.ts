@@ -1,32 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home';
-import { EducationExpoLandingComponent } from './pages/landing/education-expo/education-expo';
-import { StallsComponent } from './pages/stalls/stalls';
-import { BrochureComponent } from './pages/brochure/brochure';
-import { ContactComponent } from './pages/contact/contact';
-import { UpcomingEventsComponent } from './pages/events/upcoming-events/upcoming-events';
-import { ExpoHighlightsComponent } from './pages/events/expo-highlights/expo-highlights';
-import { ExhibitorRegistrationComponent } from './pages/registration/exhibitor-registration/exhibitor-registration';
-import { ParticipantRegistrationComponent } from './pages/registration/participant-registration/participant-registration';
-import { PhotoGalleryComponent } from './pages/media/photo-gallery/photo-gallery';
-import { VideoGalleryComponent } from './pages/media/video-gallery/video-gallery';
-import { CityDetailComponent } from './pages/cities/city-detail/city-detail.component';
-import { BlogListComponent } from './pages/blogs/blog-list/blog-list';
-import { BlogDetailComponent } from './pages/blogs/blog-detail/blog-detail';
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy';
 
-
-// Admin Components
-import { AdminLoginComponent } from './pages/admin/login/login.component';
-import { AdminDashboardComponent } from './pages/admin/dashboard/dashboard.component';
-import { DashboardStatsComponent } from './pages/admin/dashboard/stats.component';
-import { AdminCitiesComponent } from './pages/admin/cities/cities.component';
-import { AdminRegistrationsComponent } from './pages/admin/registrations/registrations.component';
-import { AdminInquiriesComponent } from './pages/admin/inquiries/inquiries.component';
-import { AdminGalleryComponent } from './pages/admin/gallery/gallery.component';
-import { AdminStallsComponent } from './pages/admin/stalls/stalls.component';
-import { AdminProgramScheduleComponent } from './pages/admin/program-schedule/program-schedule.component';
-import { AdminWheelManagementComponent } from './pages/admin/wheel-management/wheel-management.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -55,22 +29,21 @@ export const routes: Routes = [
     { path: 'blogs/:id', loadComponent: () => import('./pages/blogs/blog-detail/blog-detail').then(m => m.BlogDetailComponent), title: 'Blog Details - Edu Carnival' },
     { path: 'privacy-policy', loadComponent: () => import('./pages/privacy-policy/privacy-policy').then(m => m.PrivacyPolicyComponent), title: 'Privacy Policy - Edu Carnival' },
 
-
     // Admin Panel
-    { path: 'admin/login', component: AdminLoginComponent, title: 'Admin Login - Edu Carnival' },
+    { path: 'admin/login', loadComponent: () => import('./pages/admin/login/login.component').then(m => m.AdminLoginComponent), title: 'Admin Login - Edu Carnival' },
     {
         path: 'admin',
-        component: AdminDashboardComponent,
+        loadComponent: () => import('./pages/admin/dashboard/dashboard.component').then(m => m.AdminDashboardComponent),
         canActivate: [authGuard],
         children: [
-            { path: 'dashboard', component: DashboardStatsComponent },
-            { path: 'cities', component: AdminCitiesComponent },
-            { path: 'registrations', component: AdminRegistrationsComponent },
-            { path: 'inquiries', component: AdminInquiriesComponent },
-            { path: 'gallery', component: AdminGalleryComponent },
-            { path: 'stalls', component: AdminStallsComponent },
-            { path: 'program-schedule', component: AdminProgramScheduleComponent },
-            { path: 'wheel-management', component: AdminWheelManagementComponent },
+            { path: 'dashboard', loadComponent: () => import('./pages/admin/dashboard/stats.component').then(m => m.DashboardStatsComponent) },
+            { path: 'cities', loadComponent: () => import('./pages/admin/cities/cities.component').then(m => m.AdminCitiesComponent) },
+            { path: 'registrations', loadComponent: () => import('./pages/admin/registrations/registrations.component').then(m => m.AdminRegistrationsComponent) },
+            { path: 'inquiries', loadComponent: () => import('./pages/admin/inquiries/inquiries.component').then(m => m.AdminInquiriesComponent) },
+            { path: 'gallery', loadComponent: () => import('./pages/admin/gallery/gallery.component').then(m => m.AdminGalleryComponent) },
+            { path: 'stalls', loadComponent: () => import('./pages/admin/stalls/stalls.component').then(m => m.AdminStallsComponent) },
+            { path: 'program-schedule', loadComponent: () => import('./pages/admin/program-schedule/program-schedule.component').then(m => m.AdminProgramScheduleComponent) },
+            { path: 'wheel-management', loadComponent: () => import('./pages/admin/wheel-management/wheel-management.component').then(m => m.AdminWheelManagementComponent) },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },

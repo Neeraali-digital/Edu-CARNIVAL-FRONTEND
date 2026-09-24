@@ -11,8 +11,9 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
-import { ApiService } from '../../services/api.service';
 import { CITIES } from '../../data/cities';
+
+const DESKTOP_MEDIA_QUERY = '(min-width: 768px)';
 
 @Component({
   selector: 'app-home',
@@ -38,9 +39,11 @@ Our education expos are known for the direct participation of reputed colleges a
   @ViewChild('partnerScroll') partnerScroll!: ElementRef;
   scrollAnimationId: any;
   isScrollingPaused = false;
+  private desktopMediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
+  isDesktop = this.desktopMediaQuery.matches;
+  private onDesktopChange = (event: MediaQueryListEvent) => { this.isDesktop = event.matches; this.cdr.markForCheck(); };
 
   constructor(
-    private api: ApiService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
     private meta: Meta
@@ -143,6 +146,7 @@ Our education expos are known for the direct participation of reputed colleges a
   }
 
   ngAfterViewInit() {
+    this.desktopMediaQuery.addEventListener('change', this.onDesktopChange);
     // Only scroll when visible
     const observer = new IntersectionObserver(
       (entries) => {
@@ -168,6 +172,7 @@ Our education expos are known for the direct participation of reputed colleges a
 
 
   ngOnDestroy() {
+    this.desktopMediaQuery.removeEventListener('change', this.onDesktopChange);
     this.stopAutoScroll();
   }
 

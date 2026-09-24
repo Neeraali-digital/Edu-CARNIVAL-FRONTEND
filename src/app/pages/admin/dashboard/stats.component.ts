@@ -1,13 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core'; // Core imports
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../../services/api.service';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard-stats',
   standalone: true,
   imports: [CommonModule, BaseChartDirective],
+  providers: [provideCharts(withDefaultRegisterables())],
   template: `
     <div class="stats-grid">
       <div class="stat-card">
