@@ -13,7 +13,7 @@
            [ngClass]="{'bg-red-600 border-red-500 animate-pulse': city?.is_current_expo, 'bg-carnival-pink/20 border-carnival-pink/30': !city?.is_current_expo}">
         <span class="font-semibold uppercase tracking-widest text-sm"
               [ngClass]="{'text-white': city?.is_current_expo, 'text-carnival-pink': !city?.is_current_expo}">
-          {{ city?.is_current_expo ? 'LIVE NOW' : 'Upcoming Expo - 2026' }}
+          {{ city?.is_current_expo ? 'LIVE NOW' : 'Upcoming Expo - ' + city?.start_date?.slice(0, 4) }}
         </span>
       </div>
       <h1 class="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up">

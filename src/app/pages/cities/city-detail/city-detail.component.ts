@@ -36,7 +36,7 @@ export class CityDetailComponent implements OnInit, OnDestroy {
             }
 
             if (this.city) {
-                this.titleService.setTitle(`${this.city.name} | Edu Carnival 2026`);
+                this.titleService.setTitle(`${this.city.name} | Edu Carnival ${this.city.start_date?.slice(0, 4)}`);
             }
 
             // Inject Schema if available
