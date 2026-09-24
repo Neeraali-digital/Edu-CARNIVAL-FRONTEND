@@ -3,6 +3,8 @@ import { HomeComponent } from './pages/home/home';
 
 import { authGuard } from './guards/auth.guard';
 
+const NO_PRELOAD = { preload: false };
+
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'Education Expo in India 2026 – College Admission Fair | Edu Carnival' },
     { path: 'home', redirectTo: '', pathMatch: 'full' },
@@ -30,20 +32,21 @@ export const routes: Routes = [
     { path: 'privacy-policy', loadComponent: () => import('./pages/privacy-policy/privacy-policy').then(m => m.PrivacyPolicyComponent), title: 'Privacy Policy - Edu Carnival' },
 
     // Admin Panel
-    { path: 'admin/login', loadComponent: () => import('./pages/admin/login/login.component').then(m => m.AdminLoginComponent), title: 'Admin Login - Edu Carnival' },
+    { path: 'admin/login', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/login/login.component').then(m => m.AdminLoginComponent), title: 'Admin Login - Edu Carnival' },
     {
         path: 'admin',
+        data: NO_PRELOAD,
         loadComponent: () => import('./pages/admin/dashboard/dashboard.component').then(m => m.AdminDashboardComponent),
         canActivate: [authGuard],
         children: [
-            { path: 'dashboard', loadComponent: () => import('./pages/admin/dashboard/stats.component').then(m => m.DashboardStatsComponent) },
-            { path: 'cities', loadComponent: () => import('./pages/admin/cities/cities.component').then(m => m.AdminCitiesComponent) },
-            { path: 'registrations', loadComponent: () => import('./pages/admin/registrations/registrations.component').then(m => m.AdminRegistrationsComponent) },
-            { path: 'inquiries', loadComponent: () => import('./pages/admin/inquiries/inquiries.component').then(m => m.AdminInquiriesComponent) },
-            { path: 'gallery', loadComponent: () => import('./pages/admin/gallery/gallery.component').then(m => m.AdminGalleryComponent) },
-            { path: 'stalls', loadComponent: () => import('./pages/admin/stalls/stalls.component').then(m => m.AdminStallsComponent) },
-            { path: 'program-schedule', loadComponent: () => import('./pages/admin/program-schedule/program-schedule.component').then(m => m.AdminProgramScheduleComponent) },
-            { path: 'wheel-management', loadComponent: () => import('./pages/admin/wheel-management/wheel-management.component').then(m => m.AdminWheelManagementComponent) },
+            { path: 'dashboard', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/dashboard/stats.component').then(m => m.DashboardStatsComponent) },
+            { path: 'cities', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/cities/cities.component').then(m => m.AdminCitiesComponent) },
+            { path: 'registrations', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/registrations/registrations.component').then(m => m.AdminRegistrationsComponent) },
+            { path: 'inquiries', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/inquiries/inquiries.component').then(m => m.AdminInquiriesComponent) },
+            { path: 'gallery', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/gallery/gallery.component').then(m => m.AdminGalleryComponent) },
+            { path: 'stalls', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/stalls/stalls.component').then(m => m.AdminStallsComponent) },
+            { path: 'program-schedule', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/program-schedule/program-schedule.component').then(m => m.AdminProgramScheduleComponent) },
+            { path: 'wheel-management', data: NO_PRELOAD, loadComponent: () => import('./pages/admin/wheel-management/wheel-management.component').then(m => m.AdminWheelManagementComponent) },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     },
